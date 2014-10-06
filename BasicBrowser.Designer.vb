@@ -57,17 +57,14 @@ Partial Class BasicBrowser
         Me.MenuStripHelpSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripNew = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripOpen = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSave = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripPrint = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripCut = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripCopy = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripPaste = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripHelp = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripBack = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ToolStripForward = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ToolStripReload = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripStop = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripHome = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.TabControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
@@ -320,97 +317,70 @@ Partial Class BasicBrowser
         Me.StatusStrip.TabIndex = 3
         Me.StatusStrip.Text = "StatusStrip1"
         '
-        'ToolStrip
-        '
-        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripNew, Me.ToolStripOpen, Me.ToolStripSave, Me.ToolStripPrint, Me.ToolStripSeparator1, Me.ToolStripCut, Me.ToolStripCopy, Me.ToolStripPaste, Me.ToolStripSeparator2, Me.ToolStripHelp})
-        Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
-        Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(435, 25)
-        Me.ToolStrip.TabIndex = 4
-        Me.ToolStrip.Text = "ToolStrip1"
-        '
-        'ToolStripNew
-        '
-        Me.ToolStripNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripNew.Image = CType(resources.GetObject("ToolStripNew.Image"), System.Drawing.Image)
-        Me.ToolStripNew.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripNew.Name = "ToolStripNew"
-        Me.ToolStripNew.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripNew.Text = "&New"
-        '
-        'ToolStripOpen
-        '
-        Me.ToolStripOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripOpen.Image = CType(resources.GetObject("ToolStripOpen.Image"), System.Drawing.Image)
-        Me.ToolStripOpen.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripOpen.Name = "ToolStripOpen"
-        Me.ToolStripOpen.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripOpen.Text = "&Open"
-        '
-        'ToolStripSave
-        '
-        Me.ToolStripSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripSave.Image = CType(resources.GetObject("ToolStripSave.Image"), System.Drawing.Image)
-        Me.ToolStripSave.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripSave.Name = "ToolStripSave"
-        Me.ToolStripSave.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripSave.Text = "&Save"
-        '
-        'ToolStripPrint
-        '
-        Me.ToolStripPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripPrint.Image = CType(resources.GetObject("ToolStripPrint.Image"), System.Drawing.Image)
-        Me.ToolStripPrint.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripPrint.Name = "ToolStripPrint"
-        Me.ToolStripPrint.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripPrint.Text = "&Print"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripCut
-        '
-        Me.ToolStripCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripCut.Image = CType(resources.GetObject("ToolStripCut.Image"), System.Drawing.Image)
-        Me.ToolStripCut.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripCut.Name = "ToolStripCut"
-        Me.ToolStripCut.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripCut.Text = "C&ut"
-        '
-        'ToolStripCopy
-        '
-        Me.ToolStripCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripCopy.Image = CType(resources.GetObject("ToolStripCopy.Image"), System.Drawing.Image)
-        Me.ToolStripCopy.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripCopy.Name = "ToolStripCopy"
-        Me.ToolStripCopy.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripCopy.Text = "&Copy"
-        '
-        'ToolStripPaste
-        '
-        Me.ToolStripPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripPaste.Image = CType(resources.GetObject("ToolStripPaste.Image"), System.Drawing.Image)
-        Me.ToolStripPaste.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripPaste.Name = "ToolStripPaste"
-        Me.ToolStripPaste.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripPaste.Text = "&Paste"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripHelp
+        'ToolStripBack
         '
-        Me.ToolStripHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripHelp.Image = CType(resources.GetObject("ToolStripHelp.Image"), System.Drawing.Image)
-        Me.ToolStripHelp.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripHelp.Name = "ToolStripHelp"
-        Me.ToolStripHelp.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripHelp.Text = "He&lp"
+        Me.ToolStripBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripBack.Image = CType(resources.GetObject("ToolStripBack.Image"), System.Drawing.Image)
+        Me.ToolStripBack.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripBack.Name = "ToolStripBack"
+        Me.ToolStripBack.Size = New System.Drawing.Size(32, 22)
+        Me.ToolStripBack.Text = "&Back"
+        '
+        'ToolStripForward
+        '
+        Me.ToolStripForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripForward.Image = CType(resources.GetObject("ToolStripForward.Image"), System.Drawing.Image)
+        Me.ToolStripForward.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripForward.Name = "ToolStripForward"
+        Me.ToolStripForward.Size = New System.Drawing.Size(32, 22)
+        Me.ToolStripForward.Text = "&Forward"
+        '
+        'ToolStripReload
+        '
+        Me.ToolStripReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripReload.Image = CType(resources.GetObject("ToolStripReload.Image"), System.Drawing.Image)
+        Me.ToolStripReload.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripReload.Name = "ToolStripReload"
+        Me.ToolStripReload.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripReload.Text = "&Reload"
+        '
+        'ToolStripStop
+        '
+        Me.ToolStripStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripStop.Image = CType(resources.GetObject("ToolStripStop.Image"), System.Drawing.Image)
+        Me.ToolStripStop.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripStop.Name = "ToolStripStop"
+        Me.ToolStripStop.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripStop.Text = "&Stop"
+        '
+        'ToolStripHome
+        '
+        Me.ToolStripHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripHome.Image = CType(resources.GetObject("ToolStripHome.Image"), System.Drawing.Image)
+        Me.ToolStripHome.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripHome.Name = "ToolStripHome"
+        Me.ToolStripHome.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripHome.Text = "&Home"
+        '
+        'ToolStrip
+        '
+        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator1, Me.ToolStripSeparator2, Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome})
+        Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip.Name = "ToolStrip"
+        Me.ToolStrip.Size = New System.Drawing.Size(435, 25)
+        Me.ToolStrip.TabIndex = 4
+        Me.ToolStrip.Text = "ToolStrip1"
         '
         'BasicBrowser
         '
@@ -471,16 +441,13 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripHelpSeparator As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MenuStripHelpAbout As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripNew As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripOpen As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSave As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripPrint As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripCut As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripCopy As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripPaste As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripHelp As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripBack As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents ToolStripForward As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents ToolStripReload As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripStop As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripHome As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
 
 End Class
