@@ -1,16 +1,6 @@
 ﻿Public Class BasicBrowser
-    Dim FirstTabPage As New TabPage()
-    Dim WebBrowser1 As New WebBrowser
-
-    Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load, Me.DoubleClick
-        AddHandler WebBrowser1.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Browser1NavComplete)
-        FirstTabPage.Text = "TabPage Test" & (TabControl.TabPages.Count + 1)
-        TabControl.TabPages.Add(FirstTabPage)
-
-        WebBrowser1.GoHome()
-        WebBrowser1.Parent = FirstTabPage
-        WebBrowser1.Visible = True
-        WebBrowser1.Dock = DockStyle.Fill
+   Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load, Me.DoubleClick
+        ToolStripNewTab_Click(Nothing, Nothing)
     End Sub
 
     ' menu strip options
@@ -22,41 +12,66 @@
     ' tool strip options
 
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
-        WebBrowser1.GoBack()
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
     End Sub
 
     Private Sub ToolStripForward_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripForward.ButtonClick
-        WebBrowser1.GoForward()
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoForward()
     End Sub
 
     Private Sub ToolStripReload_Click(sender As Object, e As EventArgs) Handles ToolStripReload.Click
-        WebBrowser1.Refresh()
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
     End Sub
 
     Private Sub ToolStripStop_Click(sender As Object, e As EventArgs) Handles ToolStripStop.Click
-        WebBrowser1.Stop()
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Stop()
     End Sub
 
     Private Sub ToolStripHome_Click(sender As Object, e As EventArgs) Handles ToolStripHome.Click
-        WebBrowser1.GoHome()
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
     End Sub
 
     Private Sub ToolStripNewTab_Click(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click
-        Dim NewTabPage As New TabPage()
+        Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
-
-        NewTabPage.Text = "TabPage Test" & (TabControl.TabPages.Count + 1)
-        TabControl.TabPages.Add(NewTabPage)
+        AddHandler WebBrowser.Navigating, AddressOf Navigating
+        AddHandler WebBrowser.Navigated, AddressOf Navigated
+        AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
+        
+        TabPage.Text = "Loading Tab " & (TabControl.TabPages.Count + 1)
+        TabControl.TabPages.Add(TabPage)
 
         WebBrowser.GoHome()
-        WebBrowser.Parent = NewTabPage
+        WebBrowser.Parent = TabPage
         WebBrowser.Visible = True
         WebBrowser.Dock = DockStyle.Fill
+        TabControl.SelectTab(TabControl.TabCount - 1)
+    End Sub
+
+    Private Sub ToolStripCloseTab_Click(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click
+        If TabControl.SelectedIndex <> 0 Then
+            TabControl.SelectTab(TabControl.SelectedIndex - 1)
+        End If
+        If TabControl.TabCount = 1 Then
+            TabControl.TabPages.RemoveAt(TabControl.SelectedIndex)
+        Else
+            TabControl.TabPages.RemoveAt(TabControl.SelectedIndex + 1)
+        End If
     End Sub
 
     ' browser stuff
 
-    Sub Browser1NavComplete()
-        FirstTabPage.Text = WebBrowser1.DocumentTitle
+    Sub Navigating()
+
+    End Sub
+
+    Sub Navigated()
+        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
+    End Sub
+
+    Sub DocumentCompleted()
+        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
     End Sub
 End Class

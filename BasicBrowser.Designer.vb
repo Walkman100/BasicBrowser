@@ -64,6 +64,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -236,7 +237,7 @@ Partial Class BasicBrowser
         'ToolStrip
         '
         Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome, Me.ToolStripSeparator1, Me.ToolStripNewTab, Me.ToolStripSeparator2})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome, Me.ToolStripSeparator1, Me.ToolStripNewTab, Me.ToolStripCloseTab, Me.ToolStripSeparator2})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -369,6 +370,15 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditPaste.Text = "&Paste"
         '
+        'ToolStripCloseTab
+        '
+        Me.ToolStripCloseTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripCloseTab.Image = CType(resources.GetObject("ToolStripCloseTab.Image"), System.Drawing.Image)
+        Me.ToolStripCloseTab.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripCloseTab.Name = "ToolStripCloseTab"
+        Me.ToolStripCloseTab.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripCloseTab.Text = "Close Tab"
+        '
         'BasicBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -433,5 +443,6 @@ Partial Class BasicBrowser
     Friend WithEvents ToolStripHome As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStrip As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripNewTab As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripCloseTab As System.Windows.Forms.ToolStripButton
 
 End Class
