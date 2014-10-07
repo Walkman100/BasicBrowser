@@ -256,11 +256,7 @@
     End Sub
 
     Sub ProgressChanged(ByVal sender As Object, ByVal e As Windows.Forms.WebBrowserProgressChangedEventArgs)
-        Dim CurProg As Double
-        Dim MaxProg As Double
-        CurProg = e.CurrentProgress
-        MaxProg = e.MaximumProgress
-        StatusStripProgressBar.Value = (CurProg / MaxProg) * 100
+        StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
 
