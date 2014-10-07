@@ -127,6 +127,9 @@
   <data name="1391274345_go-next" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1391274345_go-next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="1387146817_tab-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1387146817_tab-new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="1391271889_emblem-unreadable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1391271889_emblem-unreadable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,7 +142,7 @@
   <data name="1387140136_process-stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1387140136_process-stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1387146817_tab-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1387146817_tab-new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="go_right_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\go_right_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
