@@ -136,13 +136,19 @@
   <data name="1371833355_go-home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1371833355_go-home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="16x16_bookmark_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16x16_bookmark_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="go_right_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\go_right_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1387140136_process-stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1387140136_process-stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="go_right_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\go_right_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="16x16_bookmark_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16x16_bookmark_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
