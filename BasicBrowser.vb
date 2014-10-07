@@ -196,6 +196,10 @@
         End If
     End Sub
 
+    Private Sub ToolStripURL_Click(sender As Object, e As EventArgs) Handles ToolStripURL.GotFocus
+        ToolStripURL.SelectAll()
+    End Sub
+
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
@@ -211,13 +215,10 @@
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, 25)
+        ToolStripCbxFav.Size = New Size(Me.Width - 308, 23)
     End Sub
 
     'Favourites bar
-    Private Sub ToolStripCbxFav_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripCbxFav.SelectedIndexChanged
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripCbxFav.SelectedItem.ToString)
-    End Sub
-
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
         ToolStripCbxFav.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
@@ -228,6 +229,10 @@
         ToolStripCbxFav.Items.RemoveAt(ToolStripCbxFav.SelectedIndex)
         My.Settings.Favourites.Remove(ToolStripCbxFav.SelectedItem)
         My.Settings.Save()
+    End Sub
+
+    Private Sub ToolStripCbxFav_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripCbxFav.SelectedIndexChanged
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripCbxFav.SelectedItem.ToString)
     End Sub
 
     ' browser stuff
