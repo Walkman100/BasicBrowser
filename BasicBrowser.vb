@@ -120,6 +120,18 @@
         PerformStuff()
     End Sub
 
+    Private Sub ToolStripURL_KeyDown(sender As Object, e As KeyEventArgs) Handles ToolStripURL.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ToolStripGo_Click(Nothing, Nothing)
+        End If
+    End Sub
+
+    Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
+        If ToolStripURL.Text <> "" Then
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
+        End If
+    End Sub
+
     Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
         ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
         PerformStuff()
@@ -156,6 +168,7 @@
         CurProg = e.CurrentProgress
         MaxProg = e.MaximumProgress
         StatusStripProgressBar.Value = (CurProg / MaxProg) * 100
+        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
 
     Sub StatusTextChanged()
@@ -167,5 +180,6 @@
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
         Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
         TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
+        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
 End Class
