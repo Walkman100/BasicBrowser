@@ -81,16 +81,17 @@ Partial Class BasicBrowser
         Me.TabControl.Location = New System.Drawing.Point(0, 52)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(417, 304)
+        Me.TabControl.Size = New System.Drawing.Size(426, 304)
         Me.TabControl.TabIndex = 0
         '
         'MenuStrip
         '
+        Me.MenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFile, Me.MenuStripEdit, Me.MenuStripTools, Me.MenuStripHelp})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.MenuStrip.Size = New System.Drawing.Size(417, 24)
+        Me.MenuStrip.Size = New System.Drawing.Size(426, 24)
         Me.MenuStrip.TabIndex = 1
         Me.MenuStrip.Text = "MenuStrip"
         '
@@ -292,7 +293,7 @@ Partial Class BasicBrowser
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusStripProgressBar, Me.StatusStripStatusText})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 359)
         Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(417, 22)
+        Me.StatusStrip.Size = New System.Drawing.Size(426, 22)
         Me.StatusStrip.TabIndex = 3
         Me.StatusStrip.Text = "StatusStrip1"
         '
@@ -319,12 +320,15 @@ Partial Class BasicBrowser
         '
         'ToolStrip
         '
+        Me.ToolStrip.AllowItemReorder = True
+        Me.ToolStrip.CanOverflow = False
         Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome, Me.ToolStripSeparator1, Me.ToolStripNewTab, Me.ToolStripCloseTab, Me.ToolStripSeparator2, Me.ToolStripURL, Me.ToolStripGo})
+        Me.ToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolStrip.Size = New System.Drawing.Size(417, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(426, 25)
+        Me.ToolStrip.Stretch = True
         Me.ToolStrip.TabIndex = 4
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -412,7 +416,7 @@ Partial Class BasicBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 381)
+        Me.ClientSize = New System.Drawing.Size(426, 381)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl)

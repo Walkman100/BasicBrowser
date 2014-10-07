@@ -133,6 +133,8 @@
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
+        Else
+            ToolStripURL.Focus()
         End If
     End Sub
 
@@ -142,7 +144,7 @@
     End Sub
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Size(Me.Width - 239, 25)
+        ToolStripURL.Size = New Size(Me.Width - 238, 25)
     End Sub
 
     ' browser stuff
