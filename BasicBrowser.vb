@@ -4,9 +4,12 @@
 
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewTab(Nothing, Nothing)
+        For i = 1 To My.Settings.Favourites.Count
+            ToolStripCbxFav.Items.Add(My.Settings.Favourites.Item(i))
+        Next
     End Sub
 
-    ' menu strip options
+    ' MenuStrip options
 
     'File
     Private Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
@@ -148,7 +151,7 @@
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
 
-    ' tool strip options
+    ' ToolStrip options
 
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
@@ -207,7 +210,24 @@
     End Sub
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Size(Me.Width - 238, 25)
+        ToolStripURL.Size = New Size(Me.Width - 243, 25)
+    End Sub
+
+    'Favourites bar
+    Private Sub ToolStripCbxFav_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripCbxFav.SelectedIndexChanged
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripCbxFav.SelectedItem.ToString)
+    End Sub
+
+    Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
+        ToolStripCbxFav.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
+        My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
+        My.Settings.Save()
+    End Sub
+
+    Private Sub ToolStripRemove_Click(sender As Object, e As EventArgs) Handles ToolStripRemove.Click
+        ToolStripCbxFav.Items.RemoveAt(ToolStripCbxFav.SelectedIndex)
+        My.Settings.Favourites.Remove(ToolStripCbxFav.SelectedItem)
+        My.Settings.Save()
     End Sub
 
     ' browser stuff
