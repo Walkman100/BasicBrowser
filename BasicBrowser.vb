@@ -11,6 +11,8 @@
         AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigating)
         AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigated)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
+        AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
+        AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
         TabControl.TabPages.Add(TabPage)
@@ -68,6 +70,7 @@
 
     Private Sub MenuStripFilePrintPreview_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrintPreview.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPrintPreviewDialog()
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
@@ -117,6 +120,11 @@
         PerformStuff()
     End Sub
 
+    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
+        ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        PerformStuff()
+    End Sub
+
     ' browser stuff
 
     Sub Navigating()
@@ -142,9 +150,16 @@
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
     End Sub
 
-    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
-        ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
-        PerformStuff()
+    Sub ProgressChanged(ByVal sender As Object, ByVal e As Windows.Forms.WebBrowserProgressChangedEventArgs)
+        Dim CurProg As Double
+        Dim MaxProg As Double
+        CurProg = e.CurrentProgress
+        MaxProg = e.MaximumProgress
+        StatusStripProgressBar.Value = (CurProg / MaxProg) * 100
+    End Sub
+
+    Sub StatusTextChanged()
+        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
 
     Sub PerformStuff()
@@ -152,6 +167,5 @@
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
         Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
         TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
 End Class
