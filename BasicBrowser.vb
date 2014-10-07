@@ -1,5 +1,5 @@
 ﻿Public Class BasicBrowser
-   Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load, Me.DoubleClick
+    Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewTab(Nothing, Nothing)
     End Sub
 
@@ -23,10 +23,10 @@
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
-        If TabControl.SelectedIndex <> TabControl.TabCount Then
+        If TabControl.SelectedIndex <> TabControl.TabCount - 1 Then
             TabControl.SelectTab(TabControl.SelectedIndex + 1)
         End If
-        If TabControl.SelectedIndex = 1 Or TabControl.SelectedIndex = TabControl.TabCount Then
+        If TabControl.SelectedIndex = 0 Or TabControl.SelectedIndex = TabControl.TabCount - 1 Then
             TabControl.TabPages.RemoveAt(TabControl.SelectedIndex)
         Else
             TabControl.TabPages.RemoveAt(TabControl.SelectedIndex - 1)
@@ -46,6 +46,9 @@
     End Sub
 
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
+        For i = 1 To TabControl.TabCount
+            TabControl.TabPages.RemoveAt(0)
+        Next
         Application.Exit()
     End Sub
 
@@ -99,7 +102,7 @@
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
 
-    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.TabIndexChanged
+    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
         Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
         TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
