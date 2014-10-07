@@ -92,6 +92,18 @@
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
 
+    Private Sub MenuStripToolsKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripToolsKeepOnTop.CheckedChanged
+        Me.TopMost = MenuStripToolsKeepOnTop.Checked
+    End Sub
+
+    Private Sub MenuStripToolsOpacityLbl_Click(sender As Object, e As EventArgs) Handles MenuStripToolsOpacityLbl.Click
+        MenuStripToolsOpacityCbx.Focus()
+    End Sub
+
+    Private Sub MenuStripToolsOpacityCbx_TextChanged(sender As Object, e As EventArgs) Handles MenuStripToolsOpacityCbx.TextChanged
+        Me.Opacity = MenuStripToolsOpacityCbx.Text.Remove(MenuStripToolsOpacityCbx.Text.LastIndexOf("%")) / 100
+    End Sub
+
     ' tool strip options
 
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
