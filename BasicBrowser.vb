@@ -15,22 +15,24 @@
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
+        TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
-        WebBrowser.GoHome()
         WebBrowser.Parent = TabPage
-        WebBrowser.Visible = True
         WebBrowser.Dock = DockStyle.Fill
+        WebBrowser.Visible = True
         ToolStripReload.Enabled = True
         ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
+        ToolStripGo.Enabled = True
+        ToolStripURL.Enabled = True
         MenuStripFileCloseTab.Enabled = True
         MenuStripFileSave.Enabled = True
         MenuStripFilePrint.Enabled = True
         MenuStripFilePrintPreview.Enabled = True
         MenuStripToolsCustomize.Enabled = True
         MenuStripToolsOptions.Enabled = True
-        PerformStuff()
+        WebBrowser.GoHome()
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
@@ -49,6 +51,8 @@
             ToolStripStop.Enabled = False
             ToolStripHome.Enabled = False
             ToolStripCloseTab.Enabled = False
+            ToolStripGo.Enabled = False
+            ToolStripURL.Enabled = False
             MenuStripFileCloseTab.Enabled = False
             MenuStripFileSave.Enabled = False
             MenuStripFilePrint.Enabled = False
