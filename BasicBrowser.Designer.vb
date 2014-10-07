@@ -138,7 +138,7 @@ Partial Class BasicBrowser
         Me.MenuStripFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileOpen.Name = "MenuStripFileOpen"
         Me.MenuStripFileOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.MenuStripFileOpen.Size = New System.Drawing.Size(179, 22)
+        Me.MenuStripFileOpen.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFileOpen.Text = "&Open"
         '
         'MenuStripFileSave
@@ -169,7 +169,9 @@ Partial Class BasicBrowser
         Me.MenuStripFilePrintPreview.Image = CType(resources.GetObject("MenuStripFilePrintPreview.Image"), System.Drawing.Image)
         Me.MenuStripFilePrintPreview.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFilePrintPreview.Name = "MenuStripFilePrintPreview"
-        Me.MenuStripFilePrintPreview.Size = New System.Drawing.Size(179, 22)
+        Me.MenuStripFilePrintPreview.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.MenuStripFilePrintPreview.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFilePrintPreview.Text = "Print Pre&view..."
         '
         'MenuStripFileSeparator3
@@ -287,6 +289,7 @@ Partial Class BasicBrowser
         'MenuStripViewSource
         '
         Me.MenuStripViewSource.Name = "MenuStripViewSource"
+        Me.MenuStripViewSource.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
         Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
         Me.MenuStripViewSource.Text = "Source..."
         '
@@ -306,8 +309,8 @@ Partial Class BasicBrowser
         'MenuStripToolsProperties
         '
         Me.MenuStripToolsProperties.Name = "MenuStripToolsProperties"
-        Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.MenuStripToolsProperties.Size = New System.Drawing.Size(221, 22)
+        Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.MenuStripToolsProperties.Size = New System.Drawing.Size(214, 22)
         Me.MenuStripToolsProperties.Text = "Page P&roperties..."
         '
         'MenuStripHelp
@@ -364,7 +367,8 @@ Partial Class BasicBrowser
         'StatusStripStatusText
         '
         Me.StatusStripStatusText.Name = "StatusStripStatusText"
-        Me.StatusStripStatusText.Size = New System.Drawing.Size(0, 17)
+        Me.StatusStripStatusText.Size = New System.Drawing.Size(43, 17)
+        Me.StatusStripStatusText.Text = "Status"
         '
         'ToolStripSeparator1
         '

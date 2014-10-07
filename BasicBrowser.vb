@@ -122,33 +122,20 @@
     End Sub
 
     Private Sub MenuStripViewSource_Click(sender As Object, e As EventArgs) Handles MenuStripViewSource.Click
-        'Declare sourceForm as a new Form
         Dim sourceForm As New Form()
-        'Declare sourceCode as a new TextBox
-        Dim sourceCode As New TextBox()
-        'Fill the TextBox throughout the form
-        sourceCode.Dock = DockStyle.Fill
-        'Allow the TextBox to contain more than one line
-        sourceCode.Multiline = True
-        'Have both scrollbars appear on the TextBox
-        sourceCode.ScrollBars = ScrollBars.Both
-        'Set the width of the form to 450
         sourceForm.Width = 450
-        'Set the height of the form to 350
         sourceForm.Height = 350
-        'Set the start Position
         sourceForm.StartPosition = FormStartPosition.CenterParent
-        'Do not show the Icon
-        sourceForm.ShowIcon = False
-        'Show in the Taskbar
+        sourceForm.WindowState = Me.WindowState
+        'sourceForm.ShowIcon = False
         sourceForm.ShowInTaskbar = True
-        'Set the text of the form to Source Code for and the URL
         sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
-        'Set the text of sourceCode to the DocumentText of webBrowser
-        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
-        'Add the sourceCode TextBox to the form
+        Dim sourceCode As New TextBox()
+        sourceCode.Multiline = True
+        sourceCode.ScrollBars = ScrollBars.Both
         sourceForm.Controls.Add(sourceCode)
-        'Show the sourceForm
+        sourceCode.Dock = DockStyle.Fill
+        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
         sourceForm.Show()
     End Sub
 
@@ -261,8 +248,8 @@
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
         If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
         End If
-        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
 End Class
