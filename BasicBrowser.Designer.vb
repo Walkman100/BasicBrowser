@@ -513,6 +513,7 @@ Partial Class BasicBrowser
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.MenuStrip)
         Me.HelpButton = True
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "BasicBrowser"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

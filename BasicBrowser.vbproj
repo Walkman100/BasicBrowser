@@ -45,6 +45,10 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\1371846583_internet-web-browser.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -148,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\16x16_bookmark_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1371846583_internet-web-browser.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
