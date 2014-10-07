@@ -11,20 +11,24 @@
         AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigating)
         AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigated)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
-
         AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
-
-        TabPage.Text = "Loading Tab " & (TabControl.TabPages.Count + 1)
         TabControl.TabPages.Add(TabPage)
-
+        TabControl.SelectTab(TabControl.TabCount - 1)
         WebBrowser.GoHome()
         WebBrowser.Parent = TabPage
         WebBrowser.Visible = True
         WebBrowser.Dock = DockStyle.Fill
-        TabControl.SelectTab(TabControl.TabCount - 1)
-
-       PerformStuff()
+        ToolStripReload.Enabled = True
+        ToolStripHome.Enabled = True
+        ToolStripCloseTab.Enabled = True
+        MenuStripFileCloseTab.Enabled = True
+        MenuStripFileSave.Enabled = True
+        MenuStripFilePrint.Enabled = True
+        MenuStripFilePrintPreview.Enabled = True
+        MenuStripToolsCustomize.Enabled = True
+        MenuStripToolsOptions.Enabled = True
+        PerformStuff()
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
@@ -37,8 +41,18 @@
             TabControl.TabPages.RemoveAt(TabControl.SelectedIndex - 1)
         End If
         If TabControl.TabCount = 0 Then
-            MenuStripFileCloseTab.Enabled = False
+            ToolStripBack.Enabled = False
+            ToolStripForward.Enabled = False
+            ToolStripReload.Enabled = False
+            ToolStripStop.Enabled = False
+            ToolStripHome.Enabled = False
             ToolStripCloseTab.Enabled = False
+            MenuStripFileCloseTab.Enabled = False
+            MenuStripFileSave.Enabled = False
+            MenuStripFilePrint.Enabled = False
+            MenuStripFilePrintPreview.Enabled = False
+            MenuStripToolsCustomize.Enabled = False
+            MenuStripToolsOptions.Enabled = False
         Else
             PerformStuff()
         End If
