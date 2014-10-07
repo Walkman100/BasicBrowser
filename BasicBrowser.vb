@@ -141,6 +141,10 @@
         PerformStuff()
     End Sub
 
+    Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
+        ToolStripURL.Size = New Size(Me.Width - 239, 25)
+    End Sub
+
     ' browser stuff
 
     Sub Navigate()
