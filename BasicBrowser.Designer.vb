@@ -46,13 +46,14 @@ Partial Class BasicBrowser
         Me.MenuStripEditSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripView = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripViewSource = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripViewKeepOnTop = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripViewOpacityLbl = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripViewOpacityCbx = New System.Windows.Forms.ToolStripComboBox()
+        Me.MenuStripViewSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripViewSource = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripTools = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsCustomize = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsSetup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpIndex = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,7 +75,6 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
-        Me.MenuStripViewSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -195,20 +195,20 @@ Partial Class BasicBrowser
         '
         Me.MenuStripEditUndo.Name = "MenuStripEditUndo"
         Me.MenuStripEditUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.MenuStripEditUndo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditUndo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditUndo.Text = "&Undo"
         '
         'MenuStripEditRedo
         '
         Me.MenuStripEditRedo.Name = "MenuStripEditRedo"
         Me.MenuStripEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.MenuStripEditRedo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditRedo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditRedo.Text = "&Redo"
         '
         'MenuStripEditSeparator1
         '
         Me.MenuStripEditSeparator1.Name = "MenuStripEditSeparator1"
-        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(147, 6)
         '
         'MenuStripEditCut
         '
@@ -216,7 +216,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCut.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCut.Name = "MenuStripEditCut"
         Me.MenuStripEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.MenuStripEditCut.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCut.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCut.Text = "Cu&t"
         '
         'MenuStripEditCopy
@@ -225,7 +225,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCopy.Name = "MenuStripEditCopy"
         Me.MenuStripEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.MenuStripEditCopy.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCopy.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCopy.Text = "&Copy"
         '
         'MenuStripEditPaste
@@ -234,18 +234,18 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditPaste.Name = "MenuStripEditPaste"
         Me.MenuStripEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.MenuStripEditPaste.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditPaste.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditPaste.Text = "&Paste"
         '
         'MenuStripEditSeparator2
         '
         Me.MenuStripEditSeparator2.Name = "MenuStripEditSeparator2"
-        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(147, 6)
         '
         'MenuStripEditSelectAll
         '
         Me.MenuStripEditSelectAll.Name = "MenuStripEditSelectAll"
-        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditSelectAll.Text = "Select &All"
         '
         'MenuStripView
@@ -254,12 +254,6 @@ Partial Class BasicBrowser
         Me.MenuStripView.Name = "MenuStripView"
         Me.MenuStripView.Size = New System.Drawing.Size(46, 20)
         Me.MenuStripView.Text = "&View"
-        '
-        'MenuStripViewSource
-        '
-        Me.MenuStripViewSource.Name = "MenuStripViewSource"
-        Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
-        Me.MenuStripViewSource.Text = "Source..."
         '
         'MenuStripViewKeepOnTop
         '
@@ -285,25 +279,36 @@ Partial Class BasicBrowser
         Me.MenuStripViewOpacityCbx.Size = New System.Drawing.Size(121, 21)
         Me.MenuStripViewOpacityCbx.Text = "100%"
         '
+        'MenuStripViewSeparator
+        '
+        Me.MenuStripViewSeparator.Name = "MenuStripViewSeparator"
+        Me.MenuStripViewSeparator.Size = New System.Drawing.Size(186, 6)
+        '
+        'MenuStripViewSource
+        '
+        Me.MenuStripViewSource.Name = "MenuStripViewSource"
+        Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
+        Me.MenuStripViewSource.Text = "Source..."
+        '
         'MenuStripTools
         '
-        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsCustomize, Me.MenuStripToolsOptions})
+        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsSetup, Me.MenuStripToolsProperties})
         Me.MenuStripTools.Name = "MenuStripTools"
         Me.MenuStripTools.Size = New System.Drawing.Size(49, 20)
         Me.MenuStripTools.Text = "&Tools"
         '
-        'MenuStripToolsCustomize
+        'MenuStripToolsSetup
         '
-        Me.MenuStripToolsCustomize.Name = "MenuStripToolsCustomize"
-        Me.MenuStripToolsCustomize.Size = New System.Drawing.Size(221, 22)
-        Me.MenuStripToolsCustomize.Text = "Page &Setup..."
+        Me.MenuStripToolsSetup.Name = "MenuStripToolsSetup"
+        Me.MenuStripToolsSetup.Size = New System.Drawing.Size(221, 22)
+        Me.MenuStripToolsSetup.Text = "Page &Setup..."
         '
-        'MenuStripToolsOptions
+        'MenuStripToolsProperties
         '
-        Me.MenuStripToolsOptions.Name = "MenuStripToolsOptions"
-        Me.MenuStripToolsOptions.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.MenuStripToolsOptions.Size = New System.Drawing.Size(221, 22)
-        Me.MenuStripToolsOptions.Text = "Page P&roperties..."
+        Me.MenuStripToolsProperties.Name = "MenuStripToolsProperties"
+        Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.MenuStripToolsProperties.Size = New System.Drawing.Size(221, 22)
+        Me.MenuStripToolsProperties.Text = "Page P&roperties..."
         '
         'MenuStripHelp
         '
@@ -315,30 +320,30 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
         '
         'MenuStripHelpAbout
         '
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
-        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
         '
         'StatusStrip
@@ -465,11 +470,6 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
-        'MenuStripViewSeparator
-        '
-        Me.MenuStripViewSeparator.Name = "MenuStripViewSeparator"
-        Me.MenuStripViewSeparator.Size = New System.Drawing.Size(186, 6)
-        '
         'BasicBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -517,8 +517,8 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripEditSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MenuStripEditSelectAll As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripTools As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsCustomize As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsOptions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripToolsSetup As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripToolsProperties As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripHelp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripHelpContents As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripHelpIndex As System.Windows.Forms.ToolStripMenuItem

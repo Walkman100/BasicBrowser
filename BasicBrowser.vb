@@ -1,10 +1,14 @@
 ﻿Public Class BasicBrowser
+
+    'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
+
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewTab(Nothing, Nothing)
     End Sub
 
     ' menu strip options
 
+    'File
     Private Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
@@ -27,11 +31,12 @@
         ToolStripGo.Enabled = True
         ToolStripURL.Enabled = True
         MenuStripFileCloseTab.Enabled = True
+        MenuStripFileOpen.Enabled = True
         MenuStripFileSave.Enabled = True
         MenuStripFilePrint.Enabled = True
         MenuStripFilePrintPreview.Enabled = True
-        MenuStripToolsCustomize.Enabled = True
-        MenuStripToolsOptions.Enabled = True
+        MenuStripToolsSetup.Enabled = True
+        MenuStripToolsProperties.Enabled = True
         WebBrowser.GoHome()
     End Sub
 
@@ -54,13 +59,29 @@
             ToolStripGo.Enabled = False
             ToolStripURL.Enabled = False
             MenuStripFileCloseTab.Enabled = False
+            MenuStripFileOpen.Enabled = False
             MenuStripFileSave.Enabled = False
             MenuStripFilePrint.Enabled = False
             MenuStripFilePrintPreview.Enabled = False
-            MenuStripToolsCustomize.Enabled = False
-            MenuStripToolsOptions.Enabled = False
+            MenuStripToolsSetup.Enabled = False
+            MenuStripToolsProperties.Enabled = False
         Else
             PerformStuff()
+        End If
+    End Sub
+
+    Private Sub MenuStripFileOpen_Click(sender As Object, e As EventArgs) Handles MenuStripFileOpen.Click
+        'Declare openFileDailog as a new OpenFileDialog
+        Dim OpenFileDialog As New OpenFileDialog()
+        'Set the FileName to nothing
+        OpenFileDialog.FileName = ""
+        'Set the Filter
+        OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
+        'Set the Title to Open Webpage
+        OpenFileDialog.Title = "Open Webpage"
+        If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
+            'Set the DocumentText to the text of file we just opened
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
         End If
     End Sub
 
@@ -84,24 +105,60 @@
         Application.Exit()
     End Sub
 
-    Private Sub MenuStripToolsCustomize_Click(sender As Object, e As EventArgs) Handles MenuStripToolsCustomize.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPageSetupDialog()
-    End Sub
+    'Edit
+    'WIP
 
-    Private Sub MenuStripToolsOptions_Click(sender As Object, e As EventArgs) Handles MenuStripToolsOptions.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
-    End Sub
-
-    Private Sub MenuStripToolsKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripViewKeepOnTop.CheckedChanged
+    'View
+    Private Sub MenuStripViewKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripViewKeepOnTop.CheckedChanged
         Me.TopMost = MenuStripViewKeepOnTop.Checked
     End Sub
 
-    Private Sub MenuStripToolsOpacityLbl_Click(sender As Object, e As EventArgs) Handles MenuStripViewOpacityLbl.Click
+    Private Sub MenuStripViewOpacityLbl_Click(sender As Object, e As EventArgs) Handles MenuStripViewOpacityLbl.Click
         MenuStripViewOpacityCbx.Focus()
     End Sub
 
-    Private Sub MenuStripToolsOpacityCbx_TextChanged(sender As Object, e As EventArgs) Handles MenuStripViewOpacityCbx.TextChanged
+    Private Sub MenuStripViewOpacityCbx_TextChanged(sender As Object, e As EventArgs) Handles MenuStripViewOpacityCbx.TextChanged
         Me.Opacity = MenuStripViewOpacityCbx.Text.Remove(MenuStripViewOpacityCbx.Text.LastIndexOf("%")) / 100
+    End Sub
+
+    Private Sub MenuStripViewSource_Click(sender As Object, e As EventArgs) Handles MenuStripViewSource.Click
+        'Declare sourceForm as a new Form
+        Dim sourceForm As New Form()
+        'Declare sourceCode as a new TextBox
+        Dim sourceCode As New TextBox()
+        'Fill the TextBox throughout the form
+        sourceCode.Dock = DockStyle.Fill
+        'Allow the TextBox to contain more than one line
+        sourceCode.Multiline = True
+        'Have both scrollbars appear on the TextBox
+        sourceCode.ScrollBars = ScrollBars.Both
+        'Set the width of the form to 450
+        sourceForm.Width = 450
+        'Set the height of the form to 350
+        sourceForm.Height = 350
+        'Set the start Position
+        sourceForm.StartPosition = FormStartPosition.CenterParent
+        'Do not show the Icon
+        sourceForm.ShowIcon = False
+        'Show in the Taskbar
+        sourceForm.ShowInTaskbar = True
+        'Set the text of the form to Source Code for and the URL
+        sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        'Set the text of sourceCode to the DocumentText of webBrowser
+        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
+        'Add the sourceCode TextBox to the form
+        sourceForm.Controls.Add(sourceCode)
+        'Show the sourceForm
+        sourceForm.Show()
+    End Sub
+
+    'Tools
+    Private Sub MenuStripToolsSetup_Click(sender As Object, e As EventArgs) Handles MenuStripToolsSetup.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPageSetupDialog()
+    End Sub
+
+    Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
 
     ' tool strip options
