@@ -29,6 +29,7 @@ Partial Class BasicBrowser
         Me.MenuStripFileNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileCloseTab = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripFileOpen = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFilePrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -44,6 +45,11 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripEditSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripViewSource = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripViewKeepOnTop = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripViewOpacityLbl = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripViewOpacityCbx = New System.Windows.Forms.ToolStripComboBox()
         Me.MenuStripTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsCustomize = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
@@ -68,9 +74,7 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
-        Me.MenuStripToolsKeepOnTop = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsOpacityLbl = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsOpacityCbx = New System.Windows.Forms.ToolStripComboBox()
+        Me.MenuStripViewSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
@@ -90,7 +94,7 @@ Partial Class BasicBrowser
         'MenuStrip
         '
         Me.MenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFile, Me.MenuStripEdit, Me.MenuStripTools, Me.MenuStripHelp})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFile, Me.MenuStripEdit, Me.MenuStripView, Me.MenuStripTools, Me.MenuStripHelp})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -100,7 +104,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFile
         '
-        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileSeparator1, Me.MenuStripFileSave, Me.MenuStripFileSeparator2, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
+        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileSeparator1, Me.MenuStripFileOpen, Me.MenuStripFileSave, Me.MenuStripFileSeparator2, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
         Me.MenuStripFile.Name = "MenuStripFile"
         Me.MenuStripFile.Size = New System.Drawing.Size(38, 20)
         Me.MenuStripFile.Text = "&File"
@@ -127,6 +131,15 @@ Partial Class BasicBrowser
         '
         Me.MenuStripFileSeparator1.Name = "MenuStripFileSeparator1"
         Me.MenuStripFileSeparator1.Size = New System.Drawing.Size(176, 6)
+        '
+        'MenuStripFileOpen
+        '
+        Me.MenuStripFileOpen.Image = CType(resources.GetObject("MenuStripFileOpen.Image"), System.Drawing.Image)
+        Me.MenuStripFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.MenuStripFileOpen.Name = "MenuStripFileOpen"
+        Me.MenuStripFileOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.MenuStripFileOpen.Size = New System.Drawing.Size(179, 22)
+        Me.MenuStripFileOpen.Text = "&Open"
         '
         'MenuStripFileSave
         '
@@ -235,9 +248,46 @@ Partial Class BasicBrowser
         Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditSelectAll.Text = "Select &All"
         '
+        'MenuStripView
+        '
+        Me.MenuStripView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripViewKeepOnTop, Me.MenuStripViewOpacityLbl, Me.MenuStripViewSeparator, Me.MenuStripViewSource})
+        Me.MenuStripView.Name = "MenuStripView"
+        Me.MenuStripView.Size = New System.Drawing.Size(46, 20)
+        Me.MenuStripView.Text = "&View"
+        '
+        'MenuStripViewSource
+        '
+        Me.MenuStripViewSource.Name = "MenuStripViewSource"
+        Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
+        Me.MenuStripViewSource.Text = "Source..."
+        '
+        'MenuStripViewKeepOnTop
+        '
+        Me.MenuStripViewKeepOnTop.AutoToolTip = True
+        Me.MenuStripViewKeepOnTop.CheckOnClick = True
+        Me.MenuStripViewKeepOnTop.Name = "MenuStripViewKeepOnTop"
+        Me.MenuStripViewKeepOnTop.Size = New System.Drawing.Size(189, 22)
+        Me.MenuStripViewKeepOnTop.Text = "Keep window on top"
+        '
+        'MenuStripViewOpacityLbl
+        '
+        Me.MenuStripViewOpacityLbl.AutoToolTip = True
+        Me.MenuStripViewOpacityLbl.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripViewOpacityCbx})
+        Me.MenuStripViewOpacityLbl.Name = "MenuStripViewOpacityLbl"
+        Me.MenuStripViewOpacityLbl.Size = New System.Drawing.Size(189, 22)
+        Me.MenuStripViewOpacityLbl.Text = "Set Opacity >>"
+        '
+        'MenuStripViewOpacityCbx
+        '
+        Me.MenuStripViewOpacityCbx.Items.AddRange(New Object() {"10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"})
+        Me.MenuStripViewOpacityCbx.MaxDropDownItems = 20
+        Me.MenuStripViewOpacityCbx.Name = "MenuStripViewOpacityCbx"
+        Me.MenuStripViewOpacityCbx.Size = New System.Drawing.Size(121, 21)
+        Me.MenuStripViewOpacityCbx.Text = "100%"
+        '
         'MenuStripTools
         '
-        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsCustomize, Me.MenuStripToolsOptions, Me.MenuStripToolsKeepOnTop, Me.MenuStripToolsOpacityLbl})
+        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsCustomize, Me.MenuStripToolsOptions})
         Me.MenuStripTools.Name = "MenuStripTools"
         Me.MenuStripTools.Size = New System.Drawing.Size(49, 20)
         Me.MenuStripTools.Text = "&Tools"
@@ -415,29 +465,10 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
-        'MenuStripToolsKeepOnTop
+        'MenuStripViewSeparator
         '
-        Me.MenuStripToolsKeepOnTop.AutoToolTip = True
-        Me.MenuStripToolsKeepOnTop.CheckOnClick = True
-        Me.MenuStripToolsKeepOnTop.Name = "MenuStripToolsKeepOnTop"
-        Me.MenuStripToolsKeepOnTop.Size = New System.Drawing.Size(221, 22)
-        Me.MenuStripToolsKeepOnTop.Text = "Keep window on top"
-        '
-        'MenuStripToolsOpacityLbl
-        '
-        Me.MenuStripToolsOpacityLbl.AutoToolTip = True
-        Me.MenuStripToolsOpacityLbl.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsOpacityCbx})
-        Me.MenuStripToolsOpacityLbl.Name = "MenuStripToolsOpacityLbl"
-        Me.MenuStripToolsOpacityLbl.Size = New System.Drawing.Size(221, 22)
-        Me.MenuStripToolsOpacityLbl.Text = "Set Opacity >>"
-        '
-        'MenuStripToolsOpacityCbx
-        '
-        Me.MenuStripToolsOpacityCbx.Items.AddRange(New Object() {"10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"})
-        Me.MenuStripToolsOpacityCbx.MaxDropDownItems = 20
-        Me.MenuStripToolsOpacityCbx.Name = "MenuStripToolsOpacityCbx"
-        Me.MenuStripToolsOpacityCbx.Size = New System.Drawing.Size(121, 21)
-        Me.MenuStripToolsOpacityCbx.Text = "100%"
+        Me.MenuStripViewSeparator.Name = "MenuStripViewSeparator"
+        Me.MenuStripViewSeparator.Size = New System.Drawing.Size(186, 6)
         '
         'BasicBrowser
         '
@@ -509,8 +540,12 @@ Partial Class BasicBrowser
     Friend WithEvents StatusStripStatusText As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripGo As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripTextBox
-    Friend WithEvents MenuStripToolsKeepOnTop As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsOpacityLbl As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsOpacityCbx As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents MenuStripViewKeepOnTop As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripViewOpacityLbl As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripViewOpacityCbx As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents MenuStripView As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripFileOpen As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripViewSource As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripViewSeparator As System.Windows.Forms.ToolStripSeparator
 
 End Class

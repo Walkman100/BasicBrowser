@@ -92,16 +92,16 @@
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
 
-    Private Sub MenuStripToolsKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripToolsKeepOnTop.CheckedChanged
-        Me.TopMost = MenuStripToolsKeepOnTop.Checked
+    Private Sub MenuStripToolsKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripViewKeepOnTop.CheckedChanged
+        Me.TopMost = MenuStripViewKeepOnTop.Checked
     End Sub
 
-    Private Sub MenuStripToolsOpacityLbl_Click(sender As Object, e As EventArgs) Handles MenuStripToolsOpacityLbl.Click
-        MenuStripToolsOpacityCbx.Focus()
+    Private Sub MenuStripToolsOpacityLbl_Click(sender As Object, e As EventArgs) Handles MenuStripViewOpacityLbl.Click
+        MenuStripViewOpacityCbx.Focus()
     End Sub
 
-    Private Sub MenuStripToolsOpacityCbx_TextChanged(sender As Object, e As EventArgs) Handles MenuStripToolsOpacityCbx.TextChanged
-        Me.Opacity = MenuStripToolsOpacityCbx.Text.Remove(MenuStripToolsOpacityCbx.Text.LastIndexOf("%")) / 100
+    Private Sub MenuStripToolsOpacityCbx_TextChanged(sender As Object, e As EventArgs) Handles MenuStripViewOpacityCbx.TextChanged
+        Me.Opacity = MenuStripViewOpacityCbx.Text.Remove(MenuStripViewOpacityCbx.Text.LastIndexOf("%")) / 100
     End Sub
 
     ' tool strip options
@@ -110,6 +110,13 @@
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
         ToolStripStop.Enabled = True
         PerformStuff()
+    End Sub
+
+    Private Sub ToolStripBack_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripBack.DropDownItemClicked
+        ToolStripBack.DropDownItems.Clear()
+        'For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Items
+        '   ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Item(i))
+        'Next
     End Sub
 
     Private Sub ToolStripForward_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripForward.ButtonClick
