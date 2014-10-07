@@ -8,8 +8,8 @@
     Private Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
-        AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigating)
-        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigated)
+        AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
+        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
@@ -139,12 +139,7 @@
 
     ' browser stuff
 
-    Sub Navigating()
-        ToolStripStop.Enabled = True
-        PerformStuff()
-    End Sub
-
-    Sub Navigated()
+    Sub Navigate()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
@@ -178,7 +173,9 @@
     Sub PerformStuff()
         ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
+            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        End If
         TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
