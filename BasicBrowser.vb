@@ -24,9 +24,7 @@
         WebBrowser.Dock = DockStyle.Fill
         TabControl.SelectTab(TabControl.TabCount - 1)
 
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-
+       PerformStuff()
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
@@ -41,9 +39,9 @@
         If TabControl.TabCount = 0 Then
             MenuStripFileCloseTab.Enabled = False
             ToolStripCloseTab.Enabled = False
+        Else
+            PerformStuff()
         End If
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
     End Sub
 
     Private Sub MenuStripFileSave_Click(sender As Object, e As EventArgs) Handles MenuStripFileSave.Click
@@ -78,65 +76,48 @@
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        PerformStuff()
     End Sub
 
     Private Sub ToolStripForward_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripForward.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoForward()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        PerformStuff()
     End Sub
 
     Private Sub ToolStripReload_Click(sender As Object, e As EventArgs) Handles ToolStripReload.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        PerformStuff()
     End Sub
 
     Private Sub ToolStripStop_Click(sender As Object, e As EventArgs) Handles ToolStripStop.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Stop()
         ToolStripStop.Enabled = False
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        PerformStuff()
     End Sub
 
     Private Sub ToolStripHome_Click(sender As Object, e As EventArgs) Handles ToolStripHome.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        PerformStuff()
     End Sub
 
     ' browser stuff
 
     Sub Navigating()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
-        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
+        PerformStuff()
     End Sub
 
     Sub Navigated()
         ToolStripStop.Enabled = True
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
-        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
+        PerformStuff()
     End Sub
 
     Sub DocumentCompleted()
         ToolStripStop.Enabled = False
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
-        TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
+        PerformStuff()
     End Sub
 
     Sub CanGoBackChanged()
@@ -149,6 +130,10 @@
 
     Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
         ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        PerformStuff()
+    End Sub
+
+    Sub PerformStuff()
         ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
         Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
