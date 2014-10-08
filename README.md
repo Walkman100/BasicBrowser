@@ -1,6 +1,6 @@
-BasicBrowser
+BasicBrowser [![Build status](https://ci.appveyor.com/api/projects/status/vk3okvf6qmlpykgx)](https://ci.appveyor.com/project/Walkman100/basicbrowser)
 ============
-[![Build status](https://ci.appveyor.com/api/projects/status/vk3okvf6qmlpykgx)](https://ci.appveyor.com/project/Walkman100/basicbrowser)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A simple tabbed browser coded in Vb.Net.
 
