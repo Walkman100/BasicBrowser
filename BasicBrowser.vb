@@ -131,6 +131,7 @@
         sourceForm.StartPosition = FormStartPosition.CenterParent
         sourceForm.WindowState = Me.WindowState
         'sourceForm.ShowIcon = False
+        sourceForm.Icon = CType(Resources.GetObject("SourceCode.Icon"), System.Drawing.Icon)
         sourceForm.ShowInTaskbar = True
         sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
