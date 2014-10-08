@@ -2,6 +2,7 @@
 
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NewTab(Nothing, Nothing)
         For i = 1 To My.Settings.Favourites.Count
@@ -38,6 +39,7 @@
         MenuStripFileSave.Enabled = True
         MenuStripFilePrint.Enabled = True
         MenuStripFilePrintPreview.Enabled = True
+        MenuStripViewSource.Enabled = True
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
         WebBrowser.GoHome()
@@ -66,24 +68,21 @@
             MenuStripFileSave.Enabled = False
             MenuStripFilePrint.Enabled = False
             MenuStripFilePrintPreview.Enabled = False
+            MenuStripViewSource.Enabled = False
             MenuStripToolsSetup.Enabled = False
             MenuStripToolsProperties.Enabled = False
+
         Else
             PerformStuff()
         End If
     End Sub
 
     Private Sub MenuStripFileOpen_Click(sender As Object, e As EventArgs) Handles MenuStripFileOpen.Click
-        'Declare openFileDailog as a new OpenFileDialog
         Dim OpenFileDialog As New OpenFileDialog()
-        'Set the FileName to nothing
         OpenFileDialog.FileName = ""
-        'Set the Filter
         OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
-        'Set the Title to Open Webpage
         OpenFileDialog.Title = "Open Webpage"
         If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
-            'Set the DocumentText to the text of file we just opened
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
         End If
     End Sub
@@ -130,8 +129,8 @@
         sourceForm.Height = 350
         sourceForm.StartPosition = FormStartPosition.CenterParent
         sourceForm.WindowState = Me.WindowState
-        'sourceForm.ShowIcon = False
-        sourceForm.Icon = CType(Resources.GetObject("SourceCode.Icon"), System.Drawing.Icon)
+        sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
+        sourceForm.ShowIcon = True
         sourceForm.ShowInTaskbar = True
         sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
