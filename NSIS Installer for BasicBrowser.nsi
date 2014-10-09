@@ -53,12 +53,12 @@ SectionEnd
 
 SubSection "Open in BasicBrowser"
   Section "Add to Open With menu"
-    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
+    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
   SectionEnd
   
   Section "Set as default program"
-    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
+    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
   SectionEnd
   
