@@ -15,7 +15,7 @@
 
         NewTab(Nothing, Nothing)
         For i = 1 To My.Settings.Favourites.Count
-            ToolStripCbxFav.Items.Add(My.Settings.Favourites.Item(i))
+            ToolStripCbxFav.Items.Add(My.Settings.Favourites.Item(i - 1))
         Next
     End Sub
 

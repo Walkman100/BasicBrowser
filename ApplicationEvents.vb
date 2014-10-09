@@ -1,5 +1,6 @@
 ﻿Namespace My
-    ' The following events are available for MyApplication:
+
+    ' The following events are available for MyApplication:
     ' 
     ' Startup: Raised when the application starts, before the startup form is created.
     ' Shutdown: Raised after all application forms are closed.  This event is not raised if the application terminates abnormally.
@@ -9,7 +10,7 @@
     Partial Friend Class MyApplication
         Private Sub StartFromFile(sender As Object, e As ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
             For Each s As String In My.Application.CommandLineArgs
-                If BasicBrowser.openWithURI <> "" Then
+                If BasicBrowser.openWithURI = "" Then
                     BasicBrowser.openWithURI = s
                 Else
                     BasicBrowser.openWithURI = BasicBrowser.openWithURI & s
