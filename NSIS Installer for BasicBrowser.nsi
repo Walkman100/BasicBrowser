@@ -50,6 +50,12 @@ Section "BasicBrowser Quick Launch Shortcut"
   CreateShortCut "$QUICKLAUNCH\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
 SectionEnd
 
+Section "Add to Open With menu"
+  WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
+SectionEnd
+
 ;Section "More apps from DeavmiOSS"
 ; this should have sub options for available apps, that are downloaded
 ;SectionEnd
@@ -66,7 +72,11 @@ Section "Uninstall"
   RMDir $SMPROGRAMS\DeavmiOSS
   
   Delete $DESKTOP\BasicBrowser.lnk   ; Remove Desktop Shortcut
-  Delete $QUICKLAUNCH\BasicBrowser.lnk   ; Remove Quick Launch shortcut
+  Delete $QUICKLAUNCH\BasicBrowser.lnk   ; Remove Quick Launch Shortcut
+  
+  DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
+  DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\chrome.exe"
 SectionEnd
 
 ; Functions

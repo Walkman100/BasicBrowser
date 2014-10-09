@@ -1,13 +1,5 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html]
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList]
-"j"="BasicBrowser.exe"
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice]
-"Progid"="Applications\\BasicBrowser.exe"
-
 [HKEY_CLASSES_ROOT\Applications\BasicBrowser.exe]
 
 [HKEY_CLASSES_ROOT\Applications\BasicBrowser.exe\shell]
@@ -16,3 +8,11 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\Applications\BasicBrowser.exe\shell\open\command]
 @="\"C:\\Program Files\\DeavmiOSS\\BasicBrowser.exe\" \"%1\""
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList]
+"j"="BasicBrowser.exe"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice]
+"Progid"="Applications\\BasicBrowser.exe"
