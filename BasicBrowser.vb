@@ -27,7 +27,7 @@
     Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
-        AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
+        'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
@@ -278,7 +278,7 @@
     End Sub
 
     Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
     End Sub
 
     ' browser stuff
@@ -317,6 +317,8 @@
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
             TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
         End If
-        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        If ToolStripURL.Focused = False Then
+            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        End If
     End Sub
 End Class

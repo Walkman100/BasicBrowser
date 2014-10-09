@@ -127,20 +127,20 @@
   <data name="1391271889_emblem-unreadable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1391271889_emblem-unreadable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1391274420_go-previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1391274420_go-previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="1391271803_view-refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1391271803_view-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SourceCodeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SourceCodeIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\SourceCodeIcon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1391274345_go-next" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1391274345_go-next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1371833355_go-home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1371833355_go-home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Exit2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Exit2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="go_right_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go_right_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +154,8 @@
   <data name="16x16_bookmark_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\16x16_bookmark_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Exit2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Exit2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1391274420_go-previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1391274420_go-previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="16x16_quit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\16x16_quit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,7 +163,7 @@
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SourceCodeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SourceCodeIcon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

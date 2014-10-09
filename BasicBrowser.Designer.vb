@@ -62,8 +62,8 @@ Partial Class BasicBrowser
         Me.MenuStripHelpSearch = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripAdd = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripRemove = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripAdd = New System.Windows.Forms.ToolStripButton()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.StatusStripProgressBar = New System.Windows.Forms.ToolStripProgressBar()
         Me.StatusStripStatusText = New System.Windows.Forms.ToolStripStatusLabel()
@@ -346,41 +346,32 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
         '
         'MenuStripHelpAbout
         '
+        Me.MenuStripHelpAbout.Image = Global.BasicBrowser.My.Resources.Resources.Info
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
         Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
-        '
-        'ToolStripAdd
-        '
-        Me.ToolStripAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripAdd.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_add
-        Me.ToolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripAdd.Name = "ToolStripAdd"
-        Me.ToolStripAdd.Size = New System.Drawing.Size(23, 20)
-        Me.ToolStripAdd.Text = "Add Favourite"
         '
         'ToolStripRemove
         '
@@ -392,6 +383,16 @@ Partial Class BasicBrowser
         Me.ToolStripRemove.Size = New System.Drawing.Size(23, 20)
         Me.ToolStripRemove.Text = "Remove Favourite"
         '
+        'ToolStripAdd
+        '
+        Me.ToolStripAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripAdd.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_add
+        Me.ToolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripAdd.Name = "ToolStripAdd"
+        Me.ToolStripAdd.Size = New System.Drawing.Size(23, 20)
+        Me.ToolStripAdd.Text = "Add Favourite"
+        '
         'StatusStrip
         '
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusStripProgressBar, Me.StatusStripStatusText})
@@ -399,7 +400,7 @@ Partial Class BasicBrowser
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(642, 22)
         Me.StatusStrip.TabIndex = 3
-        Me.StatusStrip.Text = "StatusStrip1"
+        Me.StatusStrip.Text = "StatusStrip"
         '
         'StatusStripProgressBar
         '
