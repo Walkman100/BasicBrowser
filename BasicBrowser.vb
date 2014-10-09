@@ -55,6 +55,7 @@
             WebBrowser.GoHome()
         Else
             WebBrowser.Navigate(openWithURI)
+            openWithURI = ""
         End If
     End Sub
 
