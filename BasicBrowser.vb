@@ -3,7 +3,7 @@
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
-    Dim openWithURI As String
+    Public openWithURI As String
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
             If openWithURI <> "" Then
@@ -22,7 +22,7 @@
     ' MenuStrip options
 
     'File
-    Private Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
+    Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
         AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)

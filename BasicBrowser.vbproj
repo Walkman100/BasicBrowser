@@ -74,6 +74,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="BasicBrowser.vb">
       <SubType>Form</SubType>
     </Compile>
