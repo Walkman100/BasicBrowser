@@ -3,7 +3,16 @@
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
+    Dim openWithURI As String
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        For Each s As String In My.Application.CommandLineArgs
+            If openWithURI <> "" Then
+                openWithURI = s
+            Else
+                openWithURI = openWithURI & s
+            End If
+        Next
+
         NewTab(Nothing, Nothing)
         For i = 1 To My.Settings.Favourites.Count
             ToolStripCbxFav.Items.Add(My.Settings.Favourites.Item(i))
@@ -42,7 +51,11 @@
         MenuStripViewSource.Enabled = True
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
-        WebBrowser.GoHome()
+        If openWithURI = "" Then
+            WebBrowser.GoHome()
+        Else
+            WebBrowser.Navigate(openWithURI)
+        End If
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
