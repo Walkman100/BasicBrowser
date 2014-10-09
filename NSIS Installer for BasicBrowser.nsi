@@ -7,6 +7,7 @@
 Caption "BasicBrowser Installer"
 Name "BasicBrowser"
 AutoCloseWindow true
+ShowInstDetails show
 
 LicenseBkColor /windows
 LicenseData "LICENSE.md"
@@ -28,33 +29,40 @@ UninstPage instfiles
 
 ; Sections
 
-Section "BasicBrowser Executable & Uninstaller"
+Section "Executable & Uninstaller"
   SectionIn RO
   SetOutPath $INSTDIR
   File "bin\Release\BasicBrowser.exe"
   WriteUninstaller "BasicBrowser-Uninst.exe"
 SectionEnd
 
-Section "BasicBrowser Start Menu Shortcuts"
+Section "Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\DeavmiOSS"
   CreateShortCut "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
   CreateShortCut "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk" "$INSTDIR\BasicBrowser-Uninst.exe" "" "" "" "" "" "Uninstall BasicBrowser"
   ;Syntax for CreateShortCut: link.lnk target.file [parameters [icon.file [icon_index_number [start_options [keyboard_shortcut [description]]]]]]
 SectionEnd
 
-Section "BasicBrowser Desktop Shortcut"
+Section "Desktop Shortcut"
   CreateShortCut "$DESKTOP\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
 SectionEnd
 
-Section "BasicBrowser Quick Launch Shortcut"
+Section "Quick Launch Shortcut"
   CreateShortCut "$QUICKLAUNCH\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
 SectionEnd
 
-Section "Add to Open With menu"
-  WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
-SectionEnd
+SubSection "Open in BasicBrowser"
+  Section "Add to Open With menu"
+    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
+  SectionEnd
+  
+  Section "Set as default program"
+    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"C:\Program Files\DeavmiOSS\BasicBrowser.exe$\" $\"%1$\""
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
+  SectionEnd
+  
+SubSectionEnd
 
 ;Section "More apps from DeavmiOSS"
 ; this should have sub options for available apps, that are downloaded
