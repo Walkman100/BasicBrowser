@@ -3,10 +3,12 @@
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
+
     Public openWithURI As String
+
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
-            If openWithURI <> "" Then
+            If openWithURI = "" Then
                 openWithURI = s
             Else
                 openWithURI = openWithURI & s
@@ -172,6 +174,28 @@
 
     Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
+    End Sub
+
+    'About
+    Private Sub MenuStripHelpAbout_Click(sender As Object, e As EventArgs) Handles MenuStripHelpAbout.Click
+        Dim AboutForm As New Form()
+        AboutForm.Width = 450
+        AboutForm.Height = 350
+        AboutForm.StartPosition = FormStartPosition.CenterParent
+        AboutForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
+        AboutForm.ShowIcon = True
+        AboutForm.ShowInTaskbar = True
+        AboutForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        Dim lblAboutText As New Label()
+        'lblAboutText.Font = True
+        lblAboutText.TextAlign = ContentAlignment.MiddleCenter
+        AboutForm.Controls.Add(lblAboutText)
+        lblAboutText.Dock = DockStyle.Fill
+        lblAboutText.Text = _
+            "Made by Walkman100" & vbNewLine & _
+            vbNewLine & _
+            "Hold ALT to reorganise all the buttons/menus at the top"
+        AboutForm.Show()
     End Sub
 
     ' ToolStrip options
