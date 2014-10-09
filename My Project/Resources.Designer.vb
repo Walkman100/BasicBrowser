@@ -73,6 +73,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _1387139872_window_new() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("1387139872_window-new", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property _1387140136_process_stop() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("1387140136_process-stop", resourceCulture)
@@ -176,7 +186,7 @@ Namespace My.Resources
         Friend ReadOnly Property SourceCodeIcon() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("SourceCodeIcon", resourceCulture)
-                Return CType(obj, System.Drawing.Icon)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
     End Module
