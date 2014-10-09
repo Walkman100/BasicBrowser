@@ -78,8 +78,8 @@ Partial Class BasicBrowser
         Me.ToolStripHome = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripNewTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripURL = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStripNavigation.SuspendLayout()
@@ -505,12 +505,6 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripCloseTab.Text = "Close Tab"
         '
-        'ToolStripURL
-        '
-        Me.ToolStripURL.Name = "ToolStripURL"
-        Me.ToolStripURL.Size = New System.Drawing.Size(415, 25)
-        Me.ToolStripURL.ToolTipText = "Enter URL to navigate to"
-        '
         'ToolStripGo
         '
         Me.ToolStripGo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -521,6 +515,12 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
+        '
+        'ToolStripURL
+        '
+        Me.ToolStripURL.Name = "ToolStripURL"
+        Me.ToolStripURL.Size = New System.Drawing.Size(415, 25)
+        Me.ToolStripURL.ToolTipText = "Enter URL to navigate to"
         '
         'BasicBrowser
         '
@@ -592,7 +592,6 @@ Partial Class BasicBrowser
     Friend WithEvents StatusStripProgressBar As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents StatusStripStatusText As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripGo As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents MenuStripViewKeepOnTop As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripViewOpacityLbl As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripViewOpacityCbx As System.Windows.Forms.ToolStripComboBox
@@ -605,5 +604,6 @@ Partial Class BasicBrowser
     Friend WithEvents ToolStripCbxFav As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents MenuStripFileNewWindow As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripFileCloseWindow As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
 
 End Class
