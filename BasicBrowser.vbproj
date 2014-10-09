@@ -164,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\1371846583_internet-web-browser.ico" />
+    <None Include="Resources\16x16_quit.png" />
+    <None Include="Resources\Exit2.png" />
     <None Include="Resources\1387139872_window-new.png" />
     <None Include="Resources\SourceCode.ico" />
   </ItemGroup>

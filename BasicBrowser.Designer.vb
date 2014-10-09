@@ -143,6 +143,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileCloseWindow
         '
+        Me.MenuStripFileCloseWindow.Image = Global.BasicBrowser.My.Resources.Resources.Exit2
         Me.MenuStripFileCloseWindow.Name = "MenuStripFileCloseWindow"
         Me.MenuStripFileCloseWindow.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
         Me.MenuStripFileCloseWindow.Size = New System.Drawing.Size(240, 22)
@@ -202,6 +203,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileExit
         '
+        Me.MenuStripFileExit.Image = Global.BasicBrowser.My.Resources.Resources._16x16_quit
         Me.MenuStripFileExit.Name = "MenuStripFileExit"
         Me.MenuStripFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Q), System.Windows.Forms.Keys)
         Me.MenuStripFileExit.Size = New System.Drawing.Size(240, 22)
