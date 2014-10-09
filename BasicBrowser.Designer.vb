@@ -99,7 +99,7 @@ Partial Class BasicBrowser
         '
         Me.MenuStrip.AllowItemReorder = True
         Me.MenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFile, Me.MenuStripEdit, Me.MenuStripView, Me.MenuStripTools, Me.MenuStripHelp, Me.ToolStripAdd, Me.ToolStripRemove})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFile, Me.MenuStripEdit, Me.MenuStripView, Me.MenuStripTools, Me.MenuStripHelp, Me.ToolStripRemove, Me.ToolStripAdd})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -310,6 +310,7 @@ Partial Class BasicBrowser
         '
         'MenuStripViewSource
         '
+        Me.MenuStripViewSource.Image = Global.BasicBrowser.My.Resources.Resources.SourceCodeIcon
         Me.MenuStripViewSource.Name = "MenuStripViewSource"
         Me.MenuStripViewSource.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
         Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
@@ -345,34 +346,35 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
         '
         'MenuStripHelpAbout
         '
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
-        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
         '
         'ToolStripAdd
         '
+        Me.ToolStripAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripAdd.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_add
         Me.ToolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -382,6 +384,7 @@ Partial Class BasicBrowser
         '
         'ToolStripRemove
         '
+        Me.ToolStripRemove.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripRemove.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_remove
         Me.ToolStripRemove.ImageTransparentColor = System.Drawing.Color.Magenta
