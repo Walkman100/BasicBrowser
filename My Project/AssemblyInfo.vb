@@ -1,4 +1,6 @@
-﻿Imports System
+﻿Imports System.Resources
+
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -15,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCopyright("FOSS from Walkman 2014")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("387a7212-4828-42f3-b14e-189045291572")> 
@@ -33,3 +35,5 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.1.0.0")> 
 <Assembly: AssemblyFileVersion("1.1.0.0")> 
+
+<Assembly: NeutralResourcesLanguageAttribute("en-ZA")> 

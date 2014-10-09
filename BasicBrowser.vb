@@ -287,4 +287,13 @@
         End If
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
+
+    Private Sub NewwindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewwindowToolStripMenuItem.Click
+        Dim newwindow As BasicBrowser = New BasicBrowser
+        newwindow.Show()
+    End Sub
+
+    Private Sub CloseWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseWindowToolStripMenuItem.Click
+        Me.Close()
+    End Sub
 End Class
