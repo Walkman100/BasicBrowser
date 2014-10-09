@@ -17,7 +17,7 @@
 
         NewTab(Nothing, Nothing)
         For i = 1 To My.Settings.Favourites.Count
-            ToolStripCbxFav.Items.Add(My.Settings.Favourites.Item(i - 1))
+            ToolStripURL.Items.Add(My.Settings.Favourites.Item(i - 1))
         Next
     End Sub
 
@@ -93,12 +93,12 @@
         End If
     End Sub
 
-    Private Sub NewwindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenuStripFileNewWindow.Click
-        Dim newwindow As BasicBrowser = New BasicBrowser
-        newwindow.Show()
+    Private Sub MenuStripFileNewWindow_Click(sender As Object, e As EventArgs) Handles MenuStripFileNewWindow.Click
+        Dim NewWindow As BasicBrowser = New BasicBrowser
+        NewWindow.Show()
     End Sub
 
-    Private Sub CloseWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenuStripFileCloseWindow.Click
+    Private Sub MenuStripFileCloseWindow_Click(sender As Object, e As EventArgs) Handles MenuStripFileCloseWindow.Click
         Me.Close()
     End Sub
 
@@ -262,24 +262,23 @@
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, 25)
-        ToolStripCbxFav.Size = New Size(Me.Width - 308, 23)
-    End Sub
+        End Sub
 
-    'Favourites bar
+    'Favourites bar (Integrated into URL bar)
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
-        ToolStripCbxFav.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
+        ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Save()
     End Sub
 
     Private Sub ToolStripRemove_Click(sender As Object, e As EventArgs) Handles ToolStripRemove.Click
-        ToolStripCbxFav.Items.RemoveAt(ToolStripCbxFav.SelectedIndex)
-        My.Settings.Favourites.Remove(ToolStripCbxFav.SelectedItem)
+        ToolStripURL.Items.RemoveAt(ToolStripURL.SelectedIndex)
+        My.Settings.Favourites.Remove(ToolStripURL.SelectedItem)
         My.Settings.Save()
     End Sub
 
-    Private Sub ToolStripCbxFav_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripCbxFav.SelectedIndexChanged
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripCbxFav.SelectedItem.ToString)
+    Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
     End Sub
 
     ' browser stuff
