@@ -185,15 +185,16 @@
         AboutForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
         AboutForm.ShowIcon = True
         AboutForm.ShowInTaskbar = True
-        AboutForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        AboutForm.Text = "About BasicBrowser"
         Dim lblAboutText As New Label()
         'lblAboutText.Font = True
         lblAboutText.TextAlign = ContentAlignment.MiddleCenter
         AboutForm.Controls.Add(lblAboutText)
         lblAboutText.Dock = DockStyle.Fill
         lblAboutText.Text = _
-            "Made by Walkman100" & vbNewLine & _
-            vbNewLine & _
+            "Made by Walkman100" & vbNewLine & vbNewLine & _
+            "Source code available at: http://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
+            "Go to http://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
             "Hold ALT to reorganise all the buttons/menus at the top"
         AboutForm.Show()
     End Sub

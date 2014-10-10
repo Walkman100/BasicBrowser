@@ -310,7 +310,7 @@ Partial Class BasicBrowser
         '
         'MenuStripViewSource
         '
-        Me.MenuStripViewSource.Image = Global.BasicBrowser.My.Resources.Resources.SourceCodeIcon
+        Me.MenuStripViewSource.Image = Global.BasicBrowser.My.Resources.Resources.SourceCodeIconBitmap
         Me.MenuStripViewSource.Name = "MenuStripViewSource"
         Me.MenuStripViewSource.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
         Me.MenuStripViewSource.Size = New System.Drawing.Size(189, 22)
