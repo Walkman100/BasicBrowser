@@ -5,7 +5,7 @@
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
 
     Public openWithURI As String
-
+    Dim TabToClose As Integer
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
             If openWithURI = "" Then
@@ -62,14 +62,20 @@
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
-        If TabControl.SelectedIndex <> TabControl.TabCount - 1 Then
-            TabControl.SelectTab(TabControl.SelectedIndex + 1)
+        TabToClose = TabControl.SelectedIndex
+        If TabControl.TabCount > 1 Then
+            '     If you have selected the first tab, select the second tab
+            If TabControl.SelectedIndex = 0 Then
+                TabControl.SelectTab(1)
+                ' If you have selected the last tab, select the second last tab
+            ElseIf TabControl.TabCount = TabControl.SelectedIndex + 1 Then
+                TabControl.SelectTab(TabControl.SelectedIndex - 1)
+            Else 'Else select the next tab
+                TabControl.SelectTab(TabControl.SelectedIndex + 1)
+            End If
         End If
-        If TabControl.SelectedIndex = 0 Or TabControl.SelectedIndex = TabControl.TabCount - 1 Then
-            TabControl.TabPages.RemoveAt(TabControl.SelectedIndex)
-        Else
-            TabControl.TabPages.RemoveAt(TabControl.SelectedIndex - 1)
-        End If
+        TabControl.TabPages.RemoveAt(TabToClose)
+
         If TabControl.TabCount = 0 Then
             ToolStripBack.Enabled = False
             ToolStripForward.Enabled = False
