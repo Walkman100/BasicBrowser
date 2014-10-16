@@ -50,9 +50,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Skybound.Gecko, Version=1.9.1.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Skybound.Gecko.dll</HintPath>
+    <Reference Include="Skybound.Gecko">
+      <HintPath>Resources\Skybound.Gecko.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -160,9 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\1371846583_internet-web-browser.ico" />
-    <None Include="Skybound.Gecko.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\SourceCodeIconBitmap.png" />
     <None Include="Resources\Info.png" />
     <None Include="Resources\SourceCodeIcon.ico" />
