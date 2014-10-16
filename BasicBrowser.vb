@@ -37,14 +37,12 @@ Public Class BasicBrowser
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
-        ' Useful events: .NewWindow, .FileDownload, 
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
         WebBrowser.Parent = TabPage
         WebBrowser.Dock = DockStyle.Fill
         WebBrowser.Visible = True
-        'WebBrowser.ScriptErrorsSuppressed = True
         ToolStripReload.Enabled = True
         ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
