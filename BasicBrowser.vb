@@ -31,7 +31,7 @@ Public Class BasicBrowser
         Dim TabPage As New TabPage()
         Dim WebBrowser As New GeckoWebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
-        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigate)
+        AddHandler WebBrowser.Navigated, New GeckoNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
@@ -44,7 +44,7 @@ Public Class BasicBrowser
         WebBrowser.Parent = TabPage
         WebBrowser.Dock = DockStyle.Fill
         WebBrowser.Visible = True
-        WebBrowser.ScriptErrorsSuppressed = True
+        'WebBrowser.ScriptErrorsSuppressed = True
         ToolStripReload.Enabled = True
         ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
@@ -59,7 +59,8 @@ Public Class BasicBrowser
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
         If openWithURI = "" Then
-            WebBrowser.GoHome()
+            'WebBrowser.GoHome()
+            WebBrowser.Navigate("https://google.com")
         Else
             WebBrowser.Navigate(openWithURI)
             openWithURI = ""
@@ -313,7 +314,7 @@ Public Class BasicBrowser
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
     End Sub
 
-    Sub ProgressChanged(ByVal sender As Object, ByVal e As Windows.Forms.WebBrowserProgressChangedEventArgs)
+    Sub ProgressChanged(ByVal sender As Object, ByVal e As Skybound.Gecko.GeckoProgressEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
     End Sub
