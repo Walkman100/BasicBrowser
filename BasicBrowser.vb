@@ -1,4 +1,6 @@
-﻿Public Class BasicBrowser
+﻿Imports Skybound.Gecko
+
+Public Class BasicBrowser
 
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
@@ -6,6 +8,7 @@
 
     Public openWithURI As String
     Dim TabToClose As Integer
+
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
             If openWithURI = "" Then
@@ -26,7 +29,7 @@
     'File
     Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
-        Dim WebBrowser As New WebBrowser
+        Dim WebBrowser As New GeckoWebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
@@ -34,6 +37,7 @@
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
+        ' Useful events: .NewWindow, .FileDownload, 
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
@@ -270,7 +274,7 @@
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, 25)
-        End Sub
+    End Sub
 
     'Favourites bar (Integrated into URL bar)
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
