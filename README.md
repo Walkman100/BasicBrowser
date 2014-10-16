@@ -9,6 +9,8 @@ https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
 http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
 http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
 
+Now with [GeckoFX](https://code.google.com/p/geckofx/)
+
 #### Screenshot
 You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
 ![Screenshot](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)
