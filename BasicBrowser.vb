@@ -40,6 +40,7 @@
         WebBrowser.Parent = TabPage
         WebBrowser.Dock = DockStyle.Fill
         WebBrowser.Visible = True
+        WebBrowser.ScriptErrorsSuppressed = True
         ToolStripReload.Enabled = True
         ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
