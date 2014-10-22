@@ -110,7 +110,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFile
         '
-        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileNewWindow, Me.MenuStripFileCloseWindow, Me.MenuStripFileSeparator1, Me.MenuStripFileOpen, Me.MenuStripFileSave, Me.MenuStripFileSeparator2, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
+        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileSeparator1, Me.MenuStripFileNewWindow, Me.MenuStripFileCloseWindow, Me.MenuStripFileSeparator2, Me.MenuStripFileOpen, Me.MenuStripFileSave, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
         Me.MenuStripFile.Name = "MenuStripFile"
         Me.MenuStripFile.Size = New System.Drawing.Size(38, 23)
         Me.MenuStripFile.Text = "&File"
@@ -203,7 +203,6 @@ Partial Class BasicBrowser
         '
         Me.MenuStripFileSeparator3.Name = "MenuStripFileSeparator3"
         Me.MenuStripFileSeparator3.Size = New System.Drawing.Size(237, 6)
-        Me.MenuStripFileSeparator3.Visible = False
         '
         'MenuStripFileExit
         '
@@ -219,29 +218,25 @@ Partial Class BasicBrowser
         Me.MenuStripEdit.Name = "MenuStripEdit"
         Me.MenuStripEdit.Size = New System.Drawing.Size(40, 23)
         Me.MenuStripEdit.Text = "&Edit"
-        Me.MenuStripEdit.Visible = False
         '
         'MenuStripEditUndo
         '
         Me.MenuStripEditUndo.Name = "MenuStripEditUndo"
         Me.MenuStripEditUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.MenuStripEditUndo.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditUndo.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditUndo.Text = "&Undo"
-        Me.MenuStripEditUndo.Visible = False
         '
         'MenuStripEditRedo
         '
         Me.MenuStripEditRedo.Name = "MenuStripEditRedo"
         Me.MenuStripEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.MenuStripEditRedo.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditRedo.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditRedo.Text = "&Redo"
-        Me.MenuStripEditRedo.Visible = False
         '
         'MenuStripEditSeparator1
         '
         Me.MenuStripEditSeparator1.Name = "MenuStripEditSeparator1"
-        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(147, 6)
-        Me.MenuStripEditSeparator1.Visible = False
+        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(149, 6)
         '
         'MenuStripEditCut
         '
@@ -249,9 +244,8 @@ Partial Class BasicBrowser
         Me.MenuStripEditCut.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCut.Name = "MenuStripEditCut"
         Me.MenuStripEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.MenuStripEditCut.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditCut.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditCut.Text = "Cu&t"
-        Me.MenuStripEditCut.Visible = False
         '
         'MenuStripEditCopy
         '
@@ -259,9 +253,8 @@ Partial Class BasicBrowser
         Me.MenuStripEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCopy.Name = "MenuStripEditCopy"
         Me.MenuStripEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.MenuStripEditCopy.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditCopy.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditCopy.Text = "&Copy"
-        Me.MenuStripEditCopy.Visible = False
         '
         'MenuStripEditPaste
         '
@@ -269,22 +262,19 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditPaste.Name = "MenuStripEditPaste"
         Me.MenuStripEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.MenuStripEditPaste.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditPaste.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditPaste.Text = "&Paste"
-        Me.MenuStripEditPaste.Visible = False
         '
         'MenuStripEditSeparator2
         '
         Me.MenuStripEditSeparator2.Name = "MenuStripEditSeparator2"
-        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(147, 6)
-        Me.MenuStripEditSeparator2.Visible = False
+        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(149, 6)
         '
         'MenuStripEditSelectAll
         '
         Me.MenuStripEditSelectAll.Name = "MenuStripEditSelectAll"
-        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(150, 22)
+        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripEditSelectAll.Text = "Select &All"
-        Me.MenuStripEditSelectAll.Visible = False
         '
         'MenuStripView
         '

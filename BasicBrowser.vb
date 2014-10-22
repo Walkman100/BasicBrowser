@@ -2,7 +2,7 @@
 
 Public Class BasicBrowser
 
-    'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
+    'use `CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser)` to refer to the webbrowser on the active tab
 
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
 
@@ -153,7 +153,29 @@ Public Class BasicBrowser
     End Sub
 
     'Edit
-    'WIP
+    Private Sub MenuStripEditUndo_Click(sender As Object, e As EventArgs) Handles MenuStripEditUndo.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Undo()
+    End Sub
+
+    Private Sub MenuStripEditRedo_Click(sender As Object, e As EventArgs) Handles MenuStripEditRedo.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Redo()
+    End Sub
+
+    Private Sub MenuStripEditCut_Click(sender As Object, e As EventArgs) Handles MenuStripEditCut.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CutSelection()
+    End Sub
+
+    Private Sub MenuStripEditCopy_Click(sender As Object, e As EventArgs) Handles MenuStripEditCopy.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopySelection()
+    End Sub
+
+    Private Sub MenuStripEditPaste_Click(sender As Object, e As EventArgs) Handles MenuStripEditPaste.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Paste()
+    End Sub
+
+    Private Sub MenuStripEditSelectAll_Click(sender As Object, e As EventArgs) Handles MenuStripEditSelectAll.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).SelectAll()
+    End Sub
 
     'View
     Private Sub MenuStripViewKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripViewKeepOnTop.CheckedChanged
@@ -169,24 +191,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub MenuStripViewSource_Click(sender As Object, e As EventArgs) Handles MenuStripViewSource.Click
-        'Dim sourceForm As New Form()
-        'sourceForm.Width = 450
-        'sourceForm.Height = 350
-        'sourceForm.StartPosition = FormStartPosition.CenterParent
-        'sourceForm.WindowState = Me.WindowState
-        'sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
-        'sourceForm.ShowIcon = True
-        'sourceForm.ShowInTaskbar = True
-        'sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
-        'Dim sourceCode As New TextBox()
-        'sourceCode.Multiline = True
-        'sourceCode.ScrollBars = ScrollBars.Both
-        'sourceForm.Controls.Add(sourceCode)
-        'sourceCode.Dock = DockStyle.Fill
-        'sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText
-        'sourceForm.Show()
-
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ViewSource()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ViewSource() ' Woah cool, one line instead of loads :D
     End Sub
 
     'Tools
@@ -241,6 +246,13 @@ Public Class BasicBrowser
         CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoForward()
         ToolStripStop.Enabled = True
         PerformStuff()
+    End Sub
+
+    Private Sub ToolStripForward_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripForward.DropDownItemClicked
+        ToolStripForward.DropDownItems.Clear()
+        For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
+            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i).ToString)
+        Next
     End Sub
 
     Private Sub ToolStripReload_Click(sender As Object, e As EventArgs) Handles ToolStripReload.Click
