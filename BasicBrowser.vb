@@ -118,20 +118,20 @@ Public Class BasicBrowser
         OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
         OpenFileDialog.Title = "Open Webpage"
         If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
-            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
         End If
     End Sub
 
     Private Sub MenuStripFileSave_Click(sender As Object, e As EventArgs) Handles MenuStripFileSave.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowSaveAsDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowSaveAsDialog()
     End Sub
 
     Private Sub MenuStripFilePrint_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrint.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPrintDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintDialog()
     End Sub
 
     Private Sub MenuStripFilePrintPreview_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrintPreview.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPrintPreviewDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintPreviewDialog()
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
@@ -167,23 +167,23 @@ Public Class BasicBrowser
         sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
         sourceForm.ShowIcon = True
         sourceForm.ShowInTaskbar = True
-        sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
         sourceCode.Multiline = True
         sourceCode.ScrollBars = ScrollBars.Both
         sourceForm.Controls.Add(sourceCode)
         sourceCode.Dock = DockStyle.Fill
-        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
+        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText
         sourceForm.Show()
     End Sub
 
     'Tools
     Private Sub MenuStripToolsSetup_Click(sender As Object, e As EventArgs) Handles MenuStripToolsSetup.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPageSetupDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageSetupDialog()
     End Sub
 
     Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPropertiesDialog()
     End Sub
 
     'About
@@ -205,45 +205,46 @@ Public Class BasicBrowser
             "Made by Walkman100" & vbNewLine & vbNewLine & _
             "Source code available at: http://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
             "Go to http://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
-            "Hold ALT to reorganise all the buttons/menus at the top"
+            "Hold ALT to reorganise all the buttons/menus at the top" & vbNewLine & vbNewLine & _
+            "Current Version: " & My.Application.Info.Version.ToString
         AboutForm.Show()
     End Sub
 
     ' ToolStrip options
 
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoBack()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub ToolStripBack_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripBack.DropDownItemClicked
         ToolStripBack.DropDownItems.Clear()
-        'For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Items
-        '   ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Item(i))
-        'Next
+        For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
+            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i).ToString)
+        Next
     End Sub
 
     Private Sub ToolStripForward_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripForward.ButtonClick
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoForward()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoForward()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub ToolStripReload_Click(sender As Object, e As EventArgs) Handles ToolStripReload.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Refresh()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub ToolStripStop_Click(sender As Object, e As EventArgs) Handles ToolStripStop.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Stop()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Stop()
         ToolStripStop.Enabled = False
         PerformStuff()
     End Sub
 
     Private Sub ToolStripHome_Click(sender As Object, e As EventArgs) Handles ToolStripHome.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoHome()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
@@ -260,14 +261,14 @@ Public Class BasicBrowser
 
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
-            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate(ToolStripURL.Text)
         Else
             ToolStripURL.Focus()
         End If
     End Sub
 
     Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
-        ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).IsBusy
         PerformStuff()
     End Sub
 
@@ -277,8 +278,8 @@ Public Class BasicBrowser
 
     'Favourites bar (Integrated into URL bar)
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
-        ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
-        My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
+        ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString)
+        My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString)
         My.Settings.Save()
     End Sub
 
@@ -289,7 +290,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
     End Sub
 
     ' browser stuff
@@ -305,31 +306,31 @@ Public Class BasicBrowser
     End Sub
 
     Sub CanGoBackChanged()
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
+        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoBack
     End Sub
 
     Sub CanGoForwardChanged()
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoForward
     End Sub
 
     Sub ProgressChanged(ByVal sender As Object, ByVal e As Skybound.Gecko.GeckoProgressEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
-        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
     End Sub
 
     Sub StatusTextChanged()
-        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
+        StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).StatusText
     End Sub
 
     Sub PerformStuff()
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
-            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
-            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
+        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoBack
+        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoForward
+        If CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle <> "" Then
+            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle & " - BasicBrowser"
+            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle
         End If
         If ToolStripURL.Focused = False Then
-            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
         End If
     End Sub
 End Class
