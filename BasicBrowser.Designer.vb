@@ -79,6 +79,7 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
+        Me.GeckoWebBrowser1 = New Skybound.Gecko.GeckoWebBrowser()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStripNavigation.SuspendLayout()
@@ -161,6 +162,7 @@ Partial Class BasicBrowser
         Me.MenuStripFileOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.MenuStripFileOpen.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFileOpen.Text = "&Open"
+        Me.MenuStripFileOpen.Visible = False
         '
         'MenuStripFileSave
         '
@@ -184,6 +186,7 @@ Partial Class BasicBrowser
         Me.MenuStripFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.MenuStripFilePrint.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFilePrint.Text = "&Print..."
+        Me.MenuStripFilePrint.Visible = False
         '
         'MenuStripFilePrintPreview
         '
@@ -194,11 +197,13 @@ Partial Class BasicBrowser
             Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.MenuStripFilePrintPreview.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFilePrintPreview.Text = "Print Pre&view..."
+        Me.MenuStripFilePrintPreview.Visible = False
         '
         'MenuStripFileSeparator3
         '
         Me.MenuStripFileSeparator3.Name = "MenuStripFileSeparator3"
         Me.MenuStripFileSeparator3.Size = New System.Drawing.Size(237, 6)
+        Me.MenuStripFileSeparator3.Visible = False
         '
         'MenuStripFileExit
         '
@@ -220,7 +225,7 @@ Partial Class BasicBrowser
         '
         Me.MenuStripEditUndo.Name = "MenuStripEditUndo"
         Me.MenuStripEditUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.MenuStripEditUndo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditUndo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditUndo.Text = "&Undo"
         Me.MenuStripEditUndo.Visible = False
         '
@@ -228,14 +233,14 @@ Partial Class BasicBrowser
         '
         Me.MenuStripEditRedo.Name = "MenuStripEditRedo"
         Me.MenuStripEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.MenuStripEditRedo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditRedo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditRedo.Text = "&Redo"
         Me.MenuStripEditRedo.Visible = False
         '
         'MenuStripEditSeparator1
         '
         Me.MenuStripEditSeparator1.Name = "MenuStripEditSeparator1"
-        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(147, 6)
         Me.MenuStripEditSeparator1.Visible = False
         '
         'MenuStripEditCut
@@ -244,7 +249,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCut.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCut.Name = "MenuStripEditCut"
         Me.MenuStripEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.MenuStripEditCut.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCut.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCut.Text = "Cu&t"
         Me.MenuStripEditCut.Visible = False
         '
@@ -254,7 +259,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCopy.Name = "MenuStripEditCopy"
         Me.MenuStripEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.MenuStripEditCopy.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCopy.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCopy.Text = "&Copy"
         Me.MenuStripEditCopy.Visible = False
         '
@@ -264,20 +269,20 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditPaste.Name = "MenuStripEditPaste"
         Me.MenuStripEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.MenuStripEditPaste.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditPaste.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditPaste.Text = "&Paste"
         Me.MenuStripEditPaste.Visible = False
         '
         'MenuStripEditSeparator2
         '
         Me.MenuStripEditSeparator2.Name = "MenuStripEditSeparator2"
-        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(147, 6)
         Me.MenuStripEditSeparator2.Visible = False
         '
         'MenuStripEditSelectAll
         '
         Me.MenuStripEditSelectAll.Name = "MenuStripEditSelectAll"
-        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditSelectAll.Text = "Select &All"
         Me.MenuStripEditSelectAll.Visible = False
         '
@@ -530,11 +535,22 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
+        'GeckoWebBrowser1
+        '
+        Me.GeckoWebBrowser1.AllowDrop = True
+        Me.GeckoWebBrowser1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GeckoWebBrowser1.Location = New System.Drawing.Point(183, 1)
+        Me.GeckoWebBrowser1.Name = "GeckoWebBrowser1"
+        Me.GeckoWebBrowser1.Size = New System.Drawing.Size(400, 23)
+        Me.GeckoWebBrowser1.TabIndex = 5
+        '
         'BasicBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(642, 381)
+        Me.Controls.Add(Me.GeckoWebBrowser1)
         Me.Controls.Add(Me.ToolStripNavigation)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl)
@@ -612,5 +628,6 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripFileNewWindow As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripFileCloseWindow As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents GeckoWebBrowser1 As Skybound.Gecko.GeckoWebBrowser
 
 End Class

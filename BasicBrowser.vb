@@ -30,7 +30,7 @@ Public Class BasicBrowser
     Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New GeckoWebBrowser
-        'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
+        AddHandler WebBrowser.Navigating, New GeckoNavigatingEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.Navigated, New GeckoNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
@@ -57,7 +57,6 @@ Public Class BasicBrowser
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
         If openWithURI = "" Then
-            'WebBrowser.GoHome()
             WebBrowser.Navigate("https://google.com")
         Else
             WebBrowser.Navigate(openWithURI)
@@ -66,6 +65,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate("about:blank") ' To make sure it doesn't take up extra memory
         TabToClose = TabControl.SelectedIndex
         If TabControl.TabCount > 1 Then
             '     If you have selected the first tab, select the second tab
@@ -118,20 +118,30 @@ Public Class BasicBrowser
         OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
         OpenFileDialog.Title = "Open Webpage"
         If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
-            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
+            'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText = System.IO.File.ReadAllText(OpenFileDialog.FileName)
+            'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document = System.IO.File.ReadAllText(OpenFileDialog.FileName)
+            'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document.Body = System.IO.File.ReadAllText(OpenFileDialog.FileName)
+            ' Apparently these properties either don't exist (DocumentText) or are read-only, so they have been disabled so that the project is compileable.
         End If
     End Sub
 
     Private Sub MenuStripFileSave_Click(sender As Object, e As EventArgs) Handles MenuStripFileSave.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowSaveAsDialog()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowSaveAsDialog() ' Valid only for WinForms WebBrowser control
+        Dim SaveFileDialog As New SaveFileDialog()
+        SaveFileDialog.FileName = ""
+        SaveFileDialog.Filter = "Webpages|*.html|All Files|*.*"
+        SaveFileDialog.Title = "Open Webpage"
+        If (SaveFileDialog.ShowDialog() = DialogResult.OK) Then
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).SaveDocument(SaveFileDialog.FileName)
+        End If
     End Sub
 
     Private Sub MenuStripFilePrint_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrint.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintDialog()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintDialog()
     End Sub
 
     Private Sub MenuStripFilePrintPreview_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrintPreview.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintPreviewDialog()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintPreviewDialog()
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
@@ -175,6 +185,8 @@ Public Class BasicBrowser
         sourceCode.Dock = DockStyle.Fill
         sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText
         sourceForm.Show()
+
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ViewSource()
     End Sub
 
     'Tools
@@ -183,7 +195,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPropertiesDialog()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageProperties()
     End Sub
 
     'About
@@ -232,7 +244,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub ToolStripReload_Click(sender As Object, e As EventArgs) Handles ToolStripReload.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Refresh()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Reload()
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
