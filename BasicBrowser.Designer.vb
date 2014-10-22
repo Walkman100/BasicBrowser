@@ -342,6 +342,7 @@ Partial Class BasicBrowser
         Me.MenuStripToolsSetup.Name = "MenuStripToolsSetup"
         Me.MenuStripToolsSetup.Size = New System.Drawing.Size(214, 22)
         Me.MenuStripToolsSetup.Text = "Page &Setup..."
+        Me.MenuStripToolsSetup.Visible = False
         '
         'MenuStripToolsProperties
         '
@@ -540,9 +541,9 @@ Partial Class BasicBrowser
         Me.GeckoWebBrowser1.AllowDrop = True
         Me.GeckoWebBrowser1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GeckoWebBrowser1.Location = New System.Drawing.Point(183, 1)
+        Me.GeckoWebBrowser1.Location = New System.Drawing.Point(231, 1)
         Me.GeckoWebBrowser1.Name = "GeckoWebBrowser1"
-        Me.GeckoWebBrowser1.Size = New System.Drawing.Size(400, 23)
+        Me.GeckoWebBrowser1.Size = New System.Drawing.Size(352, 23)
         Me.GeckoWebBrowser1.TabIndex = 5
         '
         'BasicBrowser

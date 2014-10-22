@@ -169,29 +169,29 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub MenuStripViewSource_Click(sender As Object, e As EventArgs) Handles MenuStripViewSource.Click
-        Dim sourceForm As New Form()
-        sourceForm.Width = 450
-        sourceForm.Height = 350
-        sourceForm.StartPosition = FormStartPosition.CenterParent
-        sourceForm.WindowState = Me.WindowState
-        sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
-        sourceForm.ShowIcon = True
-        sourceForm.ShowInTaskbar = True
-        sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
-        Dim sourceCode As New TextBox()
-        sourceCode.Multiline = True
-        sourceCode.ScrollBars = ScrollBars.Both
-        sourceForm.Controls.Add(sourceCode)
-        sourceCode.Dock = DockStyle.Fill
-        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText
-        sourceForm.Show()
+        'Dim sourceForm As New Form()
+        'sourceForm.Width = 450
+        'sourceForm.Height = 350
+        'sourceForm.StartPosition = FormStartPosition.CenterParent
+        'sourceForm.WindowState = Me.WindowState
+        'sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
+        'sourceForm.ShowIcon = True
+        'sourceForm.ShowInTaskbar = True
+        'sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
+        'Dim sourceCode As New TextBox()
+        'sourceCode.Multiline = True
+        'sourceCode.ScrollBars = ScrollBars.Both
+        'sourceForm.Controls.Add(sourceCode)
+        'sourceCode.Dock = DockStyle.Fill
+        'sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentText
+        'sourceForm.Show()
 
         CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ViewSource()
     End Sub
 
     'Tools
     Private Sub MenuStripToolsSetup_Click(sender As Object, e As EventArgs) Handles MenuStripToolsSetup.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageSetupDialog()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageSetupDialog()
     End Sub
 
     Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
@@ -256,7 +256,8 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub ToolStripHome_Click(sender As Object, e As EventArgs) Handles ToolStripHome.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoHome()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).GoHome()
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate("https://google.com")
         ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
