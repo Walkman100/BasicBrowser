@@ -110,6 +110,10 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub MenuStripFileCloseWindow_Click(sender As Object, e As EventArgs) Handles MenuStripFileCloseWindow.Click
+        For i = 1 To TabControl.TabCount
+            CType(TabControl.TabPages.Item(0).Controls.Item(0), GeckoWebBrowser).Navigate("about:blank")
+            TabControl.TabPages.RemoveAt(0)
+        Next
         Me.Close()
     End Sub
 
@@ -147,9 +151,7 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
-        For i = 1 To TabControl.TabCount
-            TabControl.TabPages.RemoveAt(0)
-        Next
+        MenuStripFileCloseWindow_Click(Nothing, Nothing)
         Application.Exit()
     End Sub
 
@@ -157,7 +159,7 @@ Public Class BasicBrowser
     Private Sub MenuStripEditUndo_Click(sender As Object, e As EventArgs) Handles MenuStripEditUndo.Click
         If ToolStripURL.Focused = True Then
             'ToolStripURL.Undo()
-        Else
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Undo()
         End If
     End Sub
@@ -165,7 +167,7 @@ Public Class BasicBrowser
     Private Sub MenuStripEditRedo_Click(sender As Object, e As EventArgs) Handles MenuStripEditRedo.Click
         If ToolStripURL.Focused = True Then
             'ToolStripURL.Redo()
-        Else
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Redo()
         End If
     End Sub
@@ -173,29 +175,33 @@ Public Class BasicBrowser
     Private Sub MenuStripEditCut_Click(sender As Object, e As EventArgs) Handles MenuStripEditCut.Click
         If ToolStripURL.Focused = True Then
             If ToolStripURL.SelectedText = "" Then
-                MsgBox(ToolStripURL.SelectedText)
+                Clipboard.SetText(ToolStripURL.Text)
+                ToolStripURL.Text = ""
             Else
-                MsgBox(ToolStripURL.SelectedText)
+                Clipboard.SetText(ToolStripURL.SelectedText)
+                ToolStripURL.Text = ToolStripURL.Text.Remove(ToolStripURL.SelectionStart, ToolStripURL.SelectionLength)
             End If
-            Clipboard.SetText(ToolStripURL.SelectedText)
-            ToolStripURL.Text = ToolStripURL.Text.Remove(ToolStripURL.SelectionStart, ToolStripURL.SelectionLength)
-        Else
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CutSelection()
         End If
     End Sub
 
     Private Sub MenuStripEditCopy_Click(sender As Object, e As EventArgs) Handles MenuStripEditCopy.Click
         If ToolStripURL.Focused = True Then
-            Clipboard.SetText(ToolStripURL.SelectedText)
-        Else
+            If ToolStripURL.SelectedText = "" Then
+                Clipboard.SetText(ToolStripURL.Text)
+            Else
+                Clipboard.SetText(ToolStripURL.SelectedText)
+            End If
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopySelection()
         End If
     End Sub
 
     Private Sub MenuStripEditPaste_Click(sender As Object, e As EventArgs) Handles MenuStripEditPaste.Click
         If ToolStripURL.Focused = True Then
-            ToolStripURL.Text = ToolStripURL.Text & Clipboard.GetText
-        Else
+            ToolStripURL.Text = ToolStripURL.Text.Remove(ToolStripURL.SelectionStart) & Clipboard.GetText & ToolStripURL.Text.Remove(0, ToolStripURL.SelectionStart)
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Paste()
         End If
     End Sub
@@ -203,7 +209,7 @@ Public Class BasicBrowser
     Private Sub MenuStripEditSelectAll_Click(sender As Object, e As EventArgs) Handles MenuStripEditSelectAll.Click
         If ToolStripURL.Focused = True Then
             ToolStripURL.SelectAll()
-        Else
+        ElseIf TabControl.TabCount <> 0 Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).SelectAll()
         End If
     End Sub
