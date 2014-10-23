@@ -35,6 +35,7 @@ Public Class BasicBrowser
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, New GeckoProgressEventHandler(AddressOf ProgressChanged)
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
+        AddHandler WebBrowser.DocumentTitleChanged, AddressOf DocumentTitleChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
         TabPage.Text = "Loading..."
@@ -342,6 +343,9 @@ Public Class BasicBrowser
 
     Sub StatusTextChanged()
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).StatusText
+    End Sub
+
+    Sub DocumentTitleChanged()
         If CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle <> "" Then
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle & " - BasicBrowser"
             TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle
@@ -351,10 +355,6 @@ Public Class BasicBrowser
     Sub PerformStuff()
         ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoBack
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoForward
-        If CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle <> "" Then
-            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle & " - BasicBrowser"
-            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle
-        End If
         If ToolStripURL.Focused = False Then
             ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
         End If
