@@ -348,8 +348,10 @@ Public Class BasicBrowser
     Sub DocumentTitleChanged()
         If CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle <> "" Then
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle & " - BasicBrowser"
-            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle
         End If
+        For i = 1 To TabControl.TabCount
+            TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), GeckoWebBrowser).DocumentTitle
+        Next
     End Sub
 
     Sub PerformStuff()
