@@ -155,27 +155,57 @@ Public Class BasicBrowser
 
     'Edit
     Private Sub MenuStripEditUndo_Click(sender As Object, e As EventArgs) Handles MenuStripEditUndo.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Undo()
+        If ToolStripURL.Focused = True Then
+            'ToolStripURL.Undo()
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Undo()
+        End If
     End Sub
 
     Private Sub MenuStripEditRedo_Click(sender As Object, e As EventArgs) Handles MenuStripEditRedo.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Redo()
+        If ToolStripURL.Focused = True Then
+            'ToolStripURL.Redo()
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Redo()
+        End If
     End Sub
 
     Private Sub MenuStripEditCut_Click(sender As Object, e As EventArgs) Handles MenuStripEditCut.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CutSelection()
+        If ToolStripURL.Focused = True Then
+            If ToolStripURL.SelectedText = "" Then
+                MsgBox(ToolStripURL.SelectedText)
+            Else
+                MsgBox(ToolStripURL.SelectedText)
+            End If
+            Clipboard.SetText(ToolStripURL.SelectedText)
+            ToolStripURL.Text = ToolStripURL.Text.Remove(ToolStripURL.SelectionStart, ToolStripURL.SelectionLength)
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CutSelection()
+        End If
     End Sub
 
     Private Sub MenuStripEditCopy_Click(sender As Object, e As EventArgs) Handles MenuStripEditCopy.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopySelection()
+        If ToolStripURL.Focused = True Then
+            Clipboard.SetText(ToolStripURL.SelectedText)
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopySelection()
+        End If
     End Sub
 
     Private Sub MenuStripEditPaste_Click(sender As Object, e As EventArgs) Handles MenuStripEditPaste.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Paste()
+        If ToolStripURL.Focused = True Then
+            ToolStripURL.Text = ToolStripURL.Text & Clipboard.GetText
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Paste()
+        End If
     End Sub
 
     Private Sub MenuStripEditSelectAll_Click(sender As Object, e As EventArgs) Handles MenuStripEditSelectAll.Click
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).SelectAll()
+        If ToolStripURL.Focused = True Then
+            ToolStripURL.SelectAll()
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).SelectAll()
+        End If
     End Sub
 
     'View
@@ -236,10 +266,13 @@ Public Class BasicBrowser
         PerformStuff()
     End Sub
 
-    Private Sub ToolStripBack_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripBack.DropDownItemClicked
+    Private Sub ToolStripBack_DropDownOpened(sender As Object, e As EventArgs) Handles ToolStripBack.DropDownOpened
         ToolStripBack.DropDownItems.Clear()
         For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
-            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i).ToString)
+            'Dim HistoryItem As New ToolStripMenuItem
+            'HistoryItem.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString
+            'ToolStripBack.DropDownItems.Add(HistoryItem)
+            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString)
         Next
     End Sub
 
@@ -249,10 +282,10 @@ Public Class BasicBrowser
         PerformStuff()
     End Sub
 
-    Private Sub ToolStripForward_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripForward.DropDownItemClicked
+    Private Sub ToolStripForward_DropDownOpened(sender As Object, e As EventArgs) Handles ToolStripForward.DropDownOpened
         ToolStripForward.DropDownItems.Clear()
         For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
-            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i).ToString)
+            ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString)
         Next
     End Sub
 

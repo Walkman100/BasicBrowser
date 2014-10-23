@@ -28,12 +28,12 @@ Partial Class BasicBrowser
         Me.MenuStripFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileCloseTab = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripFileSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFileNewWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileCloseWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripFileSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripFileSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFileOpen = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSave = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripFileSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFilePrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFilePrintPreview = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -126,12 +126,18 @@ Partial Class BasicBrowser
         '
         'MenuStripFileCloseTab
         '
+        Me.MenuStripFileCloseTab.Enabled = False
         Me.MenuStripFileCloseTab.Image = Global.BasicBrowser.My.Resources.Resources._1391271889_emblem_unreadable
         Me.MenuStripFileCloseTab.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileCloseTab.Name = "MenuStripFileCloseTab"
         Me.MenuStripFileCloseTab.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.W), System.Windows.Forms.Keys)
         Me.MenuStripFileCloseTab.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFileCloseTab.Text = "&Close Tab"
+        '
+        'MenuStripFileSeparator1
+        '
+        Me.MenuStripFileSeparator1.Name = "MenuStripFileSeparator1"
+        Me.MenuStripFileSeparator1.Size = New System.Drawing.Size(237, 6)
         '
         'MenuStripFileNewWindow
         '
@@ -149,13 +155,14 @@ Partial Class BasicBrowser
         Me.MenuStripFileCloseWindow.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFileCloseWindow.Text = "Close W&indow"
         '
-        'MenuStripFileSeparator1
+        'MenuStripFileSeparator2
         '
-        Me.MenuStripFileSeparator1.Name = "MenuStripFileSeparator1"
-        Me.MenuStripFileSeparator1.Size = New System.Drawing.Size(237, 6)
+        Me.MenuStripFileSeparator2.Name = "MenuStripFileSeparator2"
+        Me.MenuStripFileSeparator2.Size = New System.Drawing.Size(237, 6)
         '
         'MenuStripFileOpen
         '
+        Me.MenuStripFileOpen.Enabled = False
         Me.MenuStripFileOpen.Image = CType(resources.GetObject("MenuStripFileOpen.Image"), System.Drawing.Image)
         Me.MenuStripFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileOpen.Name = "MenuStripFileOpen"
@@ -166,6 +173,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileSave
         '
+        Me.MenuStripFileSave.Enabled = False
         Me.MenuStripFileSave.Image = CType(resources.GetObject("MenuStripFileSave.Image"), System.Drawing.Image)
         Me.MenuStripFileSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileSave.Name = "MenuStripFileSave"
@@ -173,13 +181,9 @@ Partial Class BasicBrowser
         Me.MenuStripFileSave.Size = New System.Drawing.Size(240, 22)
         Me.MenuStripFileSave.Text = "&Save As..."
         '
-        'MenuStripFileSeparator2
-        '
-        Me.MenuStripFileSeparator2.Name = "MenuStripFileSeparator2"
-        Me.MenuStripFileSeparator2.Size = New System.Drawing.Size(237, 6)
-        '
         'MenuStripFilePrint
         '
+        Me.MenuStripFilePrint.Enabled = False
         Me.MenuStripFilePrint.Image = CType(resources.GetObject("MenuStripFilePrint.Image"), System.Drawing.Image)
         Me.MenuStripFilePrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFilePrint.Name = "MenuStripFilePrint"
@@ -190,6 +194,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFilePrintPreview
         '
+        Me.MenuStripFilePrintPreview.Enabled = False
         Me.MenuStripFilePrintPreview.Image = CType(resources.GetObject("MenuStripFilePrintPreview.Image"), System.Drawing.Image)
         Me.MenuStripFilePrintPreview.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFilePrintPreview.Name = "MenuStripFilePrintPreview"
@@ -223,20 +228,20 @@ Partial Class BasicBrowser
         '
         Me.MenuStripEditUndo.Name = "MenuStripEditUndo"
         Me.MenuStripEditUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.MenuStripEditUndo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditUndo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditUndo.Text = "&Undo"
         '
         'MenuStripEditRedo
         '
         Me.MenuStripEditRedo.Name = "MenuStripEditRedo"
         Me.MenuStripEditRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
-        Me.MenuStripEditRedo.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditRedo.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditRedo.Text = "&Redo"
         '
         'MenuStripEditSeparator1
         '
         Me.MenuStripEditSeparator1.Name = "MenuStripEditSeparator1"
-        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator1.Size = New System.Drawing.Size(147, 6)
         '
         'MenuStripEditCut
         '
@@ -244,7 +249,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCut.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCut.Name = "MenuStripEditCut"
         Me.MenuStripEditCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.MenuStripEditCut.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCut.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCut.Text = "Cu&t"
         '
         'MenuStripEditCopy
@@ -253,7 +258,7 @@ Partial Class BasicBrowser
         Me.MenuStripEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditCopy.Name = "MenuStripEditCopy"
         Me.MenuStripEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.MenuStripEditCopy.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditCopy.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditCopy.Text = "&Copy"
         '
         'MenuStripEditPaste
@@ -262,18 +267,19 @@ Partial Class BasicBrowser
         Me.MenuStripEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripEditPaste.Name = "MenuStripEditPaste"
         Me.MenuStripEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.MenuStripEditPaste.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditPaste.Size = New System.Drawing.Size(150, 22)
         Me.MenuStripEditPaste.Text = "&Paste"
         '
         'MenuStripEditSeparator2
         '
         Me.MenuStripEditSeparator2.Name = "MenuStripEditSeparator2"
-        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripEditSeparator2.Size = New System.Drawing.Size(147, 6)
         '
         'MenuStripEditSelectAll
         '
         Me.MenuStripEditSelectAll.Name = "MenuStripEditSelectAll"
-        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.MenuStripEditSelectAll.Size = New System.Drawing.Size(172, 22)
         Me.MenuStripEditSelectAll.Text = "Select &All"
         '
         'MenuStripView
@@ -314,6 +320,7 @@ Partial Class BasicBrowser
         '
         'MenuStripViewSource
         '
+        Me.MenuStripViewSource.Enabled = False
         Me.MenuStripViewSource.Image = Global.BasicBrowser.My.Resources.Resources.SourceCodeIconBitmap
         Me.MenuStripViewSource.Name = "MenuStripViewSource"
         Me.MenuStripViewSource.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
@@ -329,6 +336,7 @@ Partial Class BasicBrowser
         '
         'MenuStripToolsSetup
         '
+        Me.MenuStripToolsSetup.Enabled = False
         Me.MenuStripToolsSetup.Name = "MenuStripToolsSetup"
         Me.MenuStripToolsSetup.Size = New System.Drawing.Size(214, 22)
         Me.MenuStripToolsSetup.Text = "Page &Setup..."
@@ -336,6 +344,7 @@ Partial Class BasicBrowser
         '
         'MenuStripToolsProperties
         '
+        Me.MenuStripToolsProperties.Enabled = False
         Me.MenuStripToolsProperties.Name = "MenuStripToolsProperties"
         Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.MenuStripToolsProperties.Size = New System.Drawing.Size(214, 22)
@@ -351,35 +360,35 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         Me.MenuStripHelpContents.Visible = False
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         Me.MenuStripHelpIndex.Visible = False
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         Me.MenuStripHelpSearch.Visible = False
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
         Me.MenuStripHelpSeparator.Visible = False
         '
         'MenuStripHelpAbout
         '
         Me.MenuStripHelpAbout.Image = Global.BasicBrowser.My.Resources.Resources.Info
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
-        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
         '
         'ToolStripRemove
@@ -449,6 +458,7 @@ Partial Class BasicBrowser
         'ToolStripBack
         '
         Me.ToolStripBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripBack.Enabled = False
         Me.ToolStripBack.Image = Global.BasicBrowser.My.Resources.Resources._1391274420_go_previous
         Me.ToolStripBack.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripBack.Name = "ToolStripBack"
@@ -458,6 +468,7 @@ Partial Class BasicBrowser
         'ToolStripForward
         '
         Me.ToolStripForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripForward.Enabled = False
         Me.ToolStripForward.Image = Global.BasicBrowser.My.Resources.Resources._1391274345_go_next
         Me.ToolStripForward.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripForward.Name = "ToolStripForward"
@@ -467,6 +478,7 @@ Partial Class BasicBrowser
         'ToolStripReload
         '
         Me.ToolStripReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripReload.Enabled = False
         Me.ToolStripReload.Image = Global.BasicBrowser.My.Resources.Resources._1391271803_view_refresh
         Me.ToolStripReload.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripReload.Name = "ToolStripReload"
@@ -476,6 +488,7 @@ Partial Class BasicBrowser
         'ToolStripStop
         '
         Me.ToolStripStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripStop.Enabled = False
         Me.ToolStripStop.Image = Global.BasicBrowser.My.Resources.Resources._1387140136_process_stop
         Me.ToolStripStop.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripStop.Name = "ToolStripStop"
@@ -485,6 +498,7 @@ Partial Class BasicBrowser
         'ToolStripHome
         '
         Me.ToolStripHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripHome.Enabled = False
         Me.ToolStripHome.Image = Global.BasicBrowser.My.Resources.Resources._1371833355_go_home
         Me.ToolStripHome.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripHome.Name = "ToolStripHome"
@@ -503,6 +517,7 @@ Partial Class BasicBrowser
         'ToolStripCloseTab
         '
         Me.ToolStripCloseTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripCloseTab.Enabled = False
         Me.ToolStripCloseTab.Image = Global.BasicBrowser.My.Resources.Resources._1391271889_emblem_unreadable
         Me.ToolStripCloseTab.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripCloseTab.Name = "ToolStripCloseTab"
