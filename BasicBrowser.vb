@@ -317,6 +317,8 @@ Public Class BasicBrowser
 
     Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
         CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Focus()
+        ToolStripURL.Invalidate()
     End Sub
 
     ' browser stuff
@@ -340,6 +342,10 @@ Public Class BasicBrowser
 
     Sub StatusTextChanged()
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).StatusText
+        If CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle <> "" Then
+            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle & " - BasicBrowser"
+            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).DocumentTitle
+        End If
     End Sub
 
     Sub PerformStuff()
