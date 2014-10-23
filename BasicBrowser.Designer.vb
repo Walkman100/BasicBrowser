@@ -535,6 +535,7 @@ Partial Class BasicBrowser
         Me.GeckoWebBrowser1.Name = "GeckoWebBrowser1"
         Me.GeckoWebBrowser1.Size = New System.Drawing.Size(352, 23)
         Me.GeckoWebBrowser1.TabIndex = 5
+        Me.GeckoWebBrowser1.Visible = False
         '
         'BasicBrowser
         '

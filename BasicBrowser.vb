@@ -33,10 +33,10 @@ Public Class BasicBrowser
         AddHandler WebBrowser.Navigating, New GeckoNavigatingEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.Navigated, New GeckoNavigatedEventHandler(AddressOf Navigate)
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
-        AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
+        AddHandler WebBrowser.ProgressChanged, New GeckoProgressEventHandler(AddressOf ProgressChanged)
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
-        AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
-        AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
+        AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
+        AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
@@ -214,7 +214,7 @@ Public Class BasicBrowser
         AboutForm.ShowInTaskbar = True
         AboutForm.Text = "About BasicBrowser"
         Dim lblAboutText As New Label()
-        'lblAboutText.Font = True
+        'lblAboutText.Font = 
         lblAboutText.TextAlign = ContentAlignment.MiddleCenter
         AboutForm.Controls.Add(lblAboutText)
         lblAboutText.Dock = DockStyle.Fill
@@ -280,13 +280,14 @@ Public Class BasicBrowser
         End If
     End Sub
 
-    Private Sub ToolStripURL_Click(sender As Object, e As EventArgs) Handles ToolStripURL.GotFocus
+    Private Sub ToolStripURL_Focused(sender As Object, e As EventArgs) Handles ToolStripURL.GotFocus
         ToolStripURL.SelectAll()
     End Sub
 
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
             CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate(ToolStripURL.Text)
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Focus()
         Else
             ToolStripURL.Focus()
         End If
@@ -330,17 +331,11 @@ Public Class BasicBrowser
         PerformStuff()
     End Sub
 
-    Sub CanGoBackChanged()
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoBack
-    End Sub
-
-    Sub CanGoForwardChanged()
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CanGoForward
-    End Sub
-
     Sub ProgressChanged(ByVal sender As Object, ByVal e As Skybound.Gecko.GeckoProgressEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
-        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
+        If ToolStripURL.Focused = False Then
+            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
+        End If
     End Sub
 
     Sub StatusTextChanged()
