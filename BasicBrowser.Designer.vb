@@ -22,6 +22,7 @@ Partial Class BasicBrowser
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser))
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
@@ -80,9 +81,20 @@ Partial Class BasicBrowser
         Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
         Me.GeckoWebBrowser1 = New Skybound.Gecko.GeckoWebBrowser()
+        Me.WBContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.WBContextMenuLinkNT = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuLinkNW = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuSaveLink = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuCopyLinkAddr = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.WBContextMenuSaveImg = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuCopyImgURL = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuCopyImg = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WBContextMenuImgNT = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStripNavigation.SuspendLayout()
+        Me.WBContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -547,10 +559,70 @@ Partial Class BasicBrowser
         Me.GeckoWebBrowser1.AllowDrop = True
         Me.GeckoWebBrowser1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GeckoWebBrowser1.ContextMenuStrip = Me.WBContextMenu
         Me.GeckoWebBrowser1.Location = New System.Drawing.Point(231, 1)
         Me.GeckoWebBrowser1.Name = "GeckoWebBrowser1"
         Me.GeckoWebBrowser1.Size = New System.Drawing.Size(352, 23)
         Me.GeckoWebBrowser1.TabIndex = 5
+        '
+        'WBContextMenu
+        '
+        Me.WBContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WBContextMenuLinkNT, Me.WBContextMenuLinkNW, Me.WBContextMenuSaveLink, Me.WBContextMenuCopyLinkAddr, Me.WBContextMenuSeparator, Me.WBContextMenuSaveImg, Me.WBContextMenuCopyImgURL, Me.WBContextMenuCopyImg, Me.WBContextMenuImgNT})
+        Me.WBContextMenu.Name = "WBContextMenu"
+        Me.WBContextMenu.Size = New System.Drawing.Size(216, 186)
+        '
+        'WBContextMenuLinkNT
+        '
+        Me.WBContextMenuLinkNT.Name = "WBContextMenuLinkNT"
+        Me.WBContextMenuLinkNT.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuLinkNT.Text = "Open link in new tab"
+        '
+        'WBContextMenuLinkNW
+        '
+        Me.WBContextMenuLinkNW.Name = "WBContextMenuLinkNW"
+        Me.WBContextMenuLinkNW.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuLinkNW.Text = "Open link in new window"
+        '
+        'WBContextMenuSaveLink
+        '
+        Me.WBContextMenuSaveLink.Name = "WBContextMenuSaveLink"
+        Me.WBContextMenuSaveLink.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuSaveLink.Text = "Save link as"
+        '
+        'WBContextMenuCopyLinkAddr
+        '
+        Me.WBContextMenuCopyLinkAddr.Name = "WBContextMenuCopyLinkAddr"
+        Me.WBContextMenuCopyLinkAddr.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuCopyLinkAddr.Text = "Copy link address"
+        '
+        'WBContextMenuSeparator
+        '
+        Me.WBContextMenuSeparator.Name = "WBContextMenuSeparator"
+        Me.WBContextMenuSeparator.Size = New System.Drawing.Size(186, 6)
+        '
+        'WBContextMenuSaveImg
+        '
+        Me.WBContextMenuSaveImg.Name = "WBContextMenuSaveImg"
+        Me.WBContextMenuSaveImg.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuSaveImg.Text = "Save image as..."
+        '
+        'WBContextMenuCopyImgURL
+        '
+        Me.WBContextMenuCopyImgURL.Name = "WBContextMenuCopyImgURL"
+        Me.WBContextMenuCopyImgURL.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuCopyImgURL.Text = "Copy image URL"
+        '
+        'WBContextMenuCopyImg
+        '
+        Me.WBContextMenuCopyImg.Name = "WBContextMenuCopyImg"
+        Me.WBContextMenuCopyImg.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuCopyImg.Text = "Copy image"
+        '
+        'WBContextMenuImgNT
+        '
+        Me.WBContextMenuImgNT.Name = "WBContextMenuImgNT"
+        Me.WBContextMenuImgNT.Size = New System.Drawing.Size(215, 22)
+        Me.WBContextMenuImgNT.Text = "Open image in new tab"
         '
         'BasicBrowser
         '
@@ -575,6 +647,7 @@ Partial Class BasicBrowser
         Me.StatusStrip.PerformLayout()
         Me.ToolStripNavigation.ResumeLayout(False)
         Me.ToolStripNavigation.PerformLayout()
+        Me.WBContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -636,5 +709,15 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripFileCloseWindow As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents GeckoWebBrowser1 As Skybound.Gecko.GeckoWebBrowser
+    Friend WithEvents WBContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents WBContextMenuLinkNT As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuLinkNW As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuSaveLink As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuCopyLinkAddr As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuSeparator As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents WBContextMenuSaveImg As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuCopyImgURL As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuCopyImg As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WBContextMenuImgNT As System.Windows.Forms.ToolStripMenuItem
 
 End Class
