@@ -271,7 +271,11 @@
     End Sub
 
     Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
-        ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        Try
+            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        Catch ex As Exception
+            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
+        End Try
         PerformStuff()
     End Sub
 
@@ -329,10 +333,22 @@
     End Sub
 
     Sub PerformStuff()
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        Try
+            ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
+        Catch ex As Exception
+            StatusStripStatusText.Text = "Error[CheckBack]: " & ex.Message
+        End Try
+        Try
+            ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+        Catch ex As Exception
+            StatusStripStatusText.Text = "Error[CheckForward]: " & ex.Message
+        End Try
         If ToolStripURL.Focused = False Then
-            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+            Try
+                ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+            Catch ex As Exception
+                StatusStripStatusText.Text = "Error[GetURL]: " & ex.Message
+            End Try
         End If
     End Sub
 End Class

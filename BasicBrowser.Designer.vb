@@ -125,6 +125,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileCloseTab
         '
+        Me.MenuStripFileCloseTab.Enabled = False
         Me.MenuStripFileCloseTab.Image = Global.BasicBrowser.My.Resources.Resources._1391271889_emblem_unreadable
         Me.MenuStripFileCloseTab.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileCloseTab.Name = "MenuStripFileCloseTab"
@@ -155,6 +156,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileOpen
         '
+        Me.MenuStripFileOpen.Enabled = False
         Me.MenuStripFileOpen.Image = CType(resources.GetObject("MenuStripFileOpen.Image"), System.Drawing.Image)
         Me.MenuStripFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileOpen.Name = "MenuStripFileOpen"
@@ -164,6 +166,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFileSave
         '
+        Me.MenuStripFileSave.Enabled = False
         Me.MenuStripFileSave.Image = CType(resources.GetObject("MenuStripFileSave.Image"), System.Drawing.Image)
         Me.MenuStripFileSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileSave.Name = "MenuStripFileSave"
@@ -178,6 +181,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFilePrint
         '
+        Me.MenuStripFilePrint.Enabled = False
         Me.MenuStripFilePrint.Image = CType(resources.GetObject("MenuStripFilePrint.Image"), System.Drawing.Image)
         Me.MenuStripFilePrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFilePrint.Name = "MenuStripFilePrint"
@@ -187,6 +191,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFilePrintPreview
         '
+        Me.MenuStripFilePrintPreview.Enabled = False
         Me.MenuStripFilePrintPreview.Image = CType(resources.GetObject("MenuStripFilePrintPreview.Image"), System.Drawing.Image)
         Me.MenuStripFilePrintPreview.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFilePrintPreview.Name = "MenuStripFilePrintPreview"
@@ -319,6 +324,7 @@ Partial Class BasicBrowser
         '
         'MenuStripViewSource
         '
+        Me.MenuStripViewSource.Enabled = False
         Me.MenuStripViewSource.Image = Global.BasicBrowser.My.Resources.Resources.SourceCodeIconBitmap
         Me.MenuStripViewSource.Name = "MenuStripViewSource"
         Me.MenuStripViewSource.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
@@ -334,12 +340,14 @@ Partial Class BasicBrowser
         '
         'MenuStripToolsSetup
         '
+        Me.MenuStripToolsSetup.Enabled = False
         Me.MenuStripToolsSetup.Name = "MenuStripToolsSetup"
         Me.MenuStripToolsSetup.Size = New System.Drawing.Size(214, 22)
         Me.MenuStripToolsSetup.Text = "Page &Setup..."
         '
         'MenuStripToolsProperties
         '
+        Me.MenuStripToolsProperties.Enabled = False
         Me.MenuStripToolsProperties.Name = "MenuStripToolsProperties"
         Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.MenuStripToolsProperties.Size = New System.Drawing.Size(214, 22)
@@ -355,41 +363,42 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         Me.MenuStripHelpContents.Visible = False
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         Me.MenuStripHelpIndex.Visible = False
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         Me.MenuStripHelpSearch.Visible = False
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
         Me.MenuStripHelpSeparator.Visible = False
         '
         'MenuStripHelpAbout
         '
         Me.MenuStripHelpAbout.Image = Global.BasicBrowser.My.Resources.Resources.Info
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
-        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(125, 22)
+        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
         '
         'ToolStripRemove
         '
         Me.ToolStripRemove.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripRemove.Enabled = False
         Me.ToolStripRemove.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_remove
         Me.ToolStripRemove.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripRemove.Name = "ToolStripRemove"
@@ -400,6 +409,7 @@ Partial Class BasicBrowser
         '
         Me.ToolStripAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripAdd.Enabled = False
         Me.ToolStripAdd.Image = Global.BasicBrowser.My.Resources.Resources._16x16_bookmark_add
         Me.ToolStripAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripAdd.Name = "ToolStripAdd"
@@ -419,13 +429,13 @@ Partial Class BasicBrowser
         '
         Me.StatusStripProgressBar.Name = "StatusStripProgressBar"
         Me.StatusStripProgressBar.Size = New System.Drawing.Size(100, 16)
-        Me.StatusStripProgressBar.Value = 1
         '
         'StatusStripStatusText
         '
         Me.StatusStripStatusText.Name = "StatusStripStatusText"
-        Me.StatusStripStatusText.Size = New System.Drawing.Size(43, 17)
-        Me.StatusStripStatusText.Text = "Status"
+        Me.StatusStripStatusText.Size = New System.Drawing.Size(63, 17)
+        Me.StatusStripStatusText.Text = "Loading..."
+        Me.StatusStripStatusText.ToolTipText = "Status Text"
         '
         'ToolStripSeparator1
         '
@@ -453,6 +463,7 @@ Partial Class BasicBrowser
         'ToolStripBack
         '
         Me.ToolStripBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripBack.Enabled = False
         Me.ToolStripBack.Image = Global.BasicBrowser.My.Resources.Resources._1391274420_go_previous
         Me.ToolStripBack.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripBack.Name = "ToolStripBack"
@@ -462,6 +473,7 @@ Partial Class BasicBrowser
         'ToolStripForward
         '
         Me.ToolStripForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripForward.Enabled = False
         Me.ToolStripForward.Image = Global.BasicBrowser.My.Resources.Resources._1391274345_go_next
         Me.ToolStripForward.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripForward.Name = "ToolStripForward"
@@ -471,6 +483,7 @@ Partial Class BasicBrowser
         'ToolStripReload
         '
         Me.ToolStripReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripReload.Enabled = False
         Me.ToolStripReload.Image = Global.BasicBrowser.My.Resources.Resources._1391271803_view_refresh
         Me.ToolStripReload.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripReload.Name = "ToolStripReload"
@@ -480,6 +493,7 @@ Partial Class BasicBrowser
         'ToolStripStop
         '
         Me.ToolStripStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripStop.Enabled = False
         Me.ToolStripStop.Image = Global.BasicBrowser.My.Resources.Resources._1387140136_process_stop
         Me.ToolStripStop.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripStop.Name = "ToolStripStop"
@@ -489,6 +503,7 @@ Partial Class BasicBrowser
         'ToolStripHome
         '
         Me.ToolStripHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripHome.Enabled = False
         Me.ToolStripHome.Image = Global.BasicBrowser.My.Resources.Resources._1371833355_go_home
         Me.ToolStripHome.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripHome.Name = "ToolStripHome"
@@ -507,6 +522,7 @@ Partial Class BasicBrowser
         'ToolStripCloseTab
         '
         Me.ToolStripCloseTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripCloseTab.Enabled = False
         Me.ToolStripCloseTab.Image = Global.BasicBrowser.My.Resources.Resources._1391271889_emblem_unreadable
         Me.ToolStripCloseTab.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripCloseTab.Name = "ToolStripCloseTab"
@@ -515,6 +531,7 @@ Partial Class BasicBrowser
         '
         'ToolStripURL
         '
+        Me.ToolStripURL.Enabled = False
         Me.ToolStripURL.Name = "ToolStripURL"
         Me.ToolStripURL.Size = New System.Drawing.Size(415, 25)
         Me.ToolStripURL.ToolTipText = "Enter URL to navigate to"
@@ -523,6 +540,7 @@ Partial Class BasicBrowser
         '
         Me.ToolStripGo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripGo.Enabled = False
         Me.ToolStripGo.Image = Global.BasicBrowser.My.Resources.Resources.go_right_d
         Me.ToolStripGo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripGo.Name = "ToolStripGo"
