@@ -65,6 +65,7 @@
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate("about:blank") ' To make sure it doesn't take up extra memory
         TabToClose = TabControl.SelectedIndex
         If TabControl.TabCount > 1 Then
             '     If you have selected the first tab, select the second tab
