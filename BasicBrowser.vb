@@ -46,6 +46,8 @@
         ToolStripCloseTab.Enabled = True
         ToolStripGo.Enabled = True
         ToolStripURL.Enabled = True
+        ToolStripAdd.Enabled = True
+        ToolStripRemove.Enabled = True
         MenuStripFileCloseTab.Enabled = True
         MenuStripFileOpen.Enabled = True
         MenuStripFileSave.Enabled = True
@@ -86,6 +88,8 @@
             ToolStripCloseTab.Enabled = False
             ToolStripGo.Enabled = False
             ToolStripURL.Enabled = False
+            ToolStripAdd.Enabled = False
+            ToolStripRemove.Enabled = False
             MenuStripFileCloseTab.Enabled = False
             MenuStripFileOpen.Enabled = False
             MenuStripFileSave.Enabled = False
@@ -94,7 +98,6 @@
             MenuStripViewSource.Enabled = False
             MenuStripToolsSetup.Enabled = False
             MenuStripToolsProperties.Enabled = False
-
         Else
             PerformStuff()
         End If
@@ -200,8 +203,8 @@
         lblAboutText.Dock = DockStyle.Fill
         lblAboutText.Text = _
             "Made by Walkman100" & vbNewLine & vbNewLine & _
-            "Source code available at: http://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
-            "Go to http://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
+            "Source code available at: https://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
+            "Go to https://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
             "Hold ALT to reorganise all the buttons/menus at the top"
         AboutForm.Show()
     End Sub
