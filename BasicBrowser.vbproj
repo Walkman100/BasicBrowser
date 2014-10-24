@@ -46,7 +46,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\1371846583_internet-web-browser.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\internet2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -211,6 +211,7 @@
     <None Include="xul.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\internet2.ico" />
     <None Include="Resources\SourceCodeIconBitmap.png" />
     <None Include="Resources\Info.png" />
     <None Include="Resources\SourceCodeIcon.ico" />
