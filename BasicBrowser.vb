@@ -4,10 +4,21 @@ Public Class BasicBrowser
 
     'use `CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser)` to refer to the webbrowser on the active tab
 
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
-
+    ' Copied from the designer, so i can get resources at RunTime
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser))
+    
     Public openWithURI As String
     Dim TabToClose As Integer
+
+    'right-click menu items
+    Dim LinkNT As New MenuItem
+    Dim LinkNW As New MenuItem
+    Dim SaveLink As New MenuItem
+    Dim CopyLinkAddr As New MenuItem
+    Dim SaveImg As New MenuItem
+    Dim CopyImgURL As New MenuItem
+    Dim CopyImg As New MenuItem
+    Dim ImgNT As New MenuItem
 
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
@@ -17,11 +28,20 @@ Public Class BasicBrowser
                 openWithURI = openWithURI & s
             End If
         Next
-
-        NewTab(Nothing, Nothing)
         For i = 1 To My.Settings.Favourites.Count
             ToolStripURL.Items.Add(My.Settings.Favourites.Item(i - 1))
         Next
+
+        LinkNT.Text = "Open link in new tab"
+        LinkNW.Text = "Open link in new window"
+        SaveLink.Text = "Save link as"
+        CopyLinkAddr.Text = "Copy link address"
+        SaveImg.Text = "Save image as..."
+        CopyImgURL.Text = "Copy image URL"
+        CopyImg.Text = "Copy image"
+        ImgNT.Text = "Open image in new tab"
+
+        NewTab(Nothing, Nothing)
     End Sub
 
     ' MenuStrip options
@@ -38,17 +58,29 @@ Public Class BasicBrowser
         AddHandler WebBrowser.DocumentTitleChanged, AddressOf DocumentTitleChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
+        AddHandler WebBrowser.MouseClick, New MouseEventHandler(AddressOf WebBrowserMouseClick)
+        AddHandler WebBrowser.ShowContextMenu, New GeckoContextMenuEventHandler(AddressOf WebBrowserShowContextMenu)
+        
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
         WebBrowser.Parent = TabPage
         WebBrowser.Dock = DockStyle.Fill
         WebBrowser.Visible = True
+
+        If openWithURI = "" Then
+            WebBrowser.Navigate("https://google.com")
+        Else
+            WebBrowser.Navigate(openWithURI)
+            openWithURI = ""
+        End If
+
         ToolStripReload.Enabled = True
         ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
         ToolStripGo.Enabled = True
         ToolStripURL.Enabled = True
+        ToolStripAdd.Enabled = True
         MenuStripFileCloseTab.Enabled = True
         MenuStripFileOpen.Enabled = True
         MenuStripFileSave.Enabled = True
@@ -57,12 +89,15 @@ Public Class BasicBrowser
         MenuStripViewSource.Enabled = True
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
-        If openWithURI = "" Then
-            WebBrowser.Navigate("https://google.com")
-        Else
-            WebBrowser.Navigate(openWithURI)
-            openWithURI = ""
-        End If
+
+        'WebBrowser.ContextMenu.MenuItems.Add(4, LinkNT)
+        'WebBrowser.ContextMenu.MenuItems.Add(5, LinkNW)
+        'WebBrowser.ContextMenu.MenuItems.Add(6, SaveLink)
+        'WebBrowser.ContextMenu.MenuItems.Add(7, CopyLinkAddr)
+        'WebBrowser.ContextMenu.MenuItems.Add(8, SaveImg)
+        'WebBrowser.ContextMenu.MenuItems.Add(9, CopyImgURL)
+        'WebBrowser.ContextMenu.MenuItems.Add(10, CopyImg)
+        'WebBrowser.ContextMenu.MenuItems.Add(11, ImgNT)
     End Sub
 
     Private Sub CloseTab(sender As Object, e As EventArgs) Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
@@ -90,6 +125,7 @@ Public Class BasicBrowser
             ToolStripCloseTab.Enabled = False
             ToolStripGo.Enabled = False
             ToolStripURL.Enabled = False
+            ToolStripAdd.Enabled = False
             MenuStripFileCloseTab.Enabled = False
             MenuStripFileOpen.Enabled = False
             MenuStripFileSave.Enabled = False
@@ -98,7 +134,6 @@ Public Class BasicBrowser
             MenuStripViewSource.Enabled = False
             MenuStripToolsSetup.Enabled = False
             MenuStripToolsProperties.Enabled = False
-
         Else
             PerformStuff()
         End If
@@ -272,7 +307,7 @@ Public Class BasicBrowser
         PerformStuff()
     End Sub
 
-    Private Sub ToolStripBack_DropDownOpened(sender As Object, e As EventArgs) Handles ToolStripBack.DropDownOpened
+    Private Sub ToolStripBack_DropDownOpening(sender As Object, e As EventArgs) Handles ToolStripBack.DropDownOpening
         ToolStripBack.DropDownItems.Clear()
         For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
             'Dim HistoryItem As New ToolStripMenuItem
@@ -288,7 +323,7 @@ Public Class BasicBrowser
         PerformStuff()
     End Sub
 
-    Private Sub ToolStripForward_DropDownOpened(sender As Object, e As EventArgs) Handles ToolStripForward.DropDownOpened
+    Private Sub ToolStripForward_DropDownOpening(sender As Object, e As EventArgs) Handles ToolStripForward.DropDownOpening
         ToolStripForward.DropDownItems.Clear()
         For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
             ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString)
@@ -399,5 +434,38 @@ Public Class BasicBrowser
         If ToolStripURL.Focused = False Then
             ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Url.ToString
         End If
+    End Sub
+
+    Sub WebBrowserMouseClick(sender As Object, e As MouseEventArgs) Handles GeckoWebBrowser1.MouseClick, GeckoWebBrowser1.MouseUp, GeckoWebBrowser1.MouseDown
+        MsgBox(e.Button.ToString)
+        If e.Button = Windows.Forms.MouseButtons.Middle Then
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopyLinkLocation()
+            openWithURI = Clipboard.GetText
+            NewTab(Nothing, Nothing)
+            'ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNT)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNW)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(SaveLink)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyLinkAddr)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(SaveImg)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyImgURL)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyImg)
+            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(ImgNT)
+        End If
+    End Sub
+
+    Sub WebBrowserShowContextMenu(sender As Object, e As GeckoContextMenuEventArgs) Handles GeckoWebBrowser1.ShowContextMenu
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.Show()
+
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNT)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNW)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(SaveLink)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyLinkAddr)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(SaveImg)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyImgURL)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(CopyImg)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(ImgNT)
+        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.GetContextMenu()
+        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu
     End Sub
 End Class
