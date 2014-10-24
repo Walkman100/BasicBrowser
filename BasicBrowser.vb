@@ -32,8 +32,9 @@
         AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
-        AddHandler WebBrowser.CanGoBackChanged, AddressOf CanGoBackChanged
-        AddHandler WebBrowser.CanGoForwardChanged, AddressOf CanGoForwardChanged
+        AddHandler WebBrowser.DocumentTitleChanged, AddressOf DocumentTitleChanged
+        AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
+        AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
         TabControl.SelectTab(TabControl.TabCount - 1)
@@ -110,6 +111,10 @@
     End Sub
 
     Private Sub MenuStripFileCloseWindow_Click(sender As Object, e As EventArgs) Handles MenuStripFileCloseWindow.Click
+        For i = 1 To TabControl.TabCount
+            CType(TabControl.TabPages.Item(0).Controls.Item(0), WebBrowser).Navigate("about:blank")
+            TabControl.TabPages.RemoveAt(0)
+        Next
         Me.Close()
     End Sub
 
@@ -137,9 +142,7 @@
     End Sub
 
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
-        For i = 1 To TabControl.TabCount
-            TabControl.TabPages.RemoveAt(0)
-        Next
+        MenuStripFileCloseWindow_Click(Nothing, Nothing)
         Application.Exit()
     End Sub
 
@@ -291,6 +294,8 @@
 
     Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
+        ToolStripURL.Invalidate()
     End Sub
 
     ' browser stuff
@@ -305,14 +310,6 @@
         PerformStuff()
     End Sub
 
-    Sub CanGoBackChanged()
-        ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-    End Sub
-
-    Sub CanGoForwardChanged()
-        ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-    End Sub
-
     Sub ProgressChanged(ByVal sender As Object, ByVal e As Windows.Forms.WebBrowserProgressChangedEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
         ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
@@ -322,13 +319,18 @@
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
 
+    Sub DocumentTitleChanged()
+        If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
+            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        End If
+        For i = 1 To TabControl.TabCount
+            TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle
+        Next
+    End Sub
+
     Sub PerformStuff()
         ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
         ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
-            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
-            TabControl.SelectedTab.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-        End If
         If ToolStripURL.Focused = False Then
             ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         End If
