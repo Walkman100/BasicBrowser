@@ -1,4 +1,5 @@
 ﻿Public Class BasicBrowser
+    ' Made by ░▒▓█│【Walkman】│█▓▒░
 
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
 
@@ -190,6 +191,18 @@
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
 
+    Private Sub MenuStripToolsInternetProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsInternetProperties.Click
+        Process.Start("inetcpl.cpl")
+    End Sub
+
+    Private Sub MenuStripToolsInternetProxy_Click(sender As Object, e As EventArgs) Handles MenuStripToolsInternetProxy.Click
+        Process.Start("inetcpl.cpl", ",4")
+    End Sub
+
+    Private Sub MenuStripToolsNetworkDiagnostics_Click(sender As Object, e As EventArgs) Handles MenuStripToolsNetworkDiagnostics.Click
+        Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
+    End Sub
+
     'About
     Private Sub MenuStripHelpAbout_Click(sender As Object, e As EventArgs) Handles MenuStripHelpAbout.Click
         Dim AboutForm As New Form()
@@ -206,10 +219,11 @@
         AboutForm.Controls.Add(lblAboutText)
         lblAboutText.Dock = DockStyle.Fill
         lblAboutText.Text = _
-            "Made by Walkman100" & vbNewLine & vbNewLine & _
+            "Made by ░▒▓█│【Walkman】│█▓▒░ (Walkman100)" & vbNewLine & vbNewLine & _
             "Source code available at: https://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
             "Go to https://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
-            "Hold ALT to reorganise all the buttons/menus at the top"
+            "Hold ALT to reorganise all the buttons/menus at the top" & vbNewLine & vbNewLine & _
+            "Current Version: " & My.Application.Info.Version.ToString
         AboutForm.Show()
     End Sub
 
@@ -281,7 +295,7 @@
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, 25)
-        End Sub
+    End Sub
 
     'Favourites bar (Integrated into URL bar)
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
