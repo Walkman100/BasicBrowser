@@ -1,6 +1,7 @@
 ﻿Imports Skybound.Gecko
 
 Public Class BasicBrowser
+    ' Made by ░▒▓█│【Walkman】│█▓▒░
 
     'use `CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser)` to refer to the webbrowser on the active tab
 
@@ -266,6 +267,10 @@ Public Class BasicBrowser
         Process.Start("inetcpl.cpl")
     End Sub
 
+    Private Sub MenuStripToolsInternetProxy_Click(sender As Object, e As EventArgs) Handles MenuStripToolsInternetProxy.Click
+        Process.Start("inetcpl.cpl", ",4")
+    End Sub
+
     Private Sub MenuStripToolsNetworkDiagnostics_Click(sender As Object, e As EventArgs) Handles MenuStripToolsNetworkDiagnostics.Click
         Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
     End Sub
@@ -286,9 +291,9 @@ Public Class BasicBrowser
         AboutForm.Controls.Add(lblAboutText)
         lblAboutText.Dock = DockStyle.Fill
         lblAboutText.Text = _
-            "Made by Walkman100" & vbNewLine & vbNewLine & _
-            "Source code available at: http://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
-            "Go to http://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
+            "Made by ░▒▓█│【Walkman】│█▓▒░ (Walkman100)" & vbNewLine & vbNewLine & _
+            "Source code available at: https://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
+            "Go to https://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
             "Hold ALT to reorganise all the buttons/menus at the top" & vbNewLine & vbNewLine & _
             "Current Version: " & My.Application.Info.Version.ToString
         AboutForm.Show()

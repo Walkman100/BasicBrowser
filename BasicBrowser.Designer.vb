@@ -58,6 +58,9 @@ Partial Class BasicBrowser
         Me.MenuStripTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsSetup = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsSeperator = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripToolsInternetProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsNetworkDiagnostics = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpIndex = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,9 +95,7 @@ Partial Class BasicBrowser
         Me.WBContextMenuCopyImgURL = New System.Windows.Forms.ToolStripMenuItem()
         Me.WBContextMenuCopyImg = New System.Windows.Forms.ToolStripMenuItem()
         Me.WBContextMenuImgNT = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsInternetProperties = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsNetworkDiagnostics = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStripToolsSeperator = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripToolsInternetProxy = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStripNavigation.SuspendLayout()
@@ -367,6 +368,24 @@ Partial Class BasicBrowser
         Me.MenuStripToolsProperties.Size = New System.Drawing.Size(222, 22)
         Me.MenuStripToolsProperties.Text = "Page P&roperties..."
         '
+        'MenuStripToolsSeperator
+        '
+        Me.MenuStripToolsSeperator.Name = "MenuStripToolsSeperator"
+        Me.MenuStripToolsSeperator.Size = New System.Drawing.Size(219, 6)
+        '
+        'MenuStripToolsInternetProperties
+        '
+        Me.MenuStripToolsInternetProperties.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsInternetProxy})
+        Me.MenuStripToolsInternetProperties.Name = "MenuStripToolsInternetProperties"
+        Me.MenuStripToolsInternetProperties.Size = New System.Drawing.Size(222, 22)
+        Me.MenuStripToolsInternetProperties.Text = "Internet Properties..."
+        '
+        'MenuStripToolsNetworkDiagnostics
+        '
+        Me.MenuStripToolsNetworkDiagnostics.Name = "MenuStripToolsNetworkDiagnostics"
+        Me.MenuStripToolsNetworkDiagnostics.Size = New System.Drawing.Size(222, 22)
+        Me.MenuStripToolsNetworkDiagnostics.Text = "Network Diagnostics..."
+        '
         'MenuStripHelp
         '
         Me.MenuStripHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripHelpContents, Me.MenuStripHelpIndex, Me.MenuStripHelpSearch, Me.MenuStripHelpSeparator, Me.MenuStripHelpAbout})
@@ -377,35 +396,35 @@ Partial Class BasicBrowser
         'MenuStripHelpContents
         '
         Me.MenuStripHelpContents.Name = "MenuStripHelpContents"
-        Me.MenuStripHelpContents.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpContents.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpContents.Text = "&Contents"
         Me.MenuStripHelpContents.Visible = False
         '
         'MenuStripHelpIndex
         '
         Me.MenuStripHelpIndex.Name = "MenuStripHelpIndex"
-        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpIndex.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpIndex.Text = "&Index"
         Me.MenuStripHelpIndex.Visible = False
         '
         'MenuStripHelpSearch
         '
         Me.MenuStripHelpSearch.Name = "MenuStripHelpSearch"
-        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpSearch.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpSearch.Text = "&Search"
         Me.MenuStripHelpSearch.Visible = False
         '
         'MenuStripHelpSeparator
         '
         Me.MenuStripHelpSeparator.Name = "MenuStripHelpSeparator"
-        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(149, 6)
+        Me.MenuStripHelpSeparator.Size = New System.Drawing.Size(122, 6)
         Me.MenuStripHelpSeparator.Visible = False
         '
         'MenuStripHelpAbout
         '
         Me.MenuStripHelpAbout.Image = Global.BasicBrowser.My.Resources.Resources.Info
         Me.MenuStripHelpAbout.Name = "MenuStripHelpAbout"
-        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(152, 22)
+        Me.MenuStripHelpAbout.Size = New System.Drawing.Size(125, 22)
         Me.MenuStripHelpAbout.Text = "&About..."
         '
         'ToolStripRemove
@@ -630,22 +649,11 @@ Partial Class BasicBrowser
         Me.WBContextMenuImgNT.Size = New System.Drawing.Size(215, 22)
         Me.WBContextMenuImgNT.Text = "Open image in new tab"
         '
-        'MenuStripToolsInternetProperties
+        'MenuStripToolsInternetProxy
         '
-        Me.MenuStripToolsInternetProperties.Name = "MenuStripToolsInternetProperties"
-        Me.MenuStripToolsInternetProperties.Size = New System.Drawing.Size(222, 22)
-        Me.MenuStripToolsInternetProperties.Text = "Internet Properties"
-        '
-        'MenuStripToolsNetworkDiagnostics
-        '
-        Me.MenuStripToolsNetworkDiagnostics.Name = "MenuStripToolsNetworkDiagnostics"
-        Me.MenuStripToolsNetworkDiagnostics.Size = New System.Drawing.Size(222, 22)
-        Me.MenuStripToolsNetworkDiagnostics.Text = "Network Diagnostics"
-        '
-        'MenuStripToolsSeperator
-        '
-        Me.MenuStripToolsSeperator.Name = "MenuStripToolsSeperator"
-        Me.MenuStripToolsSeperator.Size = New System.Drawing.Size(219, 6)
+        Me.MenuStripToolsInternetProxy.Name = "MenuStripToolsInternetProxy"
+        Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(323, 22)
+        Me.MenuStripToolsInternetProxy.Text = "Proxy settings... (Click LAN settings button)"
         '
         'BasicBrowser
         '
@@ -746,5 +754,6 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripToolsSeperator As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MenuStripToolsInternetProperties As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsNetworkDiagnostics As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripToolsInternetProxy As System.Windows.Forms.ToolStripMenuItem
 
 End Class
