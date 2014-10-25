@@ -39,8 +39,8 @@ Public Class BasicBrowser
         AddHandler WebBrowser.DocumentTitleChanged, AddressOf DocumentTitleChanged
         AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
-        AddHandler WebBrowser.MouseClick, New MouseEventHandler(AddressOf WebBrowserMouseClick)
-        AddHandler WebBrowser.ShowContextMenu, New GeckoContextMenuEventHandler(AddressOf WebBrowserShowContextMenu)
+        'AddHandler WebBrowser.MouseClick, New MouseEventHandler(AddressOf WebBrowserMouseClick)
+        'AddHandler WebBrowser.ShowContextMenu, New GeckoContextMenuEventHandler(AddressOf WebBrowserShowContextMenu)
         
         TabPage.Text = "Loading..."
         TabControl.TabPages.Add(TabPage)
@@ -63,13 +63,13 @@ Public Class BasicBrowser
         ToolStripGo.Enabled = True
         ToolStripURL.Enabled = True
         ToolStripAdd.Enabled = True
+        ToolStripRemove.Enabled = True
         MenuStripFileCloseTab.Enabled = True
         MenuStripFileOpen.Enabled = True
         MenuStripFileSave.Enabled = True
         MenuStripFilePrint.Enabled = True
         MenuStripFilePrintPreview.Enabled = True
         MenuStripViewSource.Enabled = True
-        MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
     End Sub
 
@@ -99,13 +99,13 @@ Public Class BasicBrowser
             ToolStripGo.Enabled = False
             ToolStripURL.Enabled = False
             ToolStripAdd.Enabled = False
+            ToolStripRemove.Enabled = False
             MenuStripFileCloseTab.Enabled = False
             MenuStripFileOpen.Enabled = False
             MenuStripFileSave.Enabled = False
             MenuStripFilePrint.Enabled = False
             MenuStripFilePrintPreview.Enabled = False
             MenuStripViewSource.Enabled = False
-            MenuStripToolsSetup.Enabled = False
             MenuStripToolsProperties.Enabled = False
         Else
             PerformStuff()
@@ -135,6 +135,7 @@ Public Class BasicBrowser
             'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document = System.IO.File.ReadAllText(OpenFileDialog.FileName)
             'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document.Body = System.IO.File.ReadAllText(OpenFileDialog.FileName)
             ' Apparently these properties either don't exist (DocumentText) or are read-only, so they have been disabled so that the project is compileable.
+            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Navigate(OpenFileDialog.FileName)
         End If
     End Sub
 
@@ -150,11 +151,22 @@ Public Class BasicBrowser
     End Sub
 
     Private Sub MenuStripFilePrint_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrint.Click
-        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintDialog()
+        Dim PrintDialog As New PrintDialog
+
+        Dim PrintDocument As New System.Drawing.Printing.PrintDocument
+        'PrintDocument = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document
+        PrintDialog.Document = PrintDocument
+
+        If (PrintDialog.ShowDialog() = DialogResult.OK) Then
+            PrintDocument.PrinterSettings = PrintDialog.PrinterSettings
+            PrintDocument.Print()
+        End If
     End Sub
 
     Private Sub MenuStripFilePrintPreview_Click(sender As Object, e As EventArgs) Handles MenuStripFilePrintPreview.Click
-        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPrintPreviewDialog()
+        Dim PrintPreviewDialog As New PrintPreviewDialog
+        'PrintPreviewDialog.Document = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).Document
+        PrintPreviewDialog.Show()
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
@@ -242,10 +254,20 @@ Public Class BasicBrowser
     'Tools
     Private Sub MenuStripToolsSetup_Click(sender As Object, e As EventArgs) Handles MenuStripToolsSetup.Click
         'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageSetupDialog()
+        openWithURI = "about:config"
+        NewTab(Nothing, Nothing)
     End Sub
 
     Private Sub MenuStripToolsProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsProperties.Click
         CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ShowPageProperties()
+    End Sub
+
+    Private Sub MenuStripToolsInternetProperties_Click(sender As Object, e As EventArgs) Handles MenuStripToolsInternetProperties.Click
+        Process.Start("inetcpl.cpl")
+    End Sub
+
+    Private Sub MenuStripToolsNetworkDiagnostics_Click(sender As Object, e As EventArgs) Handles MenuStripToolsNetworkDiagnostics.Click
+        Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
     End Sub
 
     'About
@@ -283,9 +305,6 @@ Public Class BasicBrowser
     Private Sub ToolStripBack_DropDownOpening(sender As Object, e As EventArgs) Handles ToolStripBack.DropDownOpening
         ToolStripBack.DropDownItems.Clear()
         For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Count
-            'Dim HistoryItem As New ToolStripMenuItem
-            'HistoryItem.Text = CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString
-            'ToolStripBack.DropDownItems.Add(HistoryItem)
             ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).History.Item(i - 1).ToString)
         Next
     End Sub
@@ -409,20 +428,20 @@ Public Class BasicBrowser
         End If
     End Sub
 
-    Sub WebBrowserMouseClick(sender As Object, e As MouseEventArgs) Handles GeckoWebBrowser1.MouseClick, GeckoWebBrowser1.MouseUp, GeckoWebBrowser1.MouseDown
-        MsgBox(e.Button.ToString)
-        If e.Button = Windows.Forms.MouseButtons.Middle Then
-            CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopyLinkLocation()
-            openWithURI = Clipboard.GetText
-            NewTab(Nothing, Nothing)
-            'ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
-            '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNT)
-        End If
-    End Sub
+    'Sub WebBrowserMouseClick(sender As Object, e As MouseEventArgs) Handles GeckoWebBrowser1.MouseClick, GeckoWebBrowser1.MouseUp, GeckoWebBrowser1.MouseDown
+    '    MsgBox(e.Button.ToString)
+    '    If e.Button = Windows.Forms.MouseButtons.Middle Then
+    '        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).CopyLinkLocation()
+    '        openWithURI = Clipboard.GetText
+    '        NewTab(Nothing, Nothing)
+    '        'ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+    '        '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MenuItems.Add(LinkNT)
+    '    End If
+    'End Sub
 
-    Sub WebBrowserShowContextMenu(sender As Object, e As GeckoContextMenuEventArgs) Handles GeckoWebBrowser1.ShowContextMenu
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.Show(WBContextMenu, MousePosition)
-        'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MergeMenu(WBContextMenu)
-        CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenuStrip = WBContextMenu
-    End Sub
+    'Sub WebBrowserShowContextMenu(sender As Object, e As GeckoContextMenuEventArgs) Handles GeckoWebBrowser1.ShowContextMenu
+    '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.Show(WBContextMenu, MousePosition)
+    '    'CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenu.MergeMenu(WBContextMenu)
+    '    CType(TabControl.SelectedTab.Controls.Item(0), GeckoWebBrowser).ContextMenuStrip = WBContextMenu
+    'End Sub
 End Class
