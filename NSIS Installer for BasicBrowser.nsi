@@ -34,24 +34,18 @@ Section "Executable, Uninstaller & DLLs"
   SetOutPath $INSTDIR
   File "bin\Release\BasicBrowser.exe"
   WriteUninstaller "BasicBrowser(Gecko)-Uninst.exe"
-  File "bin\Release\Skybound.Gecko.dll"
-  File "bin\Release\freebl3.dll">
-  File "bin\Release\IA2Marshal.dll">
-  File "bin\Release\js3250.dll">
-  File "bin\Release\mozcrt19.dll">
-  File "bin\Release\nspr4.dll">
-  File "bin\Release\nss3.dll">
-  File "bin\Release\nssckbi.dll">
-  File "bin\Release\nssdbm3.dll">
-  File "bin\Release\nssutil3.dll">
-  File "bin\Release\plc4.dll">
-  File "bin\Release\plds4.dll">
-  File "bin\Release\smime3.dll">
-  File "bin\Release\softokn3.dll">
-  File "bin\Release\sqlite3.dll">
-  File "bin\Release\ssl3.dll">
-  File "bin\Release\xpcom.dll">
-  File "bin\Release\xul.dll">
+  
+  ; DLLs
+  File "bin\Release\*.dll"
+  ; Sub-Folders
+  File /r "bin\Release\chrome"
+  File /r "bin\Release\components"
+  File /r "bin\Release\defaults"
+  File /r "bin\Release\dictionaries"
+  File /r "bin\Release\greprefs"
+  File /r "bin\Release\modules"
+  File /r "bin\Release\plugins"
+  File /r "bin\Release\res"
 SectionEnd
 
 Section "Start Menu Shortcuts"
