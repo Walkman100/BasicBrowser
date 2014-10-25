@@ -316,7 +316,9 @@
 
     Sub ProgressChanged(ByVal sender As Object, ByVal e As Windows.Forms.WebBrowserProgressChangedEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
-        ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        If ToolStripURL.Focused = False Then
+            ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        End If
     End Sub
 
     Sub StatusTextChanged()
