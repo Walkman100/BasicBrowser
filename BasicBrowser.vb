@@ -7,6 +7,8 @@
 
     Public openWithURI As String
     Dim TabToClose As Integer
+    Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", Nothing, Nothing, Nothing}
+
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
             If openWithURI = "" Then
@@ -203,6 +205,18 @@
         Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
     End Sub
 
+    Private Sub MenuStripToolsAutoReload_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripToolsAutoReload.MouseUp
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            For i = 1 To ReloadTitles.Length
+                ReloadTitles.SetValue(InputBox("Page title no. " & i & ":", "Auto-Reload required titles", ReloadTitles.GetValue(i - 1)), i - 1)
+                If DialogResult = Windows.Forms.DialogResult.Cancel Then
+                    ' this doesn't seem to pick up that the cancel button was pressed
+                    Exit Sub
+                End If
+            Next
+        End If
+    End Sub
+
     'About
     Private Sub MenuStripHelpAbout_Click(sender As Object, e As EventArgs) Handles MenuStripHelpAbout.Click
         Dim AboutForm As New Form()
@@ -340,12 +354,24 @@
     End Sub
 
     Sub DocumentTitleChanged()
+        ' Update window title
         If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
         End If
+        ' Update all tab names
         For i = 1 To TabControl.TabCount
             TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle
         Next
+        ' Reload tab if bad name
+        If MenuStripToolsAutoReload.Checked = True Then
+            For i = 1 To TabControl.TabCount
+                If ReloadTitles.Contains(CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle) Then
+                    StatusStripStatusText.Text = "Refreshing now..."
+                    ' It seems that you have to run the edit loop before it will get here
+                    CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).Refresh()
+                End If
+            Next
+        End If
     End Sub
 
     Sub PerformStuff()

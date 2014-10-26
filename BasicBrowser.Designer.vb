@@ -58,6 +58,7 @@ Partial Class BasicBrowser
         Me.MenuStripToolsProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripToolsInternetProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsInternetProxy = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsNetworkDiagnostics = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripHelpContents = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,7 +83,8 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
-        Me.MenuStripToolsInternetProxy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MenuStripToolsAutoReload = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.ToolStripNavigation.SuspendLayout()
@@ -337,44 +339,53 @@ Partial Class BasicBrowser
         '
         'MenuStripTools
         '
-        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsSetup, Me.MenuStripToolsProperties, Me.MenuStripToolsSeparator, Me.MenuStripToolsInternetProperties, Me.MenuStripToolsNetworkDiagnostics})
+        Me.MenuStripTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsSetup, Me.MenuStripToolsProperties, Me.MenuStripToolsSeparator, Me.MenuStripToolsInternetProperties, Me.MenuStripToolsNetworkDiagnostics, Me.MenuStripToolsSeparator2, Me.MenuStripToolsAutoReload})
         Me.MenuStripTools.Name = "MenuStripTools"
         Me.MenuStripTools.Size = New System.Drawing.Size(49, 23)
         Me.MenuStripTools.Text = "&Tools"
         '
         'MenuStripToolsSetup
         '
+        Me.MenuStripToolsSetup.AutoToolTip = True
         Me.MenuStripToolsSetup.Enabled = False
         Me.MenuStripToolsSetup.Name = "MenuStripToolsSetup"
-        Me.MenuStripToolsSetup.Size = New System.Drawing.Size(214, 22)
+        Me.MenuStripToolsSetup.Size = New System.Drawing.Size(221, 22)
         Me.MenuStripToolsSetup.Text = "Page &Setup..."
         '
         'MenuStripToolsProperties
         '
+        Me.MenuStripToolsProperties.AutoToolTip = True
         Me.MenuStripToolsProperties.Enabled = False
         Me.MenuStripToolsProperties.Name = "MenuStripToolsProperties"
         Me.MenuStripToolsProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.MenuStripToolsProperties.Size = New System.Drawing.Size(214, 22)
+        Me.MenuStripToolsProperties.Size = New System.Drawing.Size(221, 22)
         Me.MenuStripToolsProperties.Text = "Page P&roperties..."
         '
         'MenuStripToolsSeparator
         '
         Me.MenuStripToolsSeparator.Name = "MenuStripToolsSeparator"
-        Me.MenuStripToolsSeparator.Size = New System.Drawing.Size(211, 6)
+        Me.MenuStripToolsSeparator.Size = New System.Drawing.Size(218, 6)
         '
         'MenuStripToolsInternetProperties
         '
         Me.MenuStripToolsInternetProperties.AutoToolTip = True
         Me.MenuStripToolsInternetProperties.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsInternetProxy})
         Me.MenuStripToolsInternetProperties.Name = "MenuStripToolsInternetProperties"
-        Me.MenuStripToolsInternetProperties.Size = New System.Drawing.Size(214, 22)
+        Me.MenuStripToolsInternetProperties.Size = New System.Drawing.Size(221, 22)
         Me.MenuStripToolsInternetProperties.Text = "Internet Properties..."
+        '
+        'MenuStripToolsInternetProxy
+        '
+        Me.MenuStripToolsInternetProxy.AutoToolTip = True
+        Me.MenuStripToolsInternetProxy.Name = "MenuStripToolsInternetProxy"
+        Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(323, 22)
+        Me.MenuStripToolsInternetProxy.Text = "Proxy settings... (Click LAN settings button)"
         '
         'MenuStripToolsNetworkDiagnostics
         '
         Me.MenuStripToolsNetworkDiagnostics.AutoToolTip = True
         Me.MenuStripToolsNetworkDiagnostics.Name = "MenuStripToolsNetworkDiagnostics"
-        Me.MenuStripToolsNetworkDiagnostics.Size = New System.Drawing.Size(214, 22)
+        Me.MenuStripToolsNetworkDiagnostics.Size = New System.Drawing.Size(221, 22)
         Me.MenuStripToolsNetworkDiagnostics.Text = "Network Diagnostics..."
         '
         'MenuStripHelp
@@ -459,7 +470,7 @@ Partial Class BasicBrowser
         Me.StatusStripStatusText.Name = "StatusStripStatusText"
         Me.StatusStripStatusText.Size = New System.Drawing.Size(63, 17)
         Me.StatusStripStatusText.Text = "Loading..."
-        Me.StatusStripStatusText.ToolTipText = "Status Text"
+        Me.StatusStripStatusText.ToolTipText = "Status"
         '
         'ToolStripSeparator1
         '
@@ -572,12 +583,23 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
-        'MenuStripToolsInternetProxy
+        'MenuStripToolsSeparator2
         '
-        Me.MenuStripToolsInternetProxy.AutoToolTip = True
-        Me.MenuStripToolsInternetProxy.Name = "MenuStripToolsInternetProxy"
-        Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(323, 22)
-        Me.MenuStripToolsInternetProxy.Text = "Proxy settings... (Click LAN settings button)"
+        Me.MenuStripToolsSeparator2.Name = "MenuStripToolsSeparator2"
+        Me.MenuStripToolsSeparator2.Size = New System.Drawing.Size(218, 6)
+        '
+        'MenuStripToolsAutoReload
+        '
+        Me.MenuStripToolsAutoReload.Checked = True
+        Me.MenuStripToolsAutoReload.CheckOnClick = True
+        Me.MenuStripToolsAutoReload.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.MenuStripToolsAutoReload.Name = "MenuStripToolsAutoReload"
+        Me.MenuStripToolsAutoReload.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.MenuStripToolsAutoReload.Size = New System.Drawing.Size(221, 22)
+        Me.MenuStripToolsAutoReload.Text = "Auto-reload"
+        Me.MenuStripToolsAutoReload.ToolTipText = "Auto-reload pages that failed to load properly. Right-click to edit what's requir" & _
+    "ed to start a reload."
         '
         'BasicBrowser
         '
@@ -665,5 +687,7 @@ Partial Class BasicBrowser
     Friend WithEvents MenuStripToolsInternetProperties As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsNetworkDiagnostics As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsInternetProxy As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripToolsSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents MenuStripToolsAutoReload As System.Windows.Forms.ToolStripMenuItem
 
 End Class
