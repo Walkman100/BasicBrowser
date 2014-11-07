@@ -12,3 +12,7 @@ http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
 #### Screenshot
 You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
 [![Screenshot](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/basicbrowser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
