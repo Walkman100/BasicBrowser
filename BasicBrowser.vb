@@ -27,7 +27,7 @@
     ' MenuStrip options
 
     'File
-    Sub NewTab(sender As Object, e As EventArgs) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
+    Sub NewTab(Optional sender As Object = Nothing, Optional e As EventArgs = Nothing) Handles ToolStripNewTab.Click, MenuStripFileNew.Click
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
@@ -147,6 +147,13 @@
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
         MenuStripFileCloseWindow_Click(Nothing, Nothing)
         Application.Exit()
+    End Sub
+    
+    Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            openWithURI = InputBox("Open New Tab and navigate to:")
+            NewTab()
+        End If
     End Sub
 
     'Edit

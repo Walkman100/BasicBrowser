@@ -16,7 +16,7 @@
                     BasicBrowser.openWithURI = BasicBrowser.openWithURI & s
                 End If
             Next
-            BasicBrowser.NewTab(Nothing, Nothing)
+            BasicBrowser.NewTab()
             BasicBrowser.BringToFront()
         End Sub
     End Class
