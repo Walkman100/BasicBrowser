@@ -1,6 +1,6 @@
 @echo off
 
-%ProgramFiles%\MSBuild\12.0\bin\msbuild.exe /property:OutDir=bin\Release\ BasicBrowser.sln
+%ProgramFiles%\MSBuild\12.0\bin\msbuild.exe /property:Configuration=Release BasicBrowser.sln
 
 %ProgramFiles%\NSIS\makensis.exe "NSIS Installer for BasicBrowser.nsi"
 
