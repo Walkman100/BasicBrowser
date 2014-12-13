@@ -10,8 +10,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("BasicBrowser")> 
-<Assembly: AssemblyDescription("A simple tabbed browser coded in Vb.Net.")> 
+<Assembly: AssemblyTitle("Basic Browser")> 
+<Assembly: AssemblyDescription("A simple tabbed browser coded in Vb.Net")> 
 <Assembly: AssemblyCompany("DeavmiOSS")> 
 <Assembly: AssemblyProduct("BasicBrowser")> 
 <Assembly: AssemblyCopyright("FOSS from Walkman 2014")> 
