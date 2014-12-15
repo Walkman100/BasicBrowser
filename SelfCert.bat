@@ -1,0 +1,1 @@
+"%ProgramFiles%\Microsoft Office\Office14\SELFCERT.EXE"
