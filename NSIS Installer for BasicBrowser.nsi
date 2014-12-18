@@ -1,6 +1,6 @@
 ; BasicBrowser Installer NSIS Script
 ; get NSIS at http://tenet.dl.sourceforge.net/project/nsis/NSIS%202/2.46/nsis-2.46-setup.exe
-; As a program that all Power PC users should have, Notepad ++ is recommended to edit this file
+; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
 ;AddBrandingImage top 20
 ;Icon youtube_withLink.ico
@@ -71,16 +71,16 @@ SubSectionEnd
 ; Uninstaller
 
 Section "Uninstall"
-  Delete $INSTDIR\BasicBrowser-Uninst.exe   ; Remove Application Files
-  Delete $INSTDIR\BasicBrowser.exe
+  Delete "$INSTDIR\BasicBrowser-Uninst.exe"   ; Remove Application Files
+  Delete "$INSTDIR\BasicBrowser.exe"
   RMDir $INSTDIR
   
-  Delete $SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
   Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
   RMDir $SMPROGRAMS\DeavmiOSS
   
-  Delete $DESKTOP\BasicBrowser.lnk   ; Remove Desktop Shortcut
-  Delete $QUICKLAUNCH\BasicBrowser.lnk   ; Remove Quick Launch Shortcut
+  Delete "$DESKTOP\BasicBrowser.lnk"   ; Remove Desktop Shortcut
+  Delete "$QUICKLAUNCH\BasicBrowser.lnk"   ; Remove Quick Launch Shortcut
   
   DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
   DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
