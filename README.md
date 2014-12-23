@@ -1,7 +1,7 @@
 # BasicBrowser [![Build status](https://ci.appveyor.com/api/projects/status/vk3okvf6qmlpykgx)](https://ci.appveyor.com/project/Walkman100/basicbrowser)
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-As of November 2014, the Gecko branch can be found at [DeavmiOSS/BasicBrowserGecko](https://github.com/DeavmiOSS/BasicBrowserGecko). The hybrid branch is also there, since it is essentially BasicBrowserGecko with the ability to open IE tabs as well.
+As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrowserGecko](https://github.com/Walkman-Mirror/BasicBrowserGecko). The hybrid branch is also there, since it is essentially BasicBrowserGecko with the ability to open IE tabs as well.
 
 A simple tabbed browser coded in Vb.Net.
 
