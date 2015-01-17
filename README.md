@@ -5,6 +5,10 @@ As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrows
 
 A simple tabbed browser coded in Vb.Net.
 
+## Compile requirements
+
+See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
+
 ##### Many thanks to (code borrowed from):
 https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
 http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
