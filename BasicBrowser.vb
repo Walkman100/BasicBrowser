@@ -91,8 +91,6 @@
             ToolStripStop.Enabled = False
             ToolStripHome.Enabled = False
             ToolStripCloseTab.Enabled = False
-            ToolStripGo.Enabled = False
-            ToolStripURL.Enabled = False
             ToolStripAdd.Enabled = False
             ToolStripRemove.Enabled = False
             MenuStripFileCloseTab.Enabled = False
@@ -248,7 +246,7 @@
         AboutForm.Show()
     End Sub
 
-    ' ToolStrip options
+    ' ToolStrip buttons
 
     Private Sub ToolStripBack_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripBack.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
@@ -299,7 +297,12 @@
 
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
-            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
+            If TabControl.TabCount = 0 Then
+                openWithURI = ToolStripURL.Text
+                NewTab()
+            Else
+                CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
+            End If
         Else
             ToolStripURL.Focus()
         End If
@@ -332,8 +335,13 @@
     End Sub
 
     Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Items.Item(ToolStripURL.SelectedIndex).ToString)
-        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
+        If TabControl.TabCount = 0 Then
+            openWithURI = ToolStripURL.SelectedItem.ToString
+            NewTab()
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
+        End If
         ToolStripURL.Invalidate()
     End Sub
 

@@ -502,7 +502,6 @@ Partial Class BasicBrowser
         '
         'ToolStripURL
         '
-        Me.ToolStripURL.Enabled = false
         Me.ToolStripURL.Name = "ToolStripURL"
         Me.ToolStripURL.Size = New System.Drawing.Size(415, 25)
         Me.ToolStripURL.ToolTipText = "Enter URL to navigate to"
@@ -511,7 +510,6 @@ Partial Class BasicBrowser
         '
         Me.ToolStripGo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripGo.Enabled = false
         Me.ToolStripGo.Image = Global.BasicBrowser.My.Resources.Resources.go_right_d
         Me.ToolStripGo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripGo.Name = "ToolStripGo"
