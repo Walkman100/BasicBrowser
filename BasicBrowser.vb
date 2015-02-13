@@ -154,9 +154,6 @@
         End If
     End Sub
 
-    'Edit
-    'WIP
-
     'View
     Private Sub MenuStripViewKeepOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles MenuStripViewKeepOnTop.CheckedChanged
         Me.TopMost = MenuStripViewKeepOnTop.Checked
@@ -318,7 +315,7 @@
     End Sub
 
     Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Size(Me.Width - 243, 25)
+        ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
     End Sub
 
     'Favourites bar (Integrated into URL bar)
