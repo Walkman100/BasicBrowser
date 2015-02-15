@@ -282,14 +282,25 @@
         PerformStuff()
     End Sub
 
+    Private Sub ToolStripURL_Click(sender As Object, e As EventArgs) Handles ToolStripURL.GotFocus
+        ToolStripURL.SelectAll()
+    End Sub
+
     Private Sub ToolStripURL_KeyDown(sender As Object, e As KeyEventArgs) Handles ToolStripURL.KeyDown
         If e.KeyCode = Keys.Enter Then
             ToolStripGo_Click(Nothing, Nothing)
         End If
     End Sub
 
-    Private Sub ToolStripURL_Click(sender As Object, e As EventArgs) Handles ToolStripURL.GotFocus
-        ToolStripURL.SelectAll()
+    Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
+        If TabControl.TabCount = 0 Then
+            openWithURI = ToolStripURL.SelectedItem.ToString
+            NewTab()
+        Else
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
+            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
+        End If
+        ToolStripURL.Invalidate()
     End Sub
 
     Private Sub ToolStripGo_Click(sender As Object, e As EventArgs) Handles ToolStripGo.Click
@@ -305,20 +316,6 @@
         End If
     End Sub
 
-    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
-        Try
-            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
-        Catch ex As Exception
-            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
-        End Try
-        PerformStuff()
-    End Sub
-
-    Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
-    End Sub
-
-    'Favourites bar (Integrated into URL bar)
     Private Sub ToolStripAdd_Click(sender As Object, e As EventArgs) Handles ToolStripAdd.Click
         ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
@@ -331,15 +328,17 @@
         My.Settings.Save()
     End Sub
 
-    Private Sub ToolStripURL_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripURL.SelectedIndexChanged
-        If TabControl.TabCount = 0 Then
-            openWithURI = ToolStripURL.SelectedItem.ToString
-            NewTab()
-        Else
-            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
-            CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
-        End If
-        ToolStripURL.Invalidate()
+    Private Sub TabControl_Click(sender As Object, e As EventArgs) Handles TabControl.Click, TabControl.KeyUp
+        Try
+            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        Catch ex As Exception
+            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
+        End Try
+        PerformStuff()
+    End Sub
+
+    Private Sub BasicBrowser_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged, MyBase.Resize
+        ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
     End Sub
 
     ' browser stuff
