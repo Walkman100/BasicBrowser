@@ -5,6 +5,25 @@ As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrows
 
 A simple tabbed browser coded in Vb.Net.
 
+# Searching from the URL bar
+You should be able to search from the URL bar out of the box. If some queries turn into URLs (e.g. `http://test+search/`) instead of your search engines search, use a question mark `?` before the query (e.g. `?test search`).
+
+If this still doesn't work, make sure the `Search in the address bar and the search box on the new tab page` checkbox in the window described below is checked.
+
+## Changing your search engine
+Click the menu bar `Tools`, then under `Internet Properties...` select `Manage add-ons...`, then click the `Manage add-ons` button.
+
+In the window that pops up, click the `Search Providers` tab on the left. Here you can select a search provider, then:
+- Set it as default
+- Remove it
+- Enable/disable search suggestions for it (not available in BasicBrowser yet)
+- Right-click to move up or down in the listing order
+When you are done, click `Close` at the bottom then `OK`.
+
+#### Screenshot
+You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
+[![Screenshot](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)
+
 ## Compile requirements
 
 See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
@@ -13,10 +32,6 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
 https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
 http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
 http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
-
-#### Screenshot
-You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
-[![Screenshot](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/basicbrowser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
