@@ -76,6 +76,7 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
+        Me.MenuStripToolsInternetAddons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout
         Me.StatusStrip.SuspendLayout
         Me.ToolStripNavigation.SuspendLayout
@@ -287,7 +288,7 @@ Partial Class BasicBrowser
         'MenuStripToolsInternetProperties
         '
         Me.MenuStripToolsInternetProperties.AutoToolTip = true
-        Me.MenuStripToolsInternetProperties.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsInternetProxy})
+        Me.MenuStripToolsInternetProperties.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripToolsInternetProxy, Me.MenuStripToolsInternetAddons})
         Me.MenuStripToolsInternetProperties.Name = "MenuStripToolsInternetProperties"
         Me.MenuStripToolsInternetProperties.Size = New System.Drawing.Size(221, 22)
         Me.MenuStripToolsInternetProperties.Text = "Internet Properties..."
@@ -296,7 +297,7 @@ Partial Class BasicBrowser
         '
         Me.MenuStripToolsInternetProxy.AutoToolTip = true
         Me.MenuStripToolsInternetProxy.Name = "MenuStripToolsInternetProxy"
-        Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(323, 22)
+        Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(360, 22)
         Me.MenuStripToolsInternetProxy.Text = "Proxy settings... (Click LAN settings button)"
         '
         'MenuStripToolsNetworkDiagnostics
@@ -517,6 +518,13 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
+        'MenuStripToolsInternetAddons
+        '
+        Me.MenuStripToolsInternetAddons.AutoToolTip = true
+        Me.MenuStripToolsInternetAddons.Name = "MenuStripToolsInternetAddons"
+        Me.MenuStripToolsInternetAddons.Size = New System.Drawing.Size(360, 22)
+        Me.MenuStripToolsInternetAddons.Text = "Manage add-ons... (Click Manage add-ons button)"
+        '
         'BasicBrowser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -591,6 +599,7 @@ Partial Class BasicBrowser
     Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents MenuStripToolsSeparator As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MenuStripToolsInternetProperties As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuStripToolsInternetAddons As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsNetworkDiagnostics As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsInternetProxy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuStripToolsSeparator2 As System.Windows.Forms.ToolStripSeparator

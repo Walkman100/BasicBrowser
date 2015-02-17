@@ -203,6 +203,10 @@
         Process.Start("inetcpl.cpl", ",4")
     End Sub
 
+    Private Sub MenuStripToolsInternetAddons_Click(sender As Object, e As EventArgs) Handles MenuStripToolsInternetAddons.Click
+        Process.Start("inetcpl.cpl", ",5")
+    End Sub
+
     Private Sub MenuStripToolsNetworkDiagnostics_Click(sender As Object, e As EventArgs) Handles MenuStripToolsNetworkDiagnostics.Click
         Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
     End Sub
