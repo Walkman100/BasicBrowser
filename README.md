@@ -30,9 +30,9 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
 As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrowserGecko](https://github.com/Walkman-Mirror/BasicBrowserGecko). The hybrid branch is also there, since it is essentially BasicBrowserGecko with the ability to open IE tabs as well.
 
 ## Many thanks to (code borrowed from):
-https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
-http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
-http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
+- https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
+- http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
+- http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/basicbrowser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
