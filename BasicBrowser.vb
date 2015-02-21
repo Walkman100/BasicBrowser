@@ -7,7 +7,7 @@
 
     Public openWithURI As String
     Dim TabToClose As Integer
-    Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", Nothing, Nothing, Nothing}
+    Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", "", "", ""}
 
     Private Sub BasicBrowser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
@@ -65,6 +65,13 @@
         Else
             WebBrowser.Navigate(openWithURI)
             openWithURI = ""
+        End If
+    End Sub
+    
+    Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            openWithURI = InputBox("Open New Tab and navigate to:", "Enter URL", Clipboard.GetText())
+            NewTab()
         End If
     End Sub
 
@@ -145,13 +152,6 @@
     Private Sub ExitBasicBrowser(sender As Object, e As EventArgs) Handles MenuStripFileExit.Click
         MenuStripFileCloseWindow_Click(Nothing, Nothing)
         Application.Exit()
-    End Sub
-    
-    Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            openWithURI = InputBox("Open New Tab and navigate to:", "Enter URL", Clipboard.GetText())
-            NewTab()
-        End If
     End Sub
 
     'View
@@ -245,6 +245,13 @@
             "Hold ALT to reorganise all the buttons/menus at the top" & vbNewLine & vbNewLine & _
             "Current Version: " & My.Application.Info.Version.ToString
         AboutForm.Show()
+    End Sub
+    
+    Private Sub MenuStripHelpAbout_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripHelpAbout.Click
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            openWithURI = "https://github.com/Walkman100/BasicBrowser/releases/latest"
+            NewTab()
+        End If
     End Sub
 
     ' ToolStrip buttons
