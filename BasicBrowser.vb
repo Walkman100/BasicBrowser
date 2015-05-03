@@ -71,7 +71,9 @@
     Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
         If e.Button = Windows.Forms.MouseButtons.Right Then
             openWithURI = InputBox("Open New Tab and navigate to:", "Enter URL", Clipboard.GetText())
-            NewTab()
+            If openWithURI <> "" Then
+                NewTab()
+            End If
         End If
     End Sub
 
