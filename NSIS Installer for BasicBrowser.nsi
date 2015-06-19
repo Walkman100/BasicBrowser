@@ -51,7 +51,7 @@ Section "Quick Launch Shortcut"
   CreateShortCut "$QUICKLAUNCH\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
 SectionEnd
 
-SubSection "Open in BasicBrowser"
+SubSection "Open in BasicBrowser (HTML)"
   Section "Add to Open With menu"
     WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
@@ -61,31 +61,11 @@ SubSection "Open in BasicBrowser"
     WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
   SectionEnd
-  
 SubSectionEnd
 
 ;Section "More apps from DeavmiOSS"
 ; this should have sub options for available apps, that are downloaded
 ;SectionEnd
-
-; Uninstaller
-
-Section "Uninstall"
-  Delete "$INSTDIR\BasicBrowser-Uninst.exe"   ; Remove Application Files
-  Delete "$INSTDIR\BasicBrowser.exe"
-  RMDir $INSTDIR
-  
-  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
-  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
-  RMDir $SMPROGRAMS\DeavmiOSS
-  
-  Delete "$DESKTOP\BasicBrowser.lnk"   ; Remove Desktop Shortcut
-  Delete "$QUICKLAUNCH\BasicBrowser.lnk"   ; Remove Quick Launch Shortcut
-  
-  DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
-  DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\chrome.exe"
-SectionEnd
 
 ; Functions
 
@@ -93,7 +73,6 @@ Function .onInit
   MessageBox MB_YESNO "This will install BasicBrowser. Do you wish to continue?" IDYES gogogo
     Abort
   gogogo:
-  ;SetBrandingImage "[/RESIZETOFIT] youtube_withLink.ico"
   SetShellVarContext all
   SetAutoClose true
 FunctionEnd
@@ -105,6 +84,25 @@ Function .onInstSuccess
 FunctionEnd
 
 ; Uninstaller
+
+Section "Uninstall"
+  Delete "$INSTDIR\BasicBrowser-Uninst.exe"   ; Remove Application Files
+  Delete "$INSTDIR\BasicBrowser.exe"
+  RMDir "$INSTDIR"
+  
+  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
+  RMDir "$SMPROGRAMS\DeavmiOSS"
+  
+  Delete "$DESKTOP\BasicBrowser.lnk"   ; Remove Desktop Shortcut
+  Delete "$QUICKLAUNCH\BasicBrowser.lnk"   ; Remove Quick Launch Shortcut
+  
+  DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
+  DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\chrome.exe"
+SectionEnd
+
+; Uninstaller Functions
 
 Function un.onInit
     MessageBox MB_YESNO "This will uninstall BasicBrowser. Continue?" IDYES NoAbort
