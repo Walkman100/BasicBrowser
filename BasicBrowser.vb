@@ -215,6 +215,7 @@
 
     Private Sub MenuStripToolsNetworkDiagnostics_Click(sender As Object, e As EventArgs) Handles MenuStripToolsNetworkDiagnostics.Click
         Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
+        ' Can also do ("msdt.exe", "-skip TRUE -path " & Environment.GetEnvironmentVariable("WinDir") & "\diagnostics\system\networking -ep NetworkDiagnosticsPNI")
     End Sub
 
     Private Sub MenuStripToolsAutoReload_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripToolsAutoReload.MouseUp
