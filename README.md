@@ -5,7 +5,9 @@ A simple tabbed browser coded in Vb.Net
 
 ## Screenshot
 You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
-[![Screenshot](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/BasicBrowser/MainWindow.png)
+
+[![Screenshot][Screenshot]][Screenshot]
+  [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/BasicBrowser/MainWindow.png
 
 ## Searching from the URL bar
 You should be able to search from the URL bar out of the box. If some queries turn into URLs (e.g. `http://test+search/`) instead of your search engines search, use a question mark `?` before the query (e.g. `?test search`).
