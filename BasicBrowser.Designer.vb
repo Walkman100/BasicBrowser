@@ -556,60 +556,60 @@ Partial Class BasicBrowser
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
-    Friend WithEvents timerDelayedTab As System.Windows.Forms.Timer
-    Friend WithEvents TabControl As System.Windows.Forms.TabControl
-    Friend WithEvents MenuStrip As System.Windows.Forms.MenuStrip
-    Friend WithEvents MenuStripFile As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileNew As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileCloseTab As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripFileSave As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripFilePrint As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFilePrintPreview As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripFileExit As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripTools As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsSetup As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsProperties As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripHelp As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripHelpContents As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripHelpIndex As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripHelpSearch As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripHelpSeparator As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripHelpAbout As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripBack As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents ToolStripForward As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents ToolStripReload As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripStop As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripHome As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripNavigation As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripNewTab As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripCloseTab As System.Windows.Forms.ToolStripButton
-    Friend WithEvents StatusStripProgressBar As System.Windows.Forms.ToolStripProgressBar
-    Friend WithEvents StatusStripStatusText As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ToolStripGo As System.Windows.Forms.ToolStripButton
-    Friend WithEvents MenuStripViewKeepOnTop As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripViewOpacityLbl As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripViewOpacityCbx As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents MenuStripView As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileOpen As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripViewSource As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripViewSeparator As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripAdd As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripRemove As System.Windows.Forms.ToolStripButton
-    Friend WithEvents MenuStripFileNewWindow As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripFileCloseWindow As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents MenuStripToolsSeparator As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripToolsInternetProperties As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsInternetAddons As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsNetworkDiagnostics As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsInternetProxy As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuStripToolsSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents MenuStripToolsAutoReload As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents timerDelayedTab As System.Windows.Forms.Timer
+    Private WithEvents TabControl As System.Windows.Forms.TabControl
+    Private MenuStrip As System.Windows.Forms.MenuStrip
+    Private MenuStripFile As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripFileNew As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripFileCloseTab As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripFileSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripFileSave As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripFileSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripFilePrint As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripFilePrintPreview As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripFileSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripFileExit As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripTools As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripToolsSetup As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripToolsProperties As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripHelp As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripHelpContents As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripHelpIndex As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripHelpSearch As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripHelpSeparator As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripHelpAbout As System.Windows.Forms.ToolStripMenuItem
+    Private StatusStrip As System.Windows.Forms.StatusStrip
+    Private ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Private ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents ToolStripBack As System.Windows.Forms.ToolStripSplitButton
+    Private WithEvents ToolStripForward As System.Windows.Forms.ToolStripSplitButton
+    Private WithEvents ToolStripReload As System.Windows.Forms.ToolStripButton
+    Private WithEvents ToolStripStop As System.Windows.Forms.ToolStripButton
+    Private WithEvents ToolStripHome As System.Windows.Forms.ToolStripButton
+    Private WithEvents ToolStripNavigation As System.Windows.Forms.ToolStrip
+    Private WithEvents ToolStripNewTab As System.Windows.Forms.ToolStripButton
+    Private WithEvents ToolStripCloseTab As System.Windows.Forms.ToolStripButton
+    Private StatusStripProgressBar As System.Windows.Forms.ToolStripProgressBar
+    Private StatusStripStatusText As System.Windows.Forms.ToolStripStatusLabel
+    Private WithEvents ToolStripGo As System.Windows.Forms.ToolStripButton
+    Private WithEvents MenuStripViewKeepOnTop As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripViewOpacityLbl As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripViewOpacityCbx As System.Windows.Forms.ToolStripComboBox
+    Private MenuStripView As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripFileOpen As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripViewSource As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripViewSeparator As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents ToolStripAdd As System.Windows.Forms.ToolStripButton
+    Private WithEvents ToolStripRemove As System.Windows.Forms.ToolStripButton
+    Private WithEvents MenuStripFileNewWindow As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripFileCloseWindow As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents ToolStripURL As System.Windows.Forms.ToolStripComboBox
+    Private MenuStripToolsSeparator As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripToolsInternetProperties As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripToolsInternetAddons As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripToolsNetworkDiagnostics As System.Windows.Forms.ToolStripMenuItem
+    Private WithEvents MenuStripToolsInternetProxy As System.Windows.Forms.ToolStripMenuItem
+    Private MenuStripToolsSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents MenuStripToolsAutoReload As System.Windows.Forms.ToolStripMenuItem
 
 End Class
