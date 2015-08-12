@@ -17,11 +17,16 @@
                 openWithURI = openWithURI & s
             End If
         Next
-
-        NewTab(Nothing, Nothing)
+        
+        timerDelayedTab.Start
         For i = 1 To My.Settings.Favourites.Count
             ToolStripURL.Items.Add(My.Settings.Favourites.Item(i - 1))
         Next
+    End Sub
+    
+    Sub timerDelayedTab_Tick() Handles timerDelayedTab.Tick
+        timerDelayedTab.Stop
+        NewTab()
     End Sub
 
     ' MenuStrip options

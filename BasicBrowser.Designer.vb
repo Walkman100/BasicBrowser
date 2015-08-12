@@ -22,6 +22,7 @@ Partial Class BasicBrowser
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser))
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
@@ -50,6 +51,7 @@ Partial Class BasicBrowser
         Me.MenuStripToolsSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripToolsInternetProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsInternetProxy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripToolsInternetAddons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsNetworkDiagnostics = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripToolsSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripToolsAutoReload = New System.Windows.Forms.ToolStripMenuItem()
@@ -76,7 +78,7 @@ Partial Class BasicBrowser
         Me.ToolStripCloseTab = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripURL = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripGo = New System.Windows.Forms.ToolStripButton()
-        Me.MenuStripToolsInternetAddons = New System.Windows.Forms.ToolStripMenuItem()
+        Me.timerDelayedTab = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip.SuspendLayout
         Me.StatusStrip.SuspendLayout
         Me.ToolStripNavigation.SuspendLayout
@@ -300,6 +302,13 @@ Partial Class BasicBrowser
         Me.MenuStripToolsInternetProxy.Size = New System.Drawing.Size(360, 22)
         Me.MenuStripToolsInternetProxy.Text = "Proxy settings... (Click LAN settings button)"
         '
+        'MenuStripToolsInternetAddons
+        '
+        Me.MenuStripToolsInternetAddons.AutoToolTip = true
+        Me.MenuStripToolsInternetAddons.Name = "MenuStripToolsInternetAddons"
+        Me.MenuStripToolsInternetAddons.Size = New System.Drawing.Size(360, 22)
+        Me.MenuStripToolsInternetAddons.Text = "Manage add-ons... (Click Manage add-ons button)"
+        '
         'MenuStripToolsNetworkDiagnostics
         '
         Me.MenuStripToolsNetworkDiagnostics.AutoToolTip = true
@@ -518,12 +527,9 @@ Partial Class BasicBrowser
         Me.ToolStripGo.Text = "Go >>"
         Me.ToolStripGo.ToolTipText = "Go >"
         '
-        'MenuStripToolsInternetAddons
+        'timerDelayedTab
         '
-        Me.MenuStripToolsInternetAddons.AutoToolTip = true
-        Me.MenuStripToolsInternetAddons.Name = "MenuStripToolsInternetAddons"
-        Me.MenuStripToolsInternetAddons.Size = New System.Drawing.Size(360, 22)
-        Me.MenuStripToolsInternetAddons.Text = "Manage add-ons... (Click Manage add-ons button)"
+        Me.timerDelayedTab.Interval = 500
         '
         'BasicBrowser
         '
@@ -550,6 +556,7 @@ Partial Class BasicBrowser
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Friend WithEvents timerDelayedTab As System.Windows.Forms.Timer
     Friend WithEvents TabControl As System.Windows.Forms.TabControl
     Friend WithEvents MenuStrip As System.Windows.Forms.MenuStrip
     Friend WithEvents MenuStripFile As System.Windows.Forms.ToolStripMenuItem
