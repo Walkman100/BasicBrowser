@@ -1,13 +1,13 @@
 ﻿Public Class BasicBrowser
     ' Made by ░▒▓█│【Walkman】│█▓▒░
-
+    
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
-
+    
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
-
+    
     Friend openWithURI As String
     Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", "", "", ""}
-
+    
     Private Sub BasicBrowser_Load() Handles MyBase.Load
         For Each s As String In My.Application.CommandLineArgs
             If openWithURI = "" Then
@@ -27,7 +27,7 @@
         timerDelayedTab.Stop
         NewTab(openWithURI)
     End Sub
-
+    
     Sub NewTab(Optional url As String = Nothing)
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
@@ -69,12 +69,12 @@
     End Sub
     
     ' MenuStrip options
-
+    
     'File
     Private Sub MenuStripFileNew_Click() Handles MenuStripFileNew.Click, ToolStripNewTab.Click
         NewTab
     End Sub
-
+    
     Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
         If e.Button = Windows.Forms.MouseButtons.Right Then
             openWithURI = InputBox("Open New Tab and navigate to:", "Enter URL", Clipboard.GetText())
@@ -83,7 +83,7 @@
             End If
         End If
     End Sub
-
+    
     Private Sub CloseTab() Handles MenuStripFileCloseTab.Click, ToolStripCloseTab.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Dispose ' To make sure it doesn't take up memory
         Dim TabToClose = TabControl.SelectedIndex
@@ -99,7 +99,7 @@
             End If
         End If
         TabControl.TabPages.RemoveAt(TabToClose)
-
+        
         If TabControl.TabCount = 0 Then
             ToolStripBack.Enabled = False
             ToolStripForward.Enabled = False
@@ -121,12 +121,12 @@
             PerformStuff()
         End If
     End Sub
-
+    
     Private Sub MenuStripFileNewWindow_Click() Handles MenuStripFileNewWindow.Click
         Dim NewWindow As BasicBrowser = New BasicBrowser
         NewWindow.Show()
     End Sub
-
+    
     Private Sub MenuStripFileCloseWindow_Click() Handles MenuStripFileCloseWindow.Click
         For i = 1 To TabControl.TabCount
             CType(TabControl.TabPages.Item(0).Controls.Item(0), WebBrowser).Dispose
@@ -134,7 +134,7 @@
         Next
         Me.Close()
     End Sub
-
+    
     Private Sub MenuStripFileOpen_Click() Handles MenuStripFileOpen.Click
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.FileName = ""
@@ -144,34 +144,34 @@
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = IO.File.ReadAllText(OpenFileDialog.FileName)
         End If
     End Sub
-
+    
     Private Sub MenuStripFileSave_Click() Handles MenuStripFileSave.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowSaveAsDialog()
     End Sub
-
+    
     Private Sub MenuStripFilePrint_Click() Handles MenuStripFilePrint.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPrintDialog()
     End Sub
-
+    
     Private Sub MenuStripFilePrintPreview_Click() Handles MenuStripFilePrintPreview.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPrintPreviewDialog()
         Me.WindowState = FormWindowState.Minimized
     End Sub
-
+    
     Private Sub ExitBasicBrowser() Handles MenuStripFileExit.Click
         MenuStripFileCloseWindow_Click()
         Application.Exit()
     End Sub
-
+    
     'View
     Private Sub MenuStripViewKeepOnTop_CheckedChanged() Handles MenuStripViewKeepOnTop.CheckedChanged
         Me.TopMost = MenuStripViewKeepOnTop.Checked
     End Sub
-
+    
     Private Sub MenuStripViewOpacityLbl_Click() Handles MenuStripViewOpacityLbl.Click
         MenuStripViewOpacityCbx.Focus()
     End Sub
-
+    
     Private Sub MenuStripViewOpacityCbx_TextChanged() Handles MenuStripViewOpacityCbx.TextChanged
         Try
             Me.Opacity = MenuStripViewOpacityCbx.Text.Remove(MenuStripViewOpacityCbx.Text.LastIndexOf("%")) / 100
@@ -179,7 +179,7 @@
             StatusStripStatusText.Text = "Error[SetOpacity]: " & ex.Message & ", " & MenuStripViewOpacityCbx.Text
         End Try
     End Sub
-
+    
     Private Sub MenuStripViewSource_Click() Handles MenuStripViewSource.Click
         Dim sourceForm As New Form()
         sourceForm.Width = 450
@@ -196,33 +196,33 @@
         sourceCode.ScrollBars = ScrollBars.Both
         sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
     End Sub
-
+    
     'Tools
     Private Sub MenuStripToolsSetup_Click() Handles MenuStripToolsSetup.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPageSetupDialog()
     End Sub
-
+    
     Private Sub MenuStripToolsProperties_Click() Handles MenuStripToolsProperties.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).ShowPropertiesDialog()
     End Sub
-
+    
     Private Sub MenuStripToolsInternetProperties_Click() Handles MenuStripToolsInternetProperties.Click
         Process.Start("inetcpl.cpl")
     End Sub
-
+    
     Private Sub MenuStripToolsInternetProxy_Click() Handles MenuStripToolsInternetProxy.Click
         Process.Start("inetcpl.cpl", ",4")
     End Sub
-
+    
     Private Sub MenuStripToolsInternetAddons_Click() Handles MenuStripToolsInternetAddons.Click
         Process.Start("inetcpl.cpl", ",5")
     End Sub
-
+    
     Private Sub MenuStripToolsNetworkDiagnostics_Click() Handles MenuStripToolsNetworkDiagnostics.Click
         Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
         'Can also do ("msdt.exe", "-skip TRUE -path " & Environment.GetEnvironmentVariable("WinDir") & "\diagnostics\system\networking -ep NetworkDiagnosticsPNI")
     End Sub
-
+    
     Private Sub MenuStripToolsAutoReload_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripToolsAutoReload.MouseUp
         If e.Button = Windows.Forms.MouseButtons.Right Then
             For i = 1 To ReloadTitles.Length
@@ -234,7 +234,7 @@
             Next
         End If
     End Sub
-
+    
     'About
     Private Sub MenuStripHelpAbout_Click() Handles MenuStripHelpAbout.Click
         Dim AboutForm As New Form()
@@ -261,14 +261,14 @@
             NewTab("https://github.com/Walkman100/BasicBrowser/releases/latest")
         End If
     End Sub
-
+    
     ' ToolStrip buttons
-
+    
     Private Sub ToolStripBack_ButtonClick() Handles ToolStripBack.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
         PerformStuff()
     End Sub
-
+    
     Private Sub ToolStripBack_DropDownItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStripBack.DropDownItemClicked
         ToolStripBack.DropDownItems.Clear()
         'For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Items
@@ -276,37 +276,37 @@
         'Next
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(e.ClickedItem.Text)
     End Sub
-
+    
     Private Sub ToolStripForward_ButtonClick() Handles ToolStripForward.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoForward()
         PerformStuff()
     End Sub
-
+    
     Private Sub ToolStripReload_Click() Handles ToolStripReload.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
         PerformStuff()
     End Sub
-
+    
     Private Sub ToolStripStop_Click() Handles ToolStripStop.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Stop()
         PerformStuff()
     End Sub
-
+    
     Private Sub ToolStripHome_Click() Handles ToolStripHome.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
         PerformStuff()
     End Sub
-
+    
     Private Sub ToolStripURL_GotFocus() Handles ToolStripURL.GotFocus
         ToolStripURL.SelectAll()
     End Sub
-
+    
     Private Sub ToolStripURL_KeyDown(sender As Object, e As KeyEventArgs) Handles ToolStripURL.KeyDown
         If e.KeyCode = Keys.Enter Then
             ToolStripGo_Click()
         End If
     End Sub
-
+    
     Private Sub ToolStripURL_SelectedIndexChanged() Handles ToolStripURL.SelectedIndexChanged
         If TabControl.TabCount = 0 Then
             NewTab(ToolStripURL.SelectedItem.ToString)
@@ -316,7 +316,7 @@
         End If
         ToolStripURL.Invalidate()
     End Sub
-
+    
     Private Sub ToolStripGo_Click() Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
             If TabControl.TabCount = 0 Then
@@ -328,48 +328,48 @@
             ToolStripURL.Focus()
         End If
     End Sub
-
+    
     Private Sub ToolStripAdd_Click() Handles ToolStripAdd.Click
         ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
         My.Settings.Save()
     End Sub
-
+    
     Private Sub ToolStripRemove_Click() Handles ToolStripRemove.Click
         ToolStripURL.Items.RemoveAt(ToolStripURL.SelectedIndex)
         My.Settings.Favourites.Remove(ToolStripURL.SelectedItem)
         My.Settings.Save()
     End Sub
-
+    
     Private Sub TabControl_Click() Handles TabControl.Click, TabControl.KeyUp
         PerformStuff()
     End Sub
-
+    
     Private Sub BasicBrowser_SizeChanged() Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
     End Sub
-
+    
     ' browser stuff
-
+    
     Private Sub Navigate()
         PerformStuff()
     End Sub
-
+    
     Private Sub DocumentCompleted()
         PerformStuff()
     End Sub
-
+    
     Private Sub ProgressChanged(sender As Object, e As Windows.Forms.WebBrowserProgressChangedEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
         If ToolStripURL.Focused = False Then
             ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         End If
     End Sub
-
+    
     Private Sub StatusTextChanged()
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
-
+    
     Private Sub DocumentTitleChanged()
         ' Update window title
         If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
@@ -390,7 +390,7 @@
             Next
         End If
     End Sub
-
+    
     Private Sub PerformStuff()
         Try
             ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
