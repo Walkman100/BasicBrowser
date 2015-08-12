@@ -32,11 +32,11 @@
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
-        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf Navigate)
-        AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf DocumentCompleted)
+        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf PerformStuff)
+        AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf PerformStuff)
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
-        AddHandler WebBrowser.DocumentTitleChanged, AddressOf DocumentTitleChanged
+        AddHandler WebBrowser.DocumentTitleChanged, AddressOf PerformStuff
         AddHandler WebBrowser.CanGoBackChanged, AddressOf PerformStuff
         AddHandler WebBrowser.CanGoForwardChanged, AddressOf PerformStuff
         TabPage.Text = "Loading..."
@@ -341,23 +341,11 @@
         My.Settings.Save()
     End Sub
     
-    Private Sub TabControl_Click() Handles TabControl.Click, TabControl.KeyUp
-        PerformStuff()
-    End Sub
-    
     Private Sub BasicBrowser_SizeChanged() Handles MyBase.SizeChanged, MyBase.Resize
         ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
     End Sub
     
     ' browser stuff
-    
-    Private Sub Navigate()
-        PerformStuff()
-    End Sub
-    
-    Private Sub DocumentCompleted()
-        PerformStuff()
-    End Sub
     
     Private Sub ProgressChanged(sender As Object, e As Windows.Forms.WebBrowserProgressChangedEventArgs)
         StatusStripProgressBar.Value = (e.CurrentProgress / e.MaximumProgress) * 100
@@ -370,15 +358,17 @@
         StatusStripStatusText.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).StatusText
     End Sub
     
-    Private Sub DocumentTitleChanged()
+    Private Sub PerformStuff() Handles TabControl.Click, TabControl.KeyUp
         ' Update window title
         If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
             Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
         End If
+        
         ' Update all tab names
         For i = 1 To TabControl.TabCount
             TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle
         Next
+        
         ' Reload tab if bad name
         If MenuStripToolsAutoReload.Checked = True Then
             For i = 1 To TabControl.TabCount
@@ -389,9 +379,8 @@
                 End If
             Next
         End If
-    End Sub
-    
-    Private Sub PerformStuff()
+        
+        ' Update buttons
         Try
             ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
         Catch ex As Exception
@@ -410,6 +399,8 @@
             StatusStripStatusText.Text = "Error[CheckForward]: " & ex.Message
             ToolStripForward.Enabled = False
         End Try
+        
+        ' Update URL bar
         If ToolStripURL.Focused = False Then
             Try
                 ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
