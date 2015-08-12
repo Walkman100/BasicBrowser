@@ -14,6 +14,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>My Project\internet2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,9 +44,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Resources\internet2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -111,11 +109,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BasicBrowser.resx">
-      <DependentUpon>BasicBrowser.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
@@ -132,48 +127,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1391274420_go-previous.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1391274345_go-next.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1391271803_view-refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1391271889_emblem-unreadable.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1371833355_go-home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1387140136_process-stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1387146817_tab-new.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\go_right_d.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\16x16_bookmark_add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\16x16_bookmark_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\internet2.ico" />
-    <None Include="Resources\SourceCodeIconBitmap.png" />
-    <None Include="Resources\Info.png" />
-    <None Include="Resources\SourceCodeIcon.ico" />
-    <None Include="Resources\16x16_quit.png" />
-    <None Include="Resources\Exit2.png" />
-    <None Include="Resources\1387139872_window-new.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
