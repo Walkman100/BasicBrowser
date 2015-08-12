@@ -3,8 +3,6 @@
     
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
     
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
-    
     Friend openWithURI As String
     Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", "", "", ""}
     
@@ -187,7 +185,7 @@
         sourceForm.StartPosition = FormStartPosition.CenterParent
         sourceForm.WindowState = Me.WindowState
         sourceForm.Show()
-        'sourceForm.Icon = Global.BasicBrowser.BasicBrowser.Resources.SourceCodeIcon
+        sourceForm.Icon = My.Resources.Resources.sourceCode
         sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
         sourceCode.Dock = DockStyle.Fill
@@ -242,7 +240,7 @@
         AboutForm.Height = 350
         AboutForm.StartPosition = FormStartPosition.CenterParent
         AboutForm.Show()
-        'AboutForm.Icon = Global.BasicBrowser.BasicBrowser.Resources.SourceCodeIcon
+        AboutForm.Icon = My.Resources.Resources.sourceCode
         AboutForm.Text = "About BasicBrowser"
         Dim lblAboutText As New Label()
         lblAboutText.Dock = DockStyle.Fill
