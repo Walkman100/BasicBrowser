@@ -16,7 +16,14 @@
                     BasicBrowser.openWithURI = BasicBrowser.openWithURI & s
                 End If
             Next
-            BasicBrowser.NewTab()
+            For Each s As String In e.CommandLine
+                If BasicBrowser.openWithURI = "" Then
+                    BasicBrowser.openWithURI = s
+                Else
+                    BasicBrowser.openWithURI = BasicBrowser.openWithURI & s
+                End If
+            Next
+            BasicBrowser.NewTab(BasicBrowser.openWithURI)
             BasicBrowser.BringToFront()
         End Sub
     End Class

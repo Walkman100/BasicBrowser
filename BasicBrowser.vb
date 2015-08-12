@@ -6,7 +6,6 @@
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BasicBrowser)) ' Copied from the designer, so i can get resources at RunTime
 
     Friend openWithURI As String
-    Dim TabToClose As Integer
     Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", "", "", ""}
 
     Private Sub BasicBrowser_Load() Handles MyBase.Load
@@ -26,13 +25,10 @@
     
     Private Sub timerDelayedTab_Tick() Handles timerDelayedTab.Tick
         timerDelayedTab.Stop
-        NewTab()
+        NewTab(openWithURI)
     End Sub
 
-    ' MenuStrip options
-
-    'File
-    Sub NewTab() Handles ToolStripNewTab.Click, MenuStripFileNew.Click
+    Sub NewTab(Optional url As String = Nothing)
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
@@ -65,26 +61,32 @@
         MenuStripViewSource.Enabled = True
         MenuStripToolsSetup.Enabled = True
         MenuStripToolsProperties.Enabled = True
-        If openWithURI = "" Then
+        If IsNothing(url) Then
             WebBrowser.GoHome()
         Else
-            WebBrowser.Navigate(openWithURI)
-            openWithURI = ""
+            WebBrowser.Navigate(url)
         End If
     End Sub
     
+    ' MenuStrip options
+
+    'File
+    Private Sub MenuStripFileNew_Click() Handles MenuStripFileNew.Click, ToolStripNewTab.Click
+        NewTab
+    End Sub
+
     Private Sub MenuStripFileNew_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripFileNew.MouseUp
         If e.Button = Windows.Forms.MouseButtons.Right Then
             openWithURI = InputBox("Open New Tab and navigate to:", "Enter URL", Clipboard.GetText())
             If openWithURI <> "" Then
-                NewTab()
+                NewTab(openWithURI)
             End If
         End If
     End Sub
 
-    Private Sub CloseTab() Handles ToolStripCloseTab.Click, MenuStripFileCloseTab.Click
+    Private Sub CloseTab() Handles MenuStripFileCloseTab.Click, ToolStripCloseTab.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Dispose ' To make sure it doesn't take up memory
-        TabToClose = TabControl.SelectedIndex
+        Dim TabToClose = TabControl.SelectedIndex
         If TabControl.TabCount > 1 Then
             '     If you have selected the first tab, select the second tab
             If TabControl.SelectedIndex = 0 Then
@@ -127,7 +129,7 @@
 
     Private Sub MenuStripFileCloseWindow_Click() Handles MenuStripFileCloseWindow.Click
         For i = 1 To TabControl.TabCount
-            CType(TabControl.TabPages.Item(0).Controls.Item(0), WebBrowser).Navigate("about:blank")
+            CType(TabControl.TabPages.Item(0).Controls.Item(0), WebBrowser).Dispose
             TabControl.TabPages.RemoveAt(0)
         Next
         Me.Close()
@@ -137,7 +139,7 @@
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.FileName = ""
         OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
-        OpenFileDialog.Title = "Open Webpage"
+        OpenFileDialog.Title = "Open File"
         If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = IO.File.ReadAllText(OpenFileDialog.FileName)
         End If
@@ -174,7 +176,7 @@
         Try
             Me.Opacity = MenuStripViewOpacityCbx.Text.Remove(MenuStripViewOpacityCbx.Text.LastIndexOf("%")) / 100
         Catch ex As Exception
-            StatusStripStatusText.Text = "Error[SetOpacity]: " & ex.Message
+            StatusStripStatusText.Text = "Error[SetOpacity]: " & ex.Message & ", " & MenuStripViewOpacityCbx.Text
         End Try
     End Sub
 
@@ -184,17 +186,15 @@
         sourceForm.Height = 350
         sourceForm.StartPosition = FormStartPosition.CenterParent
         sourceForm.WindowState = Me.WindowState
-        sourceForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
-        sourceForm.ShowIcon = True
-        sourceForm.ShowInTaskbar = True
+        sourceForm.Show()
+        'sourceForm.Icon = Global.BasicBrowser.BasicBrowser.Resources.SourceCodeIcon
         sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
+        sourceCode.Dock = DockStyle.Fill
+        sourceForm.Controls.Add(sourceCode)
         sourceCode.Multiline = True
         sourceCode.ScrollBars = ScrollBars.Both
-        sourceForm.Controls.Add(sourceCode)
-        sourceCode.Dock = DockStyle.Fill
         sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
-        sourceForm.Show()
     End Sub
 
     'Tools
@@ -241,28 +241,24 @@
         AboutForm.Width = 450
         AboutForm.Height = 350
         AboutForm.StartPosition = FormStartPosition.CenterParent
-        AboutForm.Icon = CType(resources.GetObject("SourceCodeIcon"), System.Drawing.Icon)
-        AboutForm.ShowIcon = True
-        AboutForm.ShowInTaskbar = True
+        AboutForm.Show()
+        'AboutForm.Icon = Global.BasicBrowser.BasicBrowser.Resources.SourceCodeIcon
         AboutForm.Text = "About BasicBrowser"
         Dim lblAboutText As New Label()
-        'lblAboutText.Font = True
-        lblAboutText.TextAlign = ContentAlignment.MiddleCenter
-        AboutForm.Controls.Add(lblAboutText)
         lblAboutText.Dock = DockStyle.Fill
+        AboutForm.Controls.Add(lblAboutText)
+        lblAboutText.TextAlign = ContentAlignment.MiddleCenter
         lblAboutText.Text = _
             "Made by ░▒▓█│【Walkman】│█▓▒░ (Walkman100)" & vbNewLine & vbNewLine & _
             "Source code available at: https://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
             "Go to https://github.com/Walkman100/BasicBrowser/issues/new to report bugs or suggest features" & vbNewLine & vbNewLine & _
             "Hold ALT to reorganise all the buttons/menus at the top" & vbNewLine & vbNewLine & _
             "Current Version: " & My.Application.Info.Version.ToString
-        AboutForm.Show()
     End Sub
     
-    Private Sub MenuStripHelpAbout_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripHelpAbout.Click
+    Private Sub MenuStripHelpAbout_MouseUp(sender As Object, e As MouseEventArgs) Handles MenuStripHelpAbout.MouseUp
         If e.Button = Windows.Forms.MouseButtons.Right Then
-            openWithURI = "https://github.com/Walkman100/BasicBrowser/releases/latest"
-            NewTab()
+            NewTab("https://github.com/Walkman100/BasicBrowser/releases/latest")
         End If
     End Sub
 
@@ -270,7 +266,6 @@
 
     Private Sub ToolStripBack_ButtonClick() Handles ToolStripBack.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoBack()
-        ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
@@ -279,33 +274,30 @@
         'For i = 1 To CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Items
         '   ToolStripBack.DropDownItems.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).History.Item(i))
         'Next
+        CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(e.ClickedItem.Text)
     End Sub
 
     Private Sub ToolStripForward_ButtonClick() Handles ToolStripForward.ButtonClick
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoForward()
-        ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub ToolStripReload_Click() Handles ToolStripReload.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
-        ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub ToolStripStop_Click() Handles ToolStripStop.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Stop()
-        ToolStripStop.Enabled = False
         PerformStuff()
     End Sub
 
     Private Sub ToolStripHome_Click() Handles ToolStripHome.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
-        ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
-    Private Sub ToolStripURL_Click() Handles ToolStripURL.GotFocus
+    Private Sub ToolStripURL_GotFocus() Handles ToolStripURL.GotFocus
         ToolStripURL.SelectAll()
     End Sub
 
@@ -317,8 +309,7 @@
 
     Private Sub ToolStripURL_SelectedIndexChanged() Handles ToolStripURL.SelectedIndexChanged
         If TabControl.TabCount = 0 Then
-            openWithURI = ToolStripURL.SelectedItem.ToString
-            NewTab()
+            NewTab(ToolStripURL.SelectedItem.ToString)
         Else
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.SelectedItem.ToString)
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Focus()
@@ -329,8 +320,7 @@
     Private Sub ToolStripGo_Click() Handles ToolStripGo.Click
         If ToolStripURL.Text <> "" Then
             If TabControl.TabCount = 0 Then
-                openWithURI = ToolStripURL.Text
-                NewTab()
+                NewTab(ToolStripURL.Text)
             Else
                 CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(ToolStripURL.Text)
             End If
@@ -352,11 +342,6 @@
     End Sub
 
     Private Sub TabControl_Click() Handles TabControl.Click, TabControl.KeyUp
-        Try
-            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
-        Catch ex As Exception
-            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
-        End Try
         PerformStuff()
     End Sub
 
@@ -367,12 +352,10 @@
     ' browser stuff
 
     Private Sub Navigate()
-        ToolStripStop.Enabled = True
         PerformStuff()
     End Sub
 
     Private Sub DocumentCompleted()
-        ToolStripStop.Enabled = False
         PerformStuff()
     End Sub
 
@@ -410,20 +393,29 @@
 
     Private Sub PerformStuff()
         Try
+            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+        Catch ex As Exception
+            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
+            ToolStripStop.Enabled = False
+        End Try
+        Try
             ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
         Catch ex As Exception
             StatusStripStatusText.Text = "Error[CheckBack]: " & ex.Message
+            ToolStripBack.Enabled = False
         End Try
         Try
             ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
         Catch ex As Exception
             StatusStripStatusText.Text = "Error[CheckForward]: " & ex.Message
+            ToolStripForward.Enabled = False
         End Try
         If ToolStripURL.Focused = False Then
             Try
                 ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
             Catch ex As Exception
                 StatusStripStatusText.Text = "Error[GetURL]: " & ex.Message
+                ToolStripURL.Text = ""
             End Try
         End If
     End Sub
