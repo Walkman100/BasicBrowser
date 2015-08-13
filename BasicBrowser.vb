@@ -115,9 +115,8 @@
             MenuStripViewSource.Enabled = False
             MenuStripToolsSetup.Enabled = False
             MenuStripToolsProperties.Enabled = False
-        Else
-            PerformStuff()
         End If
+        PerformStuff()
     End Sub
     
     Private Sub MenuStripFileNewWindow_Click() Handles MenuStripFileNewWindow.Click
@@ -186,13 +185,17 @@
         sourceForm.WindowState = Me.WindowState
         sourceForm.Show()
         sourceForm.Icon = My.Resources.Resources.sourceCode
-        sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
         Dim sourceCode As New TextBox()
         sourceCode.Dock = DockStyle.Fill
         sourceForm.Controls.Add(sourceCode)
         sourceCode.Multiline = True
         sourceCode.ScrollBars = ScrollBars.Both
-        sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
+        Try
+            sourceForm.Text = "Source Code for " & CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+            sourceCode.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText
+        Catch ex As NullReferenceException
+            sourceCode.Text = "Could not get source!" & vbNewLine & vbNewLine & ex.ToString
+        End Try
     End Sub
     
     'Tools
@@ -358,19 +361,21 @@
     
     Private Sub PerformStuff() Handles TabControl.Click, TabControl.KeyUp
         ' Update window title
-        If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle <> "" Then
-            Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
+        If GetDocumentTitle() = "Empty" Or GetDocumentTitle() = "" Then
+            Me.Text = "BasicBrowser"
+        Else
+            Me.Text = GetDocumentTitle() & " - BasicBrowser"
         End If
         
         ' Update all tab names
         For i = 1 To TabControl.TabCount
-            TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle
+            TabControl.TabPages.Item(i - 1).Text = GetDocumentTitle(i - 1)
         Next
         
         ' Reload tab if bad name
         If MenuStripToolsAutoReload.Checked = True Then
             For i = 1 To TabControl.TabCount
-                If ReloadTitles.Contains(CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle) Then
+                If ReloadTitles.Contains(GetDocumentTitle(i - 1)) Then
                     StatusStripStatusText.Text = "Refreshing now..."
                     ' It seems that you have to run the edit loop before it will get here
                     CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).Refresh()
@@ -408,4 +413,23 @@
             End Try
         End If
     End Sub
+    
+    ''' <summary>Gets the title of the WebBrowser at the specified tab index</summary>
+    ''' <param name="tabPage">Optional. The tab index to find WebBrowsers in. If left out or set to -1, the selected tab will be used.</param>
+    ''' <returns>The document title of the WebBrowser, or "Empty" (string) if the WebBrowser could not be found.</returns>
+    Private Function GetDocumentTitle(Optional tabPage As Integer = -1) As String
+        If tabPage = -1 Then
+            Try
+                Return CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
+            Catch
+                Return "Empty"
+            End Try
+        Else
+            Try
+                Return CType(TabControl.TabPages.Item(tabPage).Controls.Item(0), WebBrowser).DocumentTitle
+            Catch
+                Return "Empty"
+            End Try
+        End If
+    End Function
 End Class
