@@ -36,7 +36,6 @@
     Private Sub timerDelayedTab_Tick() Handles timerDelayedTab.Tick
         timerDelayedTab.Stop
         NewTab(openWithURI)
-        WriteConfig(configFilePath)
     End Sub
     
     Sub NewTab(Optional url As String = Nothing)
@@ -456,8 +455,8 @@
         
         If reader.IsStartElement() AndAlso reader.Name = "BasicBrowser" Then
             If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Favourites" Then
-                While reader.IsStartElement
-                    If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Item" Then
+                While reader.read
+                    If reader.IsStartElement AndAlso reader.Name = "Item" AndAlso reader.Read Then
                         ToolStripURL.Items.Add(reader.Value)
                     End If
                 End While
@@ -465,6 +464,11 @@
         End If
         
         reader.Close
+        
+        If ToolStripURL.Items.Count = 0 Then
+            ToolStripURL.Items.Add("http://www.google.com")
+            ToolStripURL.Items.Add("http://github.com")
+        End If
     End Sub
     
     Private Sub WriteConfig(path As String)
@@ -477,7 +481,7 @@
         
         writer.WriteStartElement("Favourites")
         For Each item As String In ToolStripURL.Items
-            writer.WriteElementString("Item", item)
+            If item <> "" Then writer.WriteElementString("Item", item)
         Next
         writer.WriteEndElement()
         
