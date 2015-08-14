@@ -32,6 +32,7 @@ Partial Class BasicBrowser
         Me.MenuStripFileCloseWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFileOpen = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStripFileOpenLink = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripFileSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStripFilePrint = New System.Windows.Forms.ToolStripMenuItem()
@@ -108,7 +109,7 @@ Partial Class BasicBrowser
         '
         'MenuStripFile
         '
-        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileNewWindow, Me.MenuStripFileCloseWindow, Me.MenuStripFileSeparator1, Me.MenuStripFileOpen, Me.MenuStripFileSave, Me.MenuStripFileSeparator2, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
+        Me.MenuStripFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuStripFileNew, Me.MenuStripFileCloseTab, Me.MenuStripFileNewWindow, Me.MenuStripFileCloseWindow, Me.MenuStripFileSeparator1, Me.MenuStripFileOpen, Me.MenuStripFileOpenLink, Me.MenuStripFileSave, Me.MenuStripFileSeparator2, Me.MenuStripFilePrint, Me.MenuStripFilePrintPreview, Me.MenuStripFileSeparator3, Me.MenuStripFileExit})
         Me.MenuStripFile.Name = "MenuStripFile"
         Me.MenuStripFile.Size = New System.Drawing.Size(38, 23)
         Me.MenuStripFile.Text = "&File"
@@ -155,13 +156,22 @@ Partial Class BasicBrowser
         '
         'MenuStripFileOpen
         '
-        Me.MenuStripFileOpen.Enabled = false
         Me.MenuStripFileOpen.Image = Global.BasicBrowser.My.Resources.Resources.file_open
         Me.MenuStripFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.MenuStripFileOpen.Name = "MenuStripFileOpen"
         Me.MenuStripFileOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O),System.Windows.Forms.Keys)
         Me.MenuStripFileOpen.Size = New System.Drawing.Size(240, 22)
-        Me.MenuStripFileOpen.Text = "&Open"
+        Me.MenuStripFileOpen.Text = "&Open as content"
+        '
+        'MenuStripFileOpenLink
+        '
+        Me.MenuStripFileOpenLink.Image = Global.BasicBrowser.My.Resources.Resources.external_link
+        Me.MenuStripFileOpenLink.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.MenuStripFileOpenLink.Name = "MenuStripFileOpenLink"
+        Me.MenuStripFileOpenLink.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift)  _
+                        Or System.Windows.Forms.Keys.O),System.Windows.Forms.Keys)
+        Me.MenuStripFileOpenLink.Size = New System.Drawing.Size(240, 22)
+        Me.MenuStripFileOpenLink.Text = "&Open as link"
         '
         'MenuStripFileSave
         '
@@ -489,7 +499,6 @@ Partial Class BasicBrowser
         'ToolStripHome
         '
         Me.ToolStripHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripHome.Enabled = false
         Me.ToolStripHome.Image = Global.BasicBrowser.My.Resources.Resources.go_home
         Me.ToolStripHome.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripHome.Name = "ToolStripHome"
@@ -561,6 +570,7 @@ Partial Class BasicBrowser
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents MenuStripFileOpenLink As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents timerDelayedTab As System.Windows.Forms.Timer
     Private WithEvents TabControl As System.Windows.Forms.TabControl
     Private MenuStrip As System.Windows.Forms.MenuStrip

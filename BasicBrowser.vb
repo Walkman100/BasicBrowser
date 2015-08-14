@@ -57,14 +57,12 @@
         WebBrowser.Visible = True
         WebBrowser.ScriptErrorsSuppressed = True
         ToolStripReload.Enabled = True
-        ToolStripHome.Enabled = True
         ToolStripCloseTab.Enabled = True
         ToolStripGo.Enabled = True
         ToolStripURL.Enabled = True
         ToolStripAdd.Enabled = True
         ToolStripRemove.Enabled = True
         MenuStripFileCloseTab.Enabled = True
-        MenuStripFileOpen.Enabled = True
         MenuStripFileSave.Enabled = True
         MenuStripFilePrint.Enabled = True
         MenuStripFilePrintPreview.Enabled = True
@@ -115,12 +113,10 @@
             ToolStripForward.Enabled = False
             ToolStripReload.Enabled = False
             ToolStripStop.Enabled = False
-            ToolStripHome.Enabled = False
             ToolStripCloseTab.Enabled = False
             ToolStripAdd.Enabled = False
             ToolStripRemove.Enabled = False
             MenuStripFileCloseTab.Enabled = False
-            MenuStripFileOpen.Enabled = False
             MenuStripFileSave.Enabled = False
             MenuStripFilePrint.Enabled = False
             MenuStripFilePrintPreview.Enabled = False
@@ -151,7 +147,25 @@
         OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
         OpenFileDialog.Title = "Open File"
         If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
+            MenuStripToolsAutoReload.Checked = False
+            If TabControl.TabCount = 0 Then
+                NewTab("about:Loading...")
+            End If
             CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentText = IO.File.ReadAllText(OpenFileDialog.FileName)
+        End If
+    End Sub
+    
+    Private Sub MenuStripFileLink_Click() Handles MenuStripFileOpenLink.Click
+        Dim OpenFileDialog As New OpenFileDialog()
+        OpenFileDialog.FileName = ""
+        OpenFileDialog.Filter = "Webpages|*.html|All Files|*.*"
+        OpenFileDialog.Title = "Open File"
+        If (OpenFileDialog.ShowDialog() = DialogResult.OK) Then
+            If TabControl.TabCount = 0 Then
+                NewTab(OpenFileDialog.FileName)
+            Else
+                CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(OpenFileDialog.FileName)
+            End If
         End If
     End Sub
     
@@ -307,6 +321,9 @@
     End Sub
     
     Private Sub ToolStripHome_Click() Handles ToolStripHome.Click
+        If TabControl.TabCount = 0 Then
+            NewTab("about:Loading...")
+        End If
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).GoHome()
         PerformStuff()
     End Sub
@@ -381,6 +398,9 @@
         ' Update all tab names
         For i = 1 To TabControl.TabCount
             TabControl.TabPages.Item(i - 1).Text = GetDocumentTitle(i - 1)
+            If TabControl.TabPages.Item(i-1).Text.Length > 60 Then
+                TabControl.TabPages.Item(i-1).Text = TabControl.TabPages.Item(i-1).Text.Remove(57) & "..."
+            End If
         Next
         
         ' Reload tab if bad name
