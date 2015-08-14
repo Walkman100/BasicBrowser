@@ -2,8 +2,7 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
-;AddBrandingImage top 20
-;Icon youtube_withLink.ico
+Icon "My Project/internet2.ico"
 Caption "BasicBrowser Installer"
 Name "BasicBrowser"
 AutoCloseWindow true
