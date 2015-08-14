@@ -2,6 +2,7 @@
     ' Made by ░▒▓█│【Walkman】│█▓▒░
     
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab
+    Dim configFilePath As String = Environment.GetEnvironmentVariable("AppData") & "\WalkmanOSS\BasicBrowser.xml"
     
     Friend openWithURI As String
     Dim ReloadTitles() As String = {"Navigation Canceled", "This page can't be displayed", "", "", ""}
@@ -15,15 +16,27 @@
             End If
         Next
         
+        If Not IO.Directory.Exists(Environment.GetEnvironmentVariable("AppData") & "\WalkmanOSS") Then
+            IO.Directory.CreateDirectory(Environment.GetEnvironmentVariable("AppData") & "\WalkmanOSS")
+        End If
+        
+        If IO.File.Exists(Application.StartupPath & "\BasicBrowser.xml") Then
+            configFilePath = Application.StartupPath & "\BasicBrowser.xml"
+            ReadConfig(configFilePath)
+        ElseIf IO.File.Exists("BasicBrowser.xml") Then
+            configFilePath = (New IO.FileInfo("BasicBrowser.xml")).FullName
+            ReadConfig(configFilePath)
+        ElseIf IO.File.Exists(configFilePath) Then
+            ReadConfig(configFilePath)
+        End If
+        
         timerDelayedTab.Start
-        For i = 1 To My.Settings.Favourites.Count
-            ToolStripURL.Items.Add(My.Settings.Favourites.Item(i - 1))
-        Next
     End Sub
     
     Private Sub timerDelayedTab_Tick() Handles timerDelayedTab.Tick
         timerDelayedTab.Stop
         NewTab(openWithURI)
+        WriteConfig(configFilePath)
     End Sub
     
     Sub NewTab(Optional url As String = Nothing)
@@ -129,6 +142,7 @@
             CType(TabControl.TabPages.Item(0).Controls.Item(0), WebBrowser).Dispose
             TabControl.TabPages.RemoveAt(0)
         Next
+        WriteConfig(configFilePath)
         Me.Close()
     End Sub
     
@@ -332,14 +346,12 @@
     
     Private Sub ToolStripAdd_Click() Handles ToolStripAdd.Click
         ToolStripURL.Items.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
-        My.Settings.Favourites.Add(CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString)
-        My.Settings.Save()
+        WriteConfig(configFilePath)
     End Sub
     
     Private Sub ToolStripRemove_Click() Handles ToolStripRemove.Click
         ToolStripURL.Items.RemoveAt(ToolStripURL.SelectedIndex)
-        My.Settings.Favourites.Remove(ToolStripURL.SelectedItem)
-        My.Settings.Save()
+        WriteConfig(configFilePath)
     End Sub
     
     Private Sub BasicBrowser_SizeChanged() Handles MyBase.SizeChanged, MyBase.Resize
@@ -432,4 +444,46 @@
             End Try
         End If
     End Function
+    
+    Private Sub ReadConfig(path As String)
+        Dim reader As Xml.XmlReader = Xml.XmlReader.Create(path)
+        Try
+            reader.Read()
+        Catch ex As Xml.XmlException
+            reader.Close
+            Exit Sub
+        End Try
+        
+        If reader.IsStartElement() AndAlso reader.Name = "BasicBrowser" Then
+            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Favourites" Then
+                While reader.IsStartElement
+                    If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Item" Then
+                        ToolStripURL.Items.Add(reader.Value)
+                    End If
+                End While
+            End If
+        End If
+        
+        reader.Close
+    End Sub
+    
+    Private Sub WriteConfig(path As String)
+        Dim XMLwSettings As New Xml.XmlWriterSettings()
+        XMLwSettings.Indent = True
+        Dim writer As Xml.XmlWriter = Xml.XmlWriter.Create(path, XMLwSettings)
+        
+        writer.WriteStartDocument()
+        writer.WriteStartElement("BasicBrowser")
+        
+        writer.WriteStartElement("Favourites")
+        For Each item As String In ToolStripURL.Items
+            writer.WriteElementString("Item", item)
+        Next
+        writer.WriteEndElement()
+        
+        writer.WriteEndElement()
+        writer.WriteEndDocument()
+        
+        writer.Close
+    End Sub
 End Class
