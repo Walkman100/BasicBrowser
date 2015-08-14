@@ -208,19 +208,19 @@
     End Sub
     
     Private Sub MenuStripToolsInternetProperties_Click() Handles MenuStripToolsInternetProperties.Click
-        Process.Start("inetcpl.cpl")
+        Diagnostics.Process.Start("inetcpl.cpl")
     End Sub
     
     Private Sub MenuStripToolsInternetProxy_Click() Handles MenuStripToolsInternetProxy.Click
-        Process.Start("inetcpl.cpl", ",4")
+        Diagnostics.Process.Start("inetcpl.cpl", ",4")
     End Sub
     
     Private Sub MenuStripToolsInternetAddons_Click() Handles MenuStripToolsInternetAddons.Click
-        Process.Start("inetcpl.cpl", ",5")
+        Diagnostics.Process.Start("inetcpl.cpl", ",5")
     End Sub
     
     Private Sub MenuStripToolsNetworkDiagnostics_Click() Handles MenuStripToolsNetworkDiagnostics.Click
-        Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
+        Diagnostics.Process.Start("rundll32.exe", "ndfapi,NdfRunDllDiagnoseIncident")
         'Can also do ("msdt.exe", "-skip TRUE -path " & Environment.GetEnvironmentVariable("WinDir") & "\diagnostics\system\networking -ep NetworkDiagnosticsPNI")
     End Sub
     
@@ -248,7 +248,7 @@
         Dim lblAboutText As New Label()
         lblAboutText.Dock = DockStyle.Fill
         AboutForm.Controls.Add(lblAboutText)
-        lblAboutText.TextAlign = ContentAlignment.MiddleCenter
+        lblAboutText.TextAlign = Drawing.ContentAlignment.MiddleCenter
         lblAboutText.Text = _
             "Made by ░▒▓█│【Walkman】│█▓▒░ (Walkman100)" & vbNewLine & vbNewLine & _
             "Source code available at: https://github.com/Walkman100/BasicBrowser" & vbNewLine & vbNewLine & _
@@ -343,7 +343,7 @@
     End Sub
     
     Private Sub BasicBrowser_SizeChanged() Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Size(Me.Width - 243, ToolStripURL.Height)
+        ToolStripURL.Size = New Drawing.Size(Me.Width - 243, ToolStripURL.Height)
     End Sub
     
     ' browser stuff
