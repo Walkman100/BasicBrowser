@@ -42,8 +42,8 @@
         Dim TabPage As New TabPage()
         Dim WebBrowser As New WebBrowser
         'AddHandler WebBrowser.Navigating, New WebBrowserNavigatingEventHandler(AddressOf Navigate)
-        AddHandler WebBrowser.Navigated, New WebBrowserNavigatedEventHandler(AddressOf PerformStuff)
-        AddHandler WebBrowser.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf PerformStuff)
+        AddHandler WebBrowser.Navigated, AddressOf PerformStuff
+        AddHandler WebBrowser.DocumentCompleted, AddressOf PerformStuff
         AddHandler WebBrowser.ProgressChanged, AddressOf ProgressChanged
         AddHandler WebBrowser.StatusTextChanged, AddressOf StatusTextChanged
         AddHandler WebBrowser.DocumentTitleChanged, AddressOf PerformStuff
@@ -56,19 +56,7 @@
         WebBrowser.Dock = DockStyle.Fill
         WebBrowser.Visible = True
         WebBrowser.ScriptErrorsSuppressed = True
-        ToolStripReload.Enabled = True
-        ToolStripCloseTab.Enabled = True
-        ToolStripGo.Enabled = True
-        ToolStripURL.Enabled = True
-        ToolStripAdd.Enabled = True
-        ToolStripRemove.Enabled = True
-        MenuStripFileCloseTab.Enabled = True
-        MenuStripFileSave.Enabled = True
-        MenuStripFilePrint.Enabled = True
-        MenuStripFilePrintPreview.Enabled = True
-        MenuStripViewSource.Enabled = True
-        MenuStripToolsSetup.Enabled = True
-        MenuStripToolsProperties.Enabled = True
+        PerformStuff
         If IsNothing(url) Then
             WebBrowser.GoHome()
         Else
@@ -107,23 +95,6 @@
             End If
         End If
         TabControl.TabPages.RemoveAt(TabToClose)
-        
-        If TabControl.TabCount = 0 Then
-            ToolStripBack.Enabled = False
-            ToolStripForward.Enabled = False
-            ToolStripReload.Enabled = False
-            ToolStripStop.Enabled = False
-            ToolStripCloseTab.Enabled = False
-            ToolStripAdd.Enabled = False
-            ToolStripRemove.Enabled = False
-            MenuStripFileCloseTab.Enabled = False
-            MenuStripFileSave.Enabled = False
-            MenuStripFilePrint.Enabled = False
-            MenuStripFilePrintPreview.Enabled = False
-            MenuStripViewSource.Enabled = False
-            MenuStripToolsSetup.Enabled = False
-            MenuStripToolsProperties.Enabled = False
-        End If
         PerformStuff()
     End Sub
     
@@ -388,81 +359,71 @@
     End Sub
     
     Private Sub PerformStuff() Handles TabControl.Click, TabControl.KeyUp
-        ' Update window title
-        If GetDocumentTitle() = "Empty" Or GetDocumentTitle() = "" Then
-            Me.Text = "BasicBrowser"
-        Else
-            Me.Text = GetDocumentTitle() & " - BasicBrowser"
-        End If
-        
-        ' Update all tab names
-        For i = 1 To TabControl.TabCount
-            TabControl.TabPages.Item(i - 1).Text = GetDocumentTitle(i - 1)
-            If TabControl.TabPages.Item(i-1).Text.Length > 60 Then
-                TabControl.TabPages.Item(i-1).Text = TabControl.TabPages.Item(i-1).Text.Remove(57) & "..."
+        If TypeOf Me.TabControl.SelectedTab Is System.Windows.Forms.TabPage AndAlso TypeOf TabControl.SelectedTab.Controls.Item(0) Is WebBrowser Then
+            ' Update window title
+            If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle = "" Then
+                Me.Text = "BasicBrowser"
+            Else
+                Me.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle & " - BasicBrowser"
             End If
-        Next
-        
-        ' Reload tab if bad name
-        If MenuStripToolsAutoReload.Checked = True Then
+            ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
+            ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+            ToolStripReload.Enabled = True
+            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
+            ToolStripCloseTab.Enabled = True
+            ToolStripAdd.Enabled = True
+            ToolStripRemove.Enabled = True
+            MenuStripFileCloseTab.Enabled = True
+            MenuStripFileSave.Enabled = True
+            MenuStripFilePrint.Enabled = True
+            MenuStripFilePrintPreview.Enabled = True
+            MenuStripViewSource.Enabled = True
+            MenuStripToolsSetup.Enabled = True
+            MenuStripToolsProperties.Enabled = True
+            ' Update all tab names
             For i = 1 To TabControl.TabCount
-                If ReloadTitles.Contains(GetDocumentTitle(i - 1)) Then
-                    StatusStripStatusText.Text = "Refreshing now..."
-                    ' It seems that you have to run the edit loop before it will get here
-                    CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).Refresh()
+                TabControl.TabPages.Item(i - 1).Text = CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle
+                If TabControl.TabPages.Item(i-1).Text.Length > 60 Then
+                    TabControl.TabPages.Item(i-1).Text = TabControl.TabPages.Item(i-1).Text.Remove(57) & "..."
                 End If
             Next
-        End If
-        
-        ' Update buttons
-        Try
-            ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
-        Catch ex As Exception
-            StatusStripStatusText.Text = "Error[CheckBusy]: " & ex.Message
-            ToolStripStop.Enabled = False
-        End Try
-        Try
-            ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
-        Catch ex As Exception
-            StatusStripStatusText.Text = "Error[CheckBack]: " & ex.Message
+            ' Reload tab if bad name
+            If MenuStripToolsAutoReload.Checked = True Then
+                For i = 1 To TabControl.TabCount
+                    If ReloadTitles.Contains(CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).DocumentTitle) Then
+                        StatusStripStatusText.Text = "Refreshing now..."
+                        ' It seems that you have to run the edit loop before it will get here
+                        CType(TabControl.TabPages.Item(i - 1).Controls.Item(0), WebBrowser).Refresh()
+                    End If
+                Next
+            End If
+            ' Update URL bar
+            If ToolStripURL.Focused = False Then
+                If CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url <> Nothing Then
+                    ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+                End If
+            End If
+            
+        Else
+            Me.Text = "BasicBrowser"
+            StatusStripStatusText.Text = "No tabs open!"
+            
             ToolStripBack.Enabled = False
-        End Try
-        Try
-            ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
-        Catch ex As Exception
-            StatusStripStatusText.Text = "Error[CheckForward]: " & ex.Message
             ToolStripForward.Enabled = False
-        End Try
-        
-        ' Update URL bar
-        If ToolStripURL.Focused = False Then
-            Try
-                ToolStripURL.Text = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
-            Catch ex As Exception
-                StatusStripStatusText.Text = "Error[GetURL]: " & ex.Message
-                ToolStripURL.Text = ""
-            End Try
+            ToolStripReload.Enabled = False
+            ToolStripStop.Enabled = False
+            ToolStripCloseTab.Enabled = False
+            ToolStripAdd.Enabled = False
+            ToolStripRemove.Enabled = False
+            MenuStripFileCloseTab.Enabled = False
+            MenuStripFileSave.Enabled = False
+            MenuStripFilePrint.Enabled = False
+            MenuStripFilePrintPreview.Enabled = False
+            MenuStripViewSource.Enabled = False
+            MenuStripToolsSetup.Enabled = False
+            MenuStripToolsProperties.Enabled = False
         End If
     End Sub
-    
-    ''' <summary>Gets the title of the WebBrowser at the specified tab index</summary>
-    ''' <param name="tabPage">Optional. The tab index to find WebBrowsers in. If left out or set to -1, the selected tab will be used.</param>
-    ''' <returns>The document title of the WebBrowser, or "Empty" (string) if the WebBrowser could not be found.</returns>
-    Private Function GetDocumentTitle(Optional tabPage As Integer = -1) As String
-        If tabPage = -1 Then
-            Try
-                Return CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).DocumentTitle
-            Catch
-                Return "Empty"
-            End Try
-        Else
-            Try
-                Return CType(TabControl.TabPages.Item(tabPage).Controls.Item(0), WebBrowser).DocumentTitle
-            Catch
-                Return "Empty"
-            End Try
-        End If
-    End Function
     
     Private Sub ReadConfig(path As String)
         Dim reader As Xml.XmlReader = Xml.XmlReader.Create(path)
