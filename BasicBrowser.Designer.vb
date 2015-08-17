@@ -71,6 +71,7 @@ Partial Class BasicBrowser
         Me.ToolStripNavigation = New System.Windows.Forms.ToolStrip()
         Me.ToolStripBack = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripForward = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ToolStripUp = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripReload = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripStop = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripHome = New System.Windows.Forms.ToolStripButton()
@@ -447,7 +448,7 @@ Partial Class BasicBrowser
         '
         Me.ToolStripNavigation.AllowItemReorder = true
         Me.ToolStripNavigation.CanOverflow = false
-        Me.ToolStripNavigation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome, Me.ToolStripSeparator1, Me.ToolStripNewTab, Me.ToolStripCloseTab, Me.ToolStripSeparator2, Me.ToolStripURL, Me.ToolStripGo})
+        Me.ToolStripNavigation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripBack, Me.ToolStripForward, Me.ToolStripUp, Me.ToolStripReload, Me.ToolStripStop, Me.ToolStripHome, Me.ToolStripSeparator1, Me.ToolStripNewTab, Me.ToolStripCloseTab, Me.ToolStripSeparator2, Me.ToolStripURL, Me.ToolStripGo})
         Me.ToolStripNavigation.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStripNavigation.Location = New System.Drawing.Point(0, 27)
         Me.ToolStripNavigation.Name = "ToolStripNavigation"
@@ -475,6 +476,16 @@ Partial Class BasicBrowser
         Me.ToolStripForward.Name = "ToolStripForward"
         Me.ToolStripForward.Size = New System.Drawing.Size(32, 22)
         Me.ToolStripForward.Text = "&Forward"
+        '
+        'ToolStripUp
+        '
+        Me.ToolStripUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripUp.Enabled = false
+        Me.ToolStripUp.Image = Global.BasicBrowser.My.Resources.Resources._16x16_up
+        Me.ToolStripUp.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripUp.Name = "ToolStripUp"
+        Me.ToolStripUp.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripUp.Text = "&Up"
         '
         'ToolStripReload
         '
@@ -527,7 +538,7 @@ Partial Class BasicBrowser
         'ToolStripURL
         '
         Me.ToolStripURL.Name = "ToolStripURL"
-        Me.ToolStripURL.Size = New System.Drawing.Size(415, 25)
+        Me.ToolStripURL.Size = New System.Drawing.Size(392, 25)
         Me.ToolStripURL.ToolTipText = "Enter URL to navigate to"
         '
         'ToolStripGo
@@ -570,6 +581,7 @@ Partial Class BasicBrowser
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents ToolStripUp As System.Windows.Forms.ToolStripButton
     Private WithEvents MenuStripFileOpenLink As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents timerDelayedTab As System.Windows.Forms.Timer
     Private WithEvents TabControl As System.Windows.Forms.TabControl

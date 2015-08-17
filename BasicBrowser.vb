@@ -281,6 +281,14 @@
         PerformStuff()
     End Sub
     
+    Private Sub ToolStripUp_Click() Handles ToolStripUp.Click
+        Dim tmpURL As String = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Url.ToString
+        tmpURL = tmpURL.Remove(tmpURL.Length - 1)
+        tmpURL = tmpURL.Remove(tmpURL.LastIndexOf("/"))
+        If tmpURL.EndsWith(":") Then tmpURL &= "/"
+        If tmpURL <> "http:/" Then CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Navigate(tmpURL)
+    End Sub
+    
     Private Sub ToolStripReload_Click() Handles ToolStripReload.Click
         CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).Refresh()
         PerformStuff()
@@ -342,7 +350,7 @@
     End Sub
     
     Private Sub BasicBrowser_SizeChanged() Handles MyBase.SizeChanged, MyBase.Resize
-        ToolStripURL.Size = New Drawing.Size(Me.Width - 243, ToolStripURL.Height)
+        ToolStripURL.Size = New Drawing.Size(Me.Width - 266, 22)
     End Sub
     
     ' browser stuff
@@ -368,6 +376,7 @@
             End If
             ToolStripBack.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoBack
             ToolStripForward.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).CanGoForward
+            ToolStripUp.Enabled = True
             ToolStripReload.Enabled = True
             ToolStripStop.Enabled = CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser).IsBusy
             ToolStripCloseTab.Enabled = True
@@ -410,6 +419,7 @@
             
             ToolStripBack.Enabled = False
             ToolStripForward.Enabled = False
+            ToolStripUp.Enabled = False
             ToolStripReload.Enabled = False
             ToolStripStop.Enabled = False
             ToolStripCloseTab.Enabled = False
