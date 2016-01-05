@@ -12,9 +12,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Basic Browser")> 
 <Assembly: AssemblyDescription("A simple tabbed browser coded in Vb.Net")> 
-<Assembly: AssemblyCompany("DeavmiOSS")> 
+<Assembly: AssemblyCompany("WalkmanOSS")> 
 <Assembly: AssemblyProduct("BasicBrowser")> 
-<Assembly: AssemblyCopyright("FOSS from Walkman 2014")> 
+<Assembly: AssemblyCopyright("FOSS from Walkman 2014-15")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
