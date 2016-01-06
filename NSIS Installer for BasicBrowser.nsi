@@ -2,7 +2,7 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
-Icon "My Project/internet2.ico"
+Icon "My Project\internet2.ico"
 Caption "BasicBrowser Installer"
 Name "BasicBrowser"
 AutoCloseWindow true
@@ -13,7 +13,7 @@ LicenseData "LICENSE.md"
 LicenseForceSelection checkbox "I have read and understand this notice"
 LicenseText "Please read the notice below before installing BasicBrowser. If you understand the notice, click the checkbox below and click Next."
 
-InstallDir $PROGRAMFILES\DeavmiOSS
+InstallDir $PROGRAMFILES\WalkmanOSS
 
 OutFile "bin\Release\BasicBrowser-Installer.exe"
 
@@ -35,10 +35,20 @@ Section "Executable & Uninstaller"
   WriteUninstaller "BasicBrowser-Uninst.exe"
 SectionEnd
 
+Section "Remove old files in DeavmiOSS"
+  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser-Uninst.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser.exe"
+  RMDir "$PROGRAMFILES\DeavmiOSS"
+  
+  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
+  RMDir "$SMPROGRAMS\DeavmiOSS"
+SectionEnd
+
 Section "Start Menu Shortcuts"
-  CreateDirectory "$SMPROGRAMS\DeavmiOSS"
-  CreateShortCut "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
-  CreateShortCut "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk" "$INSTDIR\BasicBrowser-Uninst.exe" "" "" "" "" "" "Uninstall BasicBrowser"
+  CreateDirectory "$SMPROGRAMS\WalkmanOSS"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\Uninstall BasicBrowser.lnk" "$INSTDIR\BasicBrowser-Uninst.exe" "" "" "" "" "" "Uninstall BasicBrowser"
   ;Syntax for CreateShortCut: link.lnk target.file [parameters [icon.file [icon_index_number [start_options [keyboard_shortcut [description]]]]]]
 SectionEnd
 
@@ -61,10 +71,6 @@ SubSection "Open in BasicBrowser (HTML)"
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
   SectionEnd
 SubSectionEnd
-
-;Section "More apps from DeavmiOSS"
-; this should have sub options for available apps, that are downloaded
-;SectionEnd
 
 ; Functions
 
@@ -89,12 +95,21 @@ Section "Uninstall"
   Delete "$INSTDIR\BasicBrowser.exe"
   RMDir "$INSTDIR"
   
-  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
-  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
-  RMDir "$SMPROGRAMS\DeavmiOSS"
+  Delete "$SMPROGRAMS\WalkmanOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\WalkmanOSS\Uninstall BasicBrowser.lnk"
+  RMDir "$SMPROGRAMS\WalkmanOSS"
   
   Delete "$DESKTOP\BasicBrowser.lnk"   ; Remove Desktop Shortcut
   Delete "$QUICKLAUNCH\BasicBrowser.lnk"   ; Remove Quick Launch Shortcut
+  
+  ; Remove old files in DeavmiOSS
+  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser-Uninst.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser.exe"
+  RMDir "$PROGRAMFILES\DeavmiOSS"
+  
+  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
+  RMDir "$SMPROGRAMS\DeavmiOSS"
   
   DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
   DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
