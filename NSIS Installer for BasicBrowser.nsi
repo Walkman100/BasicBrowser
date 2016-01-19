@@ -5,6 +5,7 @@
 Icon "My Project\internet2.ico"
 Caption "BasicBrowser Installer"
 Name "BasicBrowser"
+XPStyle on
 AutoCloseWindow true
 ShowInstDetails show
 
