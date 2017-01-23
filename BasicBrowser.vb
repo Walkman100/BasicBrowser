@@ -1,4 +1,4 @@
-﻿Public Class BasicBrowser
+Public Class BasicBrowser
     ' Made by ░▒▓█│【Walkman】│█▓▒░
     
     'use CType(TabControl.SelectedTab.Controls.Item(0), WebBrowser) to refer to the webbrowser on the active tab

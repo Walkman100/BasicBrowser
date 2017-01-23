@@ -1,4 +1,4 @@
-﻿Imports System.Resources
+Imports System.Resources
 
 Imports System
 Imports System.Reflection
