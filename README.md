@@ -1,12 +1,13 @@
 # BasicBrowser [![Build status](https://ci.appveyor.com/api/projects/status/vk3okvf6qmlpykgx)](https://ci.appveyor.com/project/Walkman100/basicbrowser)
 A simple tabbed browser coded in Vb.Net
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Screenshot
 You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To reset, simply restart BasicBrowser.
 
 [![Screenshot][Screenshot]][Screenshot]
+
   [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/BasicBrowser/MainWindow.png
 
 ## Searching from the URL bar
@@ -26,7 +27,7 @@ In the window that pops up, click the `Search Providers` tab on the left. Here y
 When you are done, click `Close` at the bottom then `OK`.
 
 ## Compile requirements
-See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
+See [CompileInstructions.md](https://github.com/Walkman100/gists/blob/master/CompileInstructions.md)
 
 ## Gecko (IE8 alternative)
 As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrowserGecko](https://github.com/Walkman-Mirror/BasicBrowserGecko). The hybrid branch is also there, since it is essentially BasicBrowserGecko with the ability to open IE tabs as well.
@@ -35,7 +36,3 @@ As of November 2014, the Gecko branch can be found at [Walkman-Mirror/BasicBrows
 - https://stackoverflow.com/questions/7458607/vb-net-tabcontrol-web-browser
 - http://www.dreamincode.net/forums/topic/70491-how-to-make-a-tabbed-webbrowser/
 - http://www.dreamincode.net/forums/topic/60702-extending-the-webbrowser/
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/basicbrowser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
