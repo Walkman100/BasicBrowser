@@ -10,6 +10,11 @@ You can Hold <kbd>Alt</kbd> to move the buttons around on the main interface. To
 
   [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/BasicBrowser/MainWindow.png
 
+## Download
+Get the latest version [here](https://github.com/Walkman100/BasicBrowser/releases), and the latest build from commit
+[here](https://ci.appveyor.com/project/Walkman100/BasicBrowser/build/artifacts)
+(note that these builds are built for the Debug config and so are not optimised)
+
 ## Searching from the URL bar
 You should be able to search from the URL bar out of the box. If some queries turn into URLs (e.g. `http://test+search/`) instead of your search engines search, use a question mark `?` before the query (e.g. `?test search`).
 
