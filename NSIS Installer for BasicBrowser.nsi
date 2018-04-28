@@ -2,21 +2,22 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
+!define ProgramName "BasicBrowser"
 Icon "My Project\internet2.ico"
-Caption "BasicBrowser Installer"
-Name "BasicBrowser"
+
+Name "${ProgramName}"
+Caption "${ProgramName} Installer"
 XPStyle on
-AutoCloseWindow true
 ShowInstDetails show
+AutoCloseWindow true
 
 LicenseBkColor /windows
 LicenseData "LICENSE.md"
 LicenseForceSelection checkbox "I have read and understand this notice"
-LicenseText "Please read the notice below before installing BasicBrowser. If you understand the notice, click the checkbox below and click Next."
+LicenseText "Please read the notice below before installing ${ProgramName}. If you understand the notice, click the checkbox below and click Next."
 
 InstallDir $PROGRAMFILES\WalkmanOSS
-
-OutFile "bin\Release\BasicBrowser-Installer.exe"
+OutFile "bin\Release\${ProgramName}-Installer.exe"
 
 ; Pages
 
@@ -24,6 +25,7 @@ Page license
 Page components
 Page directory
 Page instfiles
+Page custom postInstallShow postInstallFinish ": Install Complete"
 UninstPage uninstConfirm
 UninstPage instfiles
 
@@ -32,87 +34,128 @@ UninstPage instfiles
 Section "Executable & Uninstaller"
   SectionIn RO
   SetOutPath $INSTDIR
-  File "bin\Release\BasicBrowser.exe"
-  WriteUninstaller "BasicBrowser-Uninst.exe"
+  File "bin\Release\${ProgramName}.exe"
+  WriteUninstaller "${ProgramName}-Uninst.exe"
 SectionEnd
 
 Section "Remove old files in DeavmiOSS"
-  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser-Uninst.exe"
-  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\${ProgramName}-Uninst.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\${ProgramName}.exe"
   RMDir "$PROGRAMFILES\DeavmiOSS"
   
-  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"
-  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\${ProgramName}.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall ${ProgramName}.lnk"
   RMDir "$SMPROGRAMS\DeavmiOSS"
 SectionEnd
 
 Section "Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\WalkmanOSS"
-  CreateShortCut "$SMPROGRAMS\WalkmanOSS\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
-  CreateShortCut "$SMPROGRAMS\WalkmanOSS\Uninstall BasicBrowser.lnk" "$INSTDIR\BasicBrowser-Uninst.exe" "" "" "" "" "" "Uninstall BasicBrowser"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\${ProgramName}.lnk" "$INSTDIR\${ProgramName}.exe" "" "$INSTDIR\${ProgramName}.exe" "" "" "" "${ProgramName}"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\Uninstall ${ProgramName}.lnk" "$INSTDIR\${ProgramName}-Uninst.exe" "" "" "" "" "" "Uninstall ${ProgramName}"
   ;Syntax for CreateShortCut: link.lnk target.file [parameters [icon.file [icon_index_number [start_options [keyboard_shortcut [description]]]]]]
 SectionEnd
 
 Section "Desktop Shortcut"
-  CreateShortCut "$DESKTOP\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
+  CreateShortCut "$DESKTOP\${ProgramName}.lnk" "$INSTDIR\${ProgramName}.exe" "" "$INSTDIR\${ProgramName}.exe" "" "" "" "${ProgramName}"
 SectionEnd
 
 Section "Quick Launch Shortcut"
-  CreateShortCut "$QUICKLAUNCH\BasicBrowser.lnk" "$INSTDIR\BasicBrowser.exe" "" "$INSTDIR\BasicBrowser.exe" "" "" "" "BasicBrowser"
+  CreateShortCut "$QUICKLAUNCH\${ProgramName}.lnk" "$INSTDIR\${ProgramName}.exe" "" "$INSTDIR\${ProgramName}.exe" "" "" "" "${ProgramName}"
 SectionEnd
 
-SubSection "Open in BasicBrowser (HTML)"
+SubSection "Open in ${ProgramName} (HTML)"
   Section "Add to Open With menu"
-    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "BasicBrowser.exe"
+    WriteRegStr HKCR "Applications\${ProgramName}.exe\shell\open\command" "" "$\"$INSTDIR\${ProgramName}.exe$\" $\"%1$\""
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j" "${ProgramName}.exe"
   SectionEnd
   
   Section "Set as default program"
-    WriteRegStr HKCR "Applications\BasicBrowser.exe\shell\open\command" "" "$\"$INSTDIR\BasicBrowser.exe$\" $\"%1$\""
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\BasicBrowser.exe"
+    WriteRegStr HKCR "Applications\${ProgramName}.exe\shell\open\command" "" "$\"$INSTDIR\${ProgramName}.exe$\" $\"%1$\""
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\${ProgramName}.exe"
   SectionEnd
 SubSectionEnd
 
 ; Functions
 
 Function .onInit
-  MessageBox MB_YESNO "This will install BasicBrowser. Do you wish to continue?" IDYES gogogo
-    Abort
-  gogogo:
   SetShellVarContext all
   SetAutoClose true
 FunctionEnd
 
-Function .onInstSuccess
-    MessageBox MB_YESNO "Install Succeeded! Open ReadMe?" IDNO NoReadme
-      ExecShell "open" "https://github.com/Walkman100/BasicBrowser/blob/master/README.md#basicbrowser-"
-    NoReadme:
+; Custom Install Complete page
+
+!include nsDialogs.nsh
+!include LogicLib.nsh ; For ${IF} logic
+Var Dialog
+Var Label
+Var CheckboxReadme
+Var CheckboxReadme_State
+Var CheckboxRunProgram
+Var CheckboxRunProgram_State
+
+Function postInstallShow
+  nsDialogs::Create 1018
+  Pop $Dialog
+  ${If} $Dialog == error
+    Abort
+  ${EndIf}
+  
+  ${NSD_CreateLabel} 0 0 100% 12u "Setup will launch these tasks when you click close:"
+  Pop $Label
+  
+  ${NSD_CreateCheckbox} 10u 30u 100% 10u "&Open Readme"
+  Pop $CheckboxReadme
+  ${If} $CheckboxReadme_State == ${BST_CHECKED}
+    ${NSD_Check} $CheckboxReadme
+  ${EndIf}
+  
+  ${NSD_CreateCheckbox} 10u 50u 100% 10u "&Launch ${ProgramName}"
+  Pop $CheckboxRunProgram
+  ${If} $CheckboxRunProgram_State == ${BST_CHECKED}
+    ${NSD_Check} $CheckboxRunProgram
+  ${EndIf}
+  
+  # alternative for the above ${If}:
+  #${NSD_SetState} $Checkbox_State
+  nsDialogs::Show
+FunctionEnd
+
+Function postInstallFinish
+  ${NSD_GetState} $CheckboxReadme $CheckboxReadme_State
+  ${NSD_GetState} $CheckboxRunProgram $CheckboxRunProgram_State
+  
+  ${If} $CheckboxReadme_State == ${BST_CHECKED}
+    ExecShell "open" "https://github.com/Walkman100/${ProgramName}/blob/master/README.md#basicbrowser-"
+  ${EndIf}
+  ${If} $CheckboxRunProgram_State == ${BST_CHECKED}
+    ExecShell "open" "$INSTDIR\${ProgramName}.exe"
+  ${EndIf}
 FunctionEnd
 
 ; Uninstaller
 
 Section "Uninstall"
-  Delete "$INSTDIR\BasicBrowser-Uninst.exe"   ; Remove Application Files
-  Delete "$INSTDIR\BasicBrowser.exe"
+  Delete "$INSTDIR\${ProgramName}-Uninst.exe"   ; Remove Application Files
+  Delete "$INSTDIR\${ProgramName}.exe"
   RMDir "$INSTDIR"
   
-  Delete "$SMPROGRAMS\WalkmanOSS\BasicBrowser.lnk"   ; Remove Start Menu Shortcuts & Folder
-  Delete "$SMPROGRAMS\WalkmanOSS\Uninstall BasicBrowser.lnk"
+  Delete "$SMPROGRAMS\WalkmanOSS\${ProgramName}.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\WalkmanOSS\Uninstall ${ProgramName}.lnk"
   RMDir "$SMPROGRAMS\WalkmanOSS"
   
-  Delete "$DESKTOP\BasicBrowser.lnk"   ; Remove Desktop Shortcut
-  Delete "$QUICKLAUNCH\BasicBrowser.lnk"   ; Remove Quick Launch Shortcut
+  Delete "$DESKTOP\${ProgramName}.lnk"   ; Remove Desktop Shortcut
+  Delete "$QUICKLAUNCH\${ProgramName}.lnk"   ; Remove Quick Launch Shortcut
   
   ; Remove old files in DeavmiOSS
-  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser-Uninst.exe"
-  Delete "$PROGRAMFILES\DeavmiOSS\BasicBrowser.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\${ProgramName}-Uninst.exe"
+  Delete "$PROGRAMFILES\DeavmiOSS\${ProgramName}.exe"
   RMDir "$PROGRAMFILES\DeavmiOSS"
   
-  Delete "$SMPROGRAMS\DeavmiOSS\BasicBrowser.lnk"
-  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall BasicBrowser.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\${ProgramName}.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall ${ProgramName}.lnk"
   RMDir "$SMPROGRAMS\DeavmiOSS"
   
-  DeleteRegKey HKCR Applications\BasicBrowser.exe ; Remove open with association
+  DeleteRegKey HKCR Applications\${ProgramName}.exe ; Remove open with association
   DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithList" "j"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\UserChoice" "Progid" "Applications\chrome.exe"
 SectionEnd
@@ -120,17 +163,14 @@ SectionEnd
 ; Uninstaller Functions
 
 Function un.onInit
-    MessageBox MB_YESNO "This will uninstall BasicBrowser. Continue?" IDYES NoAbort
-      Abort ; causes uninstaller to quit.
-    NoAbort:
-    SetShellVarContext all
-    SetAutoClose true
+  SetShellVarContext all
+  SetAutoClose true
 FunctionEnd
 
 Function un.onUninstFailed
-    MessageBox MB_OK "Uninstall Cancelled"
+  MessageBox MB_OK "Uninstall Cancelled"
 FunctionEnd
 
 Function un.onUninstSuccess
-    MessageBox MB_OK "Uninstall Completed"
+  MessageBox MB_OK "Uninstall Completed"
 FunctionEnd
